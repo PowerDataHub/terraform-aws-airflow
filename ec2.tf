@@ -32,25 +32,29 @@ resource "aws_instance" "airflow_scheduler" {
     volume_size = "${var.ec2_disk_size}"
   }
 
+  tags {
+    Name = "airflow_scheduler"
+  }
+
   lifecycle {
     create_before_destroy = true
   }
 
-  user_data = "${data.template_file.provisioner.rendered}"
-
-  # Provisioning
-  connection {
-    agent       = false
-    type        = "ssh"
-    user        = "ubuntu"
-    private_key = "${file(var.private_key_path)}"
-  }
-
   provisioner "remote-exec" {
     inline = [
-      "export PATH=$PATH:/usr/bin",
+      "export PATH=$PATH:/usr/bin:$HOME/.local/bin",
       "sudo apt-get update",
       "sudo apt-get install -yqq python3.6",
     ]
+
+    # Provisioning
+    connection {
+      agent       = false
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file(var.private_key_path)}"
+    }
   }
+
+  user_data = "${data.template_file.provisioner.rendered}"
 }
