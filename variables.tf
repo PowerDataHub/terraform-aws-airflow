@@ -1,16 +1,18 @@
-variable "region" {
+variable "aws_region" {
   description = "AWS Region"
   default     = "us-east-1"
 }
 
-variable "access_key" {
-  description = "AWS Access Key ID"
-}
-
-variable "secret_key" {
-  description = "AWS Secret Key"
-}
-
-variable "key_name" {
+variable "aws_key_name" {
   description = "SSH KeyPair"
+}
+
+variable "private_key_path" {
+  description = "Enter the path to the SSH Private Key to run provisioner."
+  default     = "~/.ssh/id_rsa"
+}
+
+variable "public_key_path" {
+  description = "Enter the path to the SSH Public Key to add to AWS."
+  default     = "~/.ssh/id_rsa.pub"
 }
