@@ -10,6 +10,10 @@ variable "airflow_scheduler_instance_type" {
   description = "Instance type for the Airflow Scheduler"
 }
 
+variable "disk_size" {
+  default = 15
+}
+
 variable "ami" {
   type        = "string"
   default     = "ami-a042f4d8"
