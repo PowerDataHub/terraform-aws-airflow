@@ -1,6 +1,7 @@
 ##############################################################
 # Data sources to get VPC, subnets and security group details
 ##############################################################
+
 data "aws_vpc" "default" {
   default = true
 }
