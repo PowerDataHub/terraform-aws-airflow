@@ -13,3 +13,7 @@ data "aws_security_group" "default" {
   vpc_id = "${data.aws_vpc.default.id}"
   name   = "default"
 }
+
+data "template_file" "provisioner" {
+  template = "${file("${path.module}/files/cloud-init.sh")}"
+}
