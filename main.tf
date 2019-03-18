@@ -2,6 +2,10 @@
 # DEPLOY AN AIRFLOW CLUSTER IN AWS
 # -------------------------------------------
 
+terraform {
+  required_version = ">= 0.9.3, != 0.9.5"
+}
+
 resource "aws_key_pair" "auth" {
   key_name   = "${var.aws_key_name}"
   public_key = "${file(var.public_key_path)}"
@@ -12,49 +16,50 @@ resource "aws_key_pair" "auth" {
 # -------------------------------------------
 
 resource "aws_s3_bucket" "airflow-logs" {
-  bucket = "${var.s3_bucket_name}"
+  bucket = "${var.cluster_name}-${var.s3_bucket_name}"
   acl    = "private"
 
   tags = {
-    Name = "${var.s3_bucket_name}"
+    Name = "${var.cluster_name}-${var.s3_bucket_name}"
   }
 }
 
-# ---------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------
 # CREATE A SECURITY GROUP TO CONTROL WHAT REQUESTS CAN GO IN AND OUT OF EACH EC2 INSTANCE
-# ---------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------
 
 module "sg_airflow" {
   source              = "terraform-aws-modules/security-group/aws"
-  name                = "airflow-sg"
-  description         = "Security group for Airflow machines"
+  name                = "${var.cluster_name}-sg"
+  description         = "Security group for ${var.cluster_name} machines"
   vpc_id              = "${data.aws_vpc.default.id}"
   ingress_cidr_blocks = ["0.0.0.0/0"]
   ingress_rules       = ["ssh-tcp"]
   egress_rules        = ["all-all"]
 
   tags {
-    Name = "airflow-sg"
-    Type = "sg"
+    Name = "${var.cluster_name}"
   }
 }
 
 resource "aws_instance" "airflow_scheduler" {
   count                  = 1
-  instance_type          = "${var.ec2_scheduler_instance_type}"
-  ami                    = "${var.ec2_ami}"
+  instance_type          = "${var.scheduler_instance_type}"
+  ami                    = "${var.ami}"
   key_name               = "${aws_key_pair.auth.id}"
   vpc_security_group_ids = ["${module.sg_airflow.this_security_group_id}"]
   subnet_id              = "${element(data.aws_subnet_ids.all.ids, 0)}"
 
-  associate_public_ip_address = "${var.ec2_webserver_associate_public_ip_address}"
+  associate_public_ip_address = "${var.associate_public_ip_address}"
 
   root_block_device {
-    volume_size = "${var.ec2_disk_size}"
+    volume_type           = "${var.root_volume_type}"
+    volume_size           = "${var.root_volume_size}"
+    delete_on_termination = "${var.root_volume_delete_on_termination}"
   }
 
   tags {
-    Name = "airflow_scheduler"
+    Name = "${var.cluster_name}-scheduler"
   }
 
   lifecycle {
