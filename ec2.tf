@@ -1,8 +1,15 @@
+# ---------------------------------------------------------------------------------------------------------------------
+# DEPLOY AN AIRFLOW CLUSTER IN AWS
+# ---------------------------------------------------------------------------------------------------------------------
+
 resource "aws_key_pair" "auth" {
   key_name   = "${var.aws_key_name}"
   public_key = "${file(var.public_key_path)}"
 }
 
+# ---------------------------------------------------------------------------------------------------------------------
+# CREATE A SECURITY GROUP TO CONTROL WHAT REQUESTS CAN GO IN AND OUT OF EACH EC2 INSTANCE
+# ---------------------------------------------------------------------------------------------------------------------
 module "sg_airflow" {
   source              = "terraform-aws-modules/security-group/aws"
   name                = "airflow-sg"
