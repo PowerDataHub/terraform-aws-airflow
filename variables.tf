@@ -26,7 +26,7 @@ variable "aws_region" {
 }
 
 variable "aws_key_name" {
-  description = "SSH KeyPair"
+  description = "AWS KeyPair name"
 }
 
 variable "vpc_id" {
@@ -58,14 +58,10 @@ variable "scheduler_instance_type" {
   description = "Instance type for the Airflow Scheduler"
 }
 
-variable "disk_size" {
-  default = 15
-}
-
 variable "ami" {
   type        = "string"
   default     = "ami-0a313d6098716f372"
-  description = "Ubuntu 18.04 AMI code for the Airflow servers"
+  description = "Ubuntu 18.04 AMI."
 }
 
 variable "spot_price" {
