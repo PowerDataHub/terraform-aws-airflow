@@ -1,15 +1,29 @@
-# ---------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------
 # DEPLOY AN AIRFLOW CLUSTER IN AWS
-# ---------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------
 
 resource "aws_key_pair" "auth" {
   key_name   = "${var.aws_key_name}"
   public_key = "${file(var.public_key_path)}"
 }
 
+# -------------------------------------------
+# CREATE A S3 BUCKET TO STORAGE AIRFLOW LOGS
+# -------------------------------------------
+
+resource "aws_s3_bucket" "airflow-logs" {
+  bucket = "${var.s3_bucket_name}"
+  acl    = "private"
+
+  tags = {
+    Name = "${var.s3_bucket_name}"
+  }
+}
+
 # ---------------------------------------------------------------------------------------------------------------------
 # CREATE A SECURITY GROUP TO CONTROL WHAT REQUESTS CAN GO IN AND OUT OF EACH EC2 INSTANCE
 # ---------------------------------------------------------------------------------------------------------------------
+
 module "sg_airflow" {
   source              = "terraform-aws-modules/security-group/aws"
   name                = "airflow-sg"
@@ -64,4 +78,26 @@ resource "aws_instance" "airflow_scheduler" {
   }
 
   user_data = "${data.template_file.provisioner.rendered}"
+}
+
+##############################################################
+# Data sources to get VPC, subnets and security group details
+##############################################################
+
+data "aws_vpc" "default" {
+  default = "${var.vpc_id == "" ? true : false}"
+  id      = "${var.vpc_id}"
+}
+
+data "aws_subnet_ids" "all" {
+  vpc_id = "${data.aws_vpc.default.id}"
+}
+
+data "aws_security_group" "default" {
+  vpc_id = "${data.aws_vpc.default.id}"
+  name   = "default"
+}
+
+data "template_file" "provisioner" {
+  template = "${file("${path.module}/files/cloud-init.sh")}"
 }
