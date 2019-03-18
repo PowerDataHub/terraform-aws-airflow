@@ -6,9 +6,13 @@ terraform {
   required_version = ">= 0.9.3, != 0.9.5"
 }
 
-resource "aws_key_pair" "auth" {
-  key_name   = "${var.aws_key_name}"
-  public_key = "${file(var.public_key_path)}"
+module "airflow_labels" {
+  source     = "git::https://github.com/cloudposse/terraform-terraform-label.git?ref=master"
+  namespace  = "${var.cluster_name}"
+  stage      = "${var.cluster_stage}"
+  name       = "airflow"
+  attributes = ["public"]
+  delimiter  = "-"
 }
 
 # -------------------------------------------
@@ -19,9 +23,7 @@ resource "aws_s3_bucket" "airflow-logs" {
   bucket = "${var.cluster_name}-${var.s3_bucket_name}"
   acl    = "private"
 
-  tags = {
-    Name = "${var.cluster_name}-${var.s3_bucket_name}"
-  }
+  tags = "${module.airflow_labels.tags}"
 }
 
 # ----------------------------------------------------------------------------------------
@@ -37,16 +39,14 @@ module "sg_airflow" {
   ingress_rules       = ["ssh-tcp"]
   egress_rules        = ["all-all"]
 
-  tags {
-    Name = "${var.cluster_name}"
-  }
+  tags = "${module.airflow_labels.tags}"
 }
 
 resource "aws_instance" "airflow_scheduler" {
   count                  = 1
   instance_type          = "${var.scheduler_instance_type}"
   ami                    = "${var.ami}"
-  key_name               = "${aws_key_pair.auth.id}"
+  key_name               = "${var.aws_key_name}"
   vpc_security_group_ids = ["${module.sg_airflow.this_security_group_id}"]
   subnet_id              = "${element(data.aws_subnet_ids.all.ids, 0)}"
 
@@ -58,9 +58,7 @@ resource "aws_instance" "airflow_scheduler" {
     delete_on_termination = "${var.root_volume_delete_on_termination}"
   }
 
-  tags {
-    Name = "${var.cluster_name}-scheduler"
-  }
+  tags = "${module.airflow_labels.tags}"
 
   lifecycle {
     create_before_destroy = true
@@ -70,7 +68,7 @@ resource "aws_instance" "airflow_scheduler" {
     inline = [
       "export PATH=$PATH:/usr/bin:$HOME/.local/bin",
       "sudo apt-get update",
-      "sudo apt-get install -yqq python3.6",
+      "sudo apt-get install -yqq python3",
     ]
 
     # Provisioning
