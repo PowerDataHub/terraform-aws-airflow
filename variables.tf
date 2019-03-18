@@ -12,7 +12,12 @@
 ###########
 
 variable "cluster_name" {
-  description = "The name of the Airflow cluster (e.g. airflow-prod). This variable is used to namespace all resources created by this module."
+  description = "The name of the Airflow cluster (e.g. airflow-xyz). This variable is used to namespace all resources created by this module."
+}
+
+variable "cluster_stage" {
+  description = "The stage of the Airflow cluster (e.g. prod)."
+  default     = "dev"
 }
 
 variable "aws_region" {
@@ -22,16 +27,6 @@ variable "aws_region" {
 
 variable "aws_key_name" {
   description = "SSH KeyPair"
-}
-
-variable "private_key_path" {
-  description = "Enter the path to the SSH Private Key to run provisioner."
-  default     = "~/.ssh/id_rsa"
-}
-
-variable "public_key_path" {
-  description = "Enter the path to the SSH Public Key to add to AWS."
-  default     = "~/.ssh/id_rsa.pub"
 }
 
 variable "vpc_id" {
