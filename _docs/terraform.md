@@ -2,13 +2,12 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| ami | Ubuntu 18.04 AMI code for the Airflow servers | string | `"ami-0a313d6098716f372"` | no |
+| ami | Ubuntu 18.04 AMI. | string | `"ami-0a313d6098716f372"` | no |
 | associate\_public\_ip\_address | If set to true, associate a public IP address with each EC2 Instance in the cluster. | string | `"false"` | no |
-| aws\_key\_name | SSH KeyPair | string | n/a | yes |
+| aws\_key\_name | AWS KeyPair name | string | n/a | yes |
 | aws\_region | AWS Region | string | `"us-east-1"` | no |
 | cluster\_name | The name of the Airflow cluster (e.g. airflow-xyz). This variable is used to namespace all resources created by this module. | string | n/a | yes |
 | cluster\_stage | The stage of the Airflow cluster (e.g. prod). | string | `"dev"` | no |
-| disk\_size |  | string | `"15"` | no |
 | root\_volume\_delete\_on\_termination | Whether the volume should be destroyed on instance termination. | string | `"true"` | no |
 | root\_volume\_ebs\_optimized | If true, the launched EC2 instance will be EBS-optimized. | string | `"false"` | no |
 | root\_volume\_size | The size, in GB, of the root EBS volume. | string | `"50"` | no |
