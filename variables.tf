@@ -1,6 +1,16 @@
+# ---------------------------------------------------------------------------------------------------------------------
+# ENVIRONMENT VARIABLES
+# Define these secrets as environment variables
+# ---------------------------------------------------------------------------------------------------------------------
+
+# AWS_ACCESS_KEY_ID
+# AWS_SECRET_ACCESS_KEY
+# AWS_DEFAULT_REGION
+
 ###########
 # Globals #
 ###########
+
 variable "aws_region" {
   description = "AWS Region"
   default     = "us-east-1"
@@ -20,9 +30,15 @@ variable "public_key_path" {
   default     = "~/.ssh/id_rsa.pub"
 }
 
+variable "vpc_id" {
+  description = "The ID of the VPC in which the nodes will be deployed.  Uses default VPC if not supplied."
+  default     = ""
+}
+
 ######
 # S3 #
 ######
+
 variable "s3_bucket_name" {
   default = "airflow-logs"
 }
@@ -30,6 +46,7 @@ variable "s3_bucket_name" {
 #######
 # EC2 #
 #######
+
 variable "ec2_webserver_instance_type" {
   type        = "string"
   default     = "t3.micro"
@@ -55,4 +72,9 @@ variable "ec2_ami" {
   type        = "string"
   default     = "ami-0a313d6098716f372"
   description = "Ubuntu 18.04 AMI code for the Airflow servers"
+}
+
+variable "spot_price" {
+  description = "The maximum hourly price to pay for EC2 Spot Instances."
+  default     = ""
 }

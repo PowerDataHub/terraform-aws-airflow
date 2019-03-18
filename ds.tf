@@ -3,7 +3,8 @@
 ##############################################################
 
 data "aws_vpc" "default" {
-  default = true
+  default = "${var.vpc_id == "" ? true : false}"
+  id      = "${var.vpc_id}"
 }
 
 data "aws_subnet_ids" "all" {

@@ -29,7 +29,7 @@ function install_python_and_python_packages() {
       pycurl
 
     export SLUGIFY_USES_TEXT_UNIDECODE=yes
-    pip install \
+    pip install --user \
       apache-airflow[celery,postgres,s3,crypto]==1.10.2 \
       celery[sqs] \
       billiard==3.5.0.4 \
