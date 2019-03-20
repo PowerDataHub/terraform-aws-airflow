@@ -1,6 +1,6 @@
-# -------------------------------------------
+# ---------------------------------------
 # DEPLOY AN AIRFLOW CLUSTER IN AWS
-# -------------------------------------------
+# ---------------------------------------
 
 terraform {
   required_version = ">= 0.9.3, != 0.9.5"
@@ -20,7 +20,7 @@ module "airflow_labels" {
 # -------------------------------------------
 
 resource "aws_s3_bucket" "airflow-logs" {
-  bucket = "${var.cluster_name}-${var.s3_bucket_name}"
+  bucket = "${module.airflow_labels.id}"
   acl    = "private"
 
   tags = "${module.airflow_labels.tags}"
@@ -32,8 +32,8 @@ resource "aws_s3_bucket" "airflow-logs" {
 
 module "sg_airflow" {
   source              = "terraform-aws-modules/security-group/aws"
-  name                = "${var.cluster_name}-sg"
-  description         = "Security group for ${var.cluster_name} machines"
+  name                = "${module.airflow_labels.id}-sg"
+  description         = "Security group for ${module.airflow_labels.id} machines"
   vpc_id              = "${data.aws_vpc.default.id}"
   ingress_cidr_blocks = ["0.0.0.0/0"]
   ingress_rules       = ["ssh-tcp"]
@@ -42,6 +42,9 @@ module "sg_airflow" {
   tags = "${module.airflow_labels.tags}"
 }
 
+#-------------------------------------------------------------------------
+# EC2
+#-------------------------------------------------------------------------
 resource "aws_instance" "airflow_webserver" {
   count                  = 1
   instance_type          = "${var.scheduler_instance_type}"
@@ -124,9 +127,35 @@ resource "aws_instance" "airflow_scheduler" {
   user_data = "${data.template_file.provisioner.rendered}"
 }
 
-##############################################################
+#-----------
+# Database
+#-----------
+
+resource "aws_db_instance" "airflow-database" {
+  identifier                = "${module.airflow_labels.id}-db"
+  allocated_storage         = "${var.db_allocated_storage}"
+  engine                    = "postgres"
+  engine_version            = "11.1"
+  instance_class            = "${var.db_instance_type}"
+  name                      = "${module.airflow_labels.id}"
+  username                  = "${var.db_username == "" ? ${module.airflow_labels.id} : ${var.db_username}}"
+  username                  = "${var.db_username}"
+  password                  = "${var.db_password}"
+  storage_type              = "gp2"
+  backup_retention_period   = 14
+  multi_az                  = false
+  publicly_accessible       = false
+  apply_immediately         = true
+  db_subnet_group_name      = "${element(data.aws_subnet_ids.all.ids, 0)}"
+  final_snapshot_identifier = "airflow-database-final-snapshot-1"
+  skip_final_snapshot       = false
+  vpc_security_group_ids    = ["${data.aws_vpc.default.id}"]
+  port                      = "5432"
+}
+
+#------------------------------------------------------------
 # Data sources to get VPC, subnets and security group details
-##############################################################
+#------------------------------------------------------------
 
 data "aws_vpc" "default" {
   default = "${var.vpc_id == "" ? true : false}"

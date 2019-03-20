@@ -12,24 +12,29 @@
 ###########
 
 variable "cluster_name" {
+  type        = "string"
   description = "The name of the Airflow cluster (e.g. airflow-xyz). This variable is used to namespace all resources created by this module."
 }
 
 variable "cluster_stage" {
+  type        = "string"
   description = "The stage of the Airflow cluster (e.g. prod)."
   default     = "dev"
 }
 
 variable "aws_region" {
+  type        = "string"
   description = "AWS Region"
   default     = "us-east-1"
 }
 
 variable "aws_key_name" {
+  type        = "string"
   description = "AWS KeyPair name"
 }
 
 variable "vpc_id" {
+  type        = "string"
   description = "The ID of the VPC in which the nodes will be deployed.  Uses default VPC if not supplied."
   default     = ""
 }
@@ -39,6 +44,7 @@ variable "vpc_id" {
 ######
 
 variable "s3_bucket_name" {
+  type    = "string"
   default = ""
 }
 
@@ -75,6 +81,7 @@ variable "root_volume_ebs_optimized" {
 }
 
 variable "root_volume_type" {
+  type        = "string"
   description = "The type of volume. Must be one of: standard, gp2, or io1."
   default     = "standard"
 }
@@ -92,4 +99,28 @@ variable "root_volume_delete_on_termination" {
 variable "associate_public_ip_address" {
   description = "If set to true, associate a public IP address with each EC2 Instance in the cluster."
   default     = false
+}
+
+############
+# DATABASE #
+############
+
+variable "db_instance_type" {
+  type        = "string"
+  default     = "db.t2.micro"
+  description = "Instance type for PostgreSQL database"
+}
+
+variable "db_username" {
+  description = "PostgreSQL username."
+  default     = ""
+}
+
+variable "db_password" {
+  description = "PostgreSQL password."
+}
+
+variable "db_allocated_storage" {
+  description = "Dabatase disk size."
+  default     = 20
 }
