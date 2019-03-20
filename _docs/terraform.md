@@ -8,6 +8,10 @@
 | aws\_region | AWS Region | string | `"us-east-1"` | no |
 | cluster\_name | The name of the Airflow cluster (e.g. airflow-xyz). This variable is used to namespace all resources created by this module. | string | n/a | yes |
 | cluster\_stage | The stage of the Airflow cluster (e.g. prod). | string | `"dev"` | no |
+| db\_allocated\_storage | Dabatase disk size. | string | `"20"` | no |
+| db\_instance\_type | Instance type for PostgreSQL database | string | `"db.t2.micro"` | no |
+| db\_password | PostgreSQL password. | string | n/a | yes |
+| db\_username | PostgreSQL username. | string | `""` | no |
 | root\_volume\_delete\_on\_termination | Whether the volume should be destroyed on instance termination. | string | `"true"` | no |
 | root\_volume\_ebs\_optimized | If true, the launched EC2 instance will be EBS-optimized. | string | `"false"` | no |
 | root\_volume\_size | The size, in GB, of the root EBS volume. | string | `"50"` | no |
