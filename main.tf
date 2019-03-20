@@ -42,6 +42,47 @@ module "sg_airflow" {
   tags = "${module.airflow_labels.tags}"
 }
 
+resource "aws_instance" "airflow_webserver" {
+  count                  = 1
+  instance_type          = "${var.scheduler_instance_type}"
+  ami                    = "${var.ami}"
+  key_name               = "${var.aws_key_name}"
+  vpc_security_group_ids = ["${module.sg_airflow.this_security_group_id}"]
+  subnet_id              = "${element(data.aws_subnet_ids.all.ids, 0)}"
+
+  associate_public_ip_address = "${var.associate_public_ip_address}"
+
+  root_block_device {
+    volume_type           = "${var.root_volume_type}"
+    volume_size           = "${var.root_volume_size}"
+    delete_on_termination = "${var.root_volume_delete_on_termination}"
+  }
+
+  tags = "${module.airflow_labels.tags}"
+
+  lifecycle {
+    create_before_destroy = true
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "export PATH=$PATH:/usr/bin:$HOME/.local/bin",
+      "sudo apt-get update",
+      "sudo apt-get install -yqq python3",
+    ]
+
+    # Provisioning
+    connection {
+      agent       = false
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file(var.private_key_path)}"
+    }
+  }
+
+  user_data = "${data.template_file.provisioner.rendered}"
+}
+
 resource "aws_instance" "airflow_scheduler" {
   count                  = 1
   instance_type          = "${var.scheduler_instance_type}"
