@@ -24,18 +24,23 @@ function install_python_and_python_packages() {
 
     pip install -q --upgrade pip
 
-    PYCURL_SSL_LIBRARY=openssl sudo -H pip install \
+    PYCURL_SSL_LIBRARY=openssl pip install --user \
       --no-cache-dir --compile --ignore-installed \
       pycurl
 
     export SLUGIFY_USES_TEXT_UNIDECODE=yes
     pip install --user \
-      apache-airflow[celery,postgres,s3,crypto]==1.10.2 \
+      Cython \
+      pytz \
+      pyOpenSSL \
+      ndg-httpsclient \
+      pyasn1 \
+      apache-airflow[celery,postgres,s3,crypto,jdbc]==1.10.2 \
       celery[sqs] \
       billiard==3.5.0.4 \
       tenacity==4.12.0
 
-    sudo -H pip install -qU setuptools --ignore-installed
+    pip install --user -qU setuptools --ignore-installed
 }
 
 
