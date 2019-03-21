@@ -178,21 +178,20 @@ module "sg_database" {
 }
 
 resource "aws_db_instance" "airflow-database" {
-  identifier                = "${module.airflow_labels.id}-db"
-  allocated_storage         = "${var.db_allocated_storage}"
-  engine                    = "postgres"
-  engine_version            = "11.1"
-  instance_class            = "${var.db_instance_type}"
-  name                      = "${var.db_dbname}"
-  username                  = "${var.db_username}"
-  password                  = "${var.db_password}"
-  storage_type              = "gp2"
-  backup_retention_period   = 14
-  multi_az                  = false
-  publicly_accessible       = false
-  apply_immediately         = true
-  final_snapshot_identifier = "airflow-database-final-snapshot-1"
-  skip_final_snapshot       = false
-  vpc_security_group_ids    = ["${module.sg_airflow.this_security_group_id}"]
-  port                      = "5432"
+  identifier              = "${module.airflow_labels.id}-db"
+  allocated_storage       = "${var.db_allocated_storage}"
+  engine                  = "postgres"
+  engine_version          = "11.1"
+  instance_class          = "${var.db_instance_type}"
+  name                    = "${var.db_dbname}"
+  username                = "${var.db_username}"
+  password                = "${var.db_password}"
+  storage_type            = "gp2"
+  backup_retention_period = 14
+  multi_az                = false
+  publicly_accessible     = false
+  apply_immediately       = true
+  skip_final_snapshot     = true
+  vpc_security_group_ids  = ["${module.sg_airflow.this_security_group_id}"]
+  port                    = "5432"
 }
