@@ -22,12 +22,12 @@ function install_dependencyes() {
 
 function install_python_and_python_packages() {
 
-    PYCURL_SSL_LIBRARY=openssl pip3 install --user \
+    PYCURL_SSL_LIBRARY=openssl pip3 install \
       --no-cache-dir --compile --ignore-installed \
       pycurl
 
     export SLUGIFY_USES_TEXT_UNIDECODE=yes
-    pip3 install --user \
+    pip3 install \
       Cython \
       pytz \
       pyOpenSSL \
@@ -38,7 +38,7 @@ function install_python_and_python_packages() {
       billiard==3.5.0.4 \
       tenacity==4.12.0
 
-    pip3 install --user -qU setuptools --ignore-installed
+    pip3 install -qU setuptools --ignore-installed
 }
 
 
