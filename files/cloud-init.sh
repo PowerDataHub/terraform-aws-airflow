@@ -5,31 +5,29 @@ set -x
 function install_dependencyes() {
     sudo apt-get update
     sudo apt-get install -y \
-      python3 \
-      python3-pip \
-      python3-dev \
-      python3-wheel \
-      git \
-      gcc \
-      jq \
+      bzip2 \
       curl \
+      gcc \
+      git \
+      jq \
       libcurl4-openssl-dev \
       libssl-dev \
-      bzip2 \
+      openssl \
       postgresql-client \
-      openssl
+      python3 \
+      python3-dev \
+      python3-pip \
+      python3-wheel
 }
 
 function install_python_and_python_packages() {
 
-    pip install -q --upgrade pip
-
-    PYCURL_SSL_LIBRARY=openssl pip install --user \
+    PYCURL_SSL_LIBRARY=openssl pip3 install --user \
       --no-cache-dir --compile --ignore-installed \
       pycurl
 
     export SLUGIFY_USES_TEXT_UNIDECODE=yes
-    pip install --user \
+    pip3 install --user \
       Cython \
       pytz \
       pyOpenSSL \
@@ -40,7 +38,7 @@ function install_python_and_python_packages() {
       billiard==3.5.0.4 \
       tenacity==4.12.0
 
-    pip install --user -qU setuptools --ignore-installed
+    pip3 install --user -qU setuptools --ignore-installed
 }
 
 
