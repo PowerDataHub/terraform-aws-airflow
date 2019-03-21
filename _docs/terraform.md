@@ -12,6 +12,7 @@
 | db\_instance\_type | Instance type for PostgreSQL database | string | `"db.t2.micro"` | no |
 | db\_password | PostgreSQL password. | string | n/a | yes |
 | db\_username | PostgreSQL username. | string | `"airflow"` | no |
+| fernet\_key | Key for encrypting data in the database - see Airflow docs | string | n/a | yes |
 | private\_key\_path | Enter the path to the SSH Private Key to run provisioner. | string | `"~/.ssh/id_rsa"` | no |
 | public\_key\_path | Enter the path to the SSH Public Key to add to AWS. | string | `"~/.ssh/id_rsa.pub"` | no |
 | root\_volume\_delete\_on\_termination | Whether the volume should be destroyed on instance termination. | string | `"true"` | no |

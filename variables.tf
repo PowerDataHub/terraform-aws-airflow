@@ -49,6 +49,11 @@ variable "vpc_id" {
   default     = ""
 }
 
+variable "fernet_key" {
+  type        = "string"
+  description = "Key for encrypting data in the database - see Airflow docs"
+}
+
 ######
 # S3 #
 ######
