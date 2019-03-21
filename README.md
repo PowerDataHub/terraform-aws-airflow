@@ -11,7 +11,7 @@ Terraform module to deploy an [Apache Airflow](https://airflow.apache.org/) inst
 You can use this module from the [Terraform Registry](https://registry.terraform.io/modules/powerdatahub/airflow/aws/)
 
 ```terraform
-module "example-airflow-cluster" {
+module "airflow-cluster" {
   source            = "powerdatahub/airflow/aws"
   cluster_name      = "my-airflow"
   cluster_stage     = "dev"
