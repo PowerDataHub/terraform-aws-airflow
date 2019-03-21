@@ -2,8 +2,7 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| ami | Ubuntu 18.04 AMI. | string | `"ami-0a313d6098716f372"` | no |
-| associate\_public\_ip\_address | If set to true, associate a public IP address with each EC2 Instance in the cluster. | string | `"false"` | no |
+| ami | Default is: Ubuntu Server 18.04 LTS (HVM), SSD Volume Type. | string | `"ami-0a313d6098716f372"` | no |
 | aws\_key\_name | AWS KeyPair name | string | n/a | yes |
 | aws\_region | AWS Region | string | `"us-east-1"` | no |
 | cluster\_name | The name of the Airflow cluster (e.g. airflow-xyz). This variable is used to namespace all resources created by this module. | string | n/a | yes |
@@ -20,15 +19,16 @@
 | root\_volume\_size | The size, in GB, of the root EBS volume. | string | `"30"` | no |
 | root\_volume\_type | The type of volume. Must be one of: standard, gp2, or io1. | string | `"standard"` | no |
 | s3\_bucket\_name |  | string | `""` | no |
-| scheduler\_instance\_type | Instance type for the Airflow Scheduler | string | `"t3.small"` | no |
+| scheduler\_instance\_type | Instance type for the Airflow Scheduler | string | `"t3.micro"` | no |
 | spot\_price | The maximum hourly price to pay for EC2 Spot Instances. | string | `""` | no |
 | vpc\_id | The ID of the VPC in which the nodes will be deployed.  Uses default VPC if not supplied. | string | `""` | no |
-| webserver\_instance\_type | Instance type for the Airflow Webserver | string | `"t3.small"` | no |
+| webserver\_instance\_type | Instance type for the Airflow Webserver | string | `"t3.micro"` | no |
+| worker\_instance\_type | Instance type for the Celery Worker | string | `"t3.small"` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| airflow\_instance\_public\_dns | Public DNS for the Airflow instance |
-| airflow\_instance\_public\_ip | Public IP address for the Airflow instance |
+| airflow\_webserver\_public\_dns | Public DNS for the Airflow Webserver instance |
+| airflow\_webserver\_public\_ip | Public IP address for the Airflow Webserver instance |
 
