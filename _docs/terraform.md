@@ -30,6 +30,7 @@
 
 | Name | Description |
 |------|-------------|
+| airflow\_database\_username | Username to connect to RDS metadata |
 | airflow\_webserver\_public\_dns | Public DNS for the Airflow Webserver instance |
 | airflow\_webserver\_public\_ip | Public IP address for the Airflow Webserver instance |
 
