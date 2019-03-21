@@ -11,10 +11,11 @@ Terraform module to deploy an [Apache Airflow](https://airflow.apache.org/) inst
 You can use this module from the [Terraform Registry](https://registry.terraform.io/modules/powerdatahub/airflow/aws/)
 
 ```terraform
-module "example-airflow-setup" {
+module "example-airflow-cluster" {
   source            = "powerdatahub/airflow/aws"
   cluster_name      = "my-airflow"
   cluster_stage     = "dev"
+  db_password       = "rds-master-password"
   fernet_key        = "your-fernet-key"
   vpc_id            = "some-vpc-id"  
   aws_key_name      = "airflow-key"
