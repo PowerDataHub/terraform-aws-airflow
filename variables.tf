@@ -117,7 +117,7 @@ variable "root_volume_type" {
 variable "root_volume_size" {
   type        = "string"
   description = "The size, in GB, of the root EBS volume."
-  default     = 30
+  default     = 35
 }
 
 variable "root_volume_delete_on_termination" {
