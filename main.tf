@@ -97,6 +97,18 @@ resource "aws_instance" "airflow_webserver" {
     create_before_destroy = true
   }
 
+  provisioner "file" {
+    content     = "${data.template_file.requirements_txt.rendered}"
+    destination = "/var/tmp/requirements.txt"
+
+    connection {
+      agent       = false
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file(var.private_key_path)}"
+    }
+  }
+
   user_data = "${data.template_file.provisioner.rendered}"
 }
 
@@ -122,6 +134,18 @@ resource "aws_instance" "airflow_scheduler" {
     create_before_destroy = true
   }
 
+  provisioner "file" {
+    content     = "${data.template_file.requirements_txt.rendered}"
+    destination = "/var/tmp/requirements.txt"
+
+    connection {
+      agent       = false
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file(var.private_key_path)}"
+    }
+  }
+
   user_data = "${data.template_file.provisioner.rendered}"
 }
 
@@ -145,6 +169,18 @@ resource "aws_instance" "airflow_worker" {
 
   lifecycle {
     create_before_destroy = true
+  }
+
+  provisioner "file" {
+    content     = "${data.template_file.requirements_txt.rendered}"
+    destination = "/var/tmp/requirements.txt"
+
+    connection {
+      agent       = false
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file(var.private_key_path)}"
+    }
   }
 
   user_data = "${data.template_file.provisioner.rendered}"

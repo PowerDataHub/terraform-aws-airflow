@@ -54,9 +54,10 @@ variable "fernet_key" {
   description = "Key for encrypting data in the database - see Airflow docs"
 }
 
-variable "requirements.txt" {
+variable "requirements_txt" {
   type        = "string"
   description = "Custom requirements.txt"
+  default     = ""
 }
 
 ######
@@ -176,6 +177,6 @@ data "template_file" "provisioner" {
   template = "${file("${path.module}/files/cloud-init.sh")}"
 }
 
-data "template_file" "requirements.txt" {
-  template = "${file("${var.requirements.txt}")}"
+data "template_file" "requirements_txt" {
+  template = "${file("${var.requirements_txt}")}"
 }
