@@ -28,17 +28,25 @@ function install_python_and_python_packages() {
 
     export SLUGIFY_USES_TEXT_UNIDECODE=yes
     pip3 install \
-      Cython \
+      cython \
       pytz \
-      pyOpenSSL \
+      pyopenssl \
       ndg-httpsclient \
       pyasn1 \
+      wheel \
+      boto3 \
+      pendulum \
+      setuptools \
       apache-airflow[celery,postgres,s3,crypto,jdbc]==1.10.2 \
       celery[sqs] \
       billiard==3.5.0.4 \
       tenacity==4.12.0
+}
 
-    pip3 install -qU setuptools --ignore-installed
+function setup_airflow() {
+    export AIRFLOW_HOME=/etc/airflow
+    mkdir -p $AIRFLOW_HOME /var/log/airflow
+    airflow initdb
 }
 
 
@@ -46,6 +54,7 @@ START_TIME=$(date +%s)
 
 install_dependencyes
 install_python_and_python_packages
+setup_airflow
 
 END_TIME=$(date +%s)
 ELAPSED=$(($END_TIME - $START_TIME))
