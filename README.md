@@ -28,7 +28,7 @@ module "airflow-cluster" {
 - [ ] Auto Scalling for workers
 - [ ] Use SPOT instances for workers
 - [ ] Maybe use the [AWS Fargate](https://aws.amazon.com/pt/fargate/) to reduce costs
-- [ ] Provide a way to users pass a custom requirements.txt and packages.txt files
+- [x] Provide a way to users pass a custom requirements.txt and packages.txt files
 
 ---
 
