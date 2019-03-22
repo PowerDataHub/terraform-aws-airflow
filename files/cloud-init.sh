@@ -22,6 +22,10 @@ function install_dependencyes() {
 
 function install_python_and_python_packages() {
 
+	if [ ! -f /var/tmp/requirements.txt ]; then
+	    pip3 install -r /var/tmp/requirements.txt
+	fi
+
     PYCURL_SSL_LIBRARY=openssl pip3 install \
       --no-cache-dir --compile --ignore-installed \
       pycurl
