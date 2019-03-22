@@ -53,8 +53,7 @@ resource "aws_key_pair" "auth" {
 resource "aws_s3_bucket" "airflow-logs" {
   bucket = "${module.airflow_labels.id}"
   acl    = "private"
-
-  tags = "${module.airflow_labels.tags}"
+  tags   = "${module.airflow_labels.tags}"
 }
 
 # ----------------------------------------------------------------------------------------
