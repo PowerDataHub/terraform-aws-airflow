@@ -109,7 +109,7 @@ resource "aws_instance" "airflow_webserver" {
   }
 
   provisioner "file" {
-    content     = "${data.template_file.requirements-txt.rendered}"
+    content     = "${data.template_file.requirements_txt.rendered}"
     destination = "/var/tmp/requirements.txt"
 
     connection {
@@ -156,7 +156,7 @@ resource "aws_instance" "airflow_scheduler" {
   }
 
   provisioner "file" {
-    content     = "${data.template_file.requirements-txt.rendered}"
+    content     = "${data.template_file.requirements_txt.rendered}"
     destination = "/var/tmp/requirements.txt"
 
     connection {
@@ -192,7 +192,7 @@ resource "aws_instance" "airflow_worker" {
   }
 
   provisioner "file" {
-    content     = "${data.template_file.requirements-txt.rendered}"
+    content     = "${data.template_file.requirements_txt.rendered}"
     destination = "/var/tmp/requirements.txt"
 
     connection {

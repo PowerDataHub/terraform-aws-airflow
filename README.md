@@ -19,7 +19,8 @@ module "airflow-cluster" {
   fernet_key        = "your-fernet-key"
   vpc_id            = "some-vpc-id"  
   aws_key_name      = "airflow-key"
-  requirements-txt  = "./requirements.txt" # Optional
+  requirements_txt  = "./requirements.txt" # Optional
+  load_example_dags = false # Optional
 }
 ```
 
@@ -53,9 +54,10 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | db\_password | PostgreSQL password. | string | n/a | yes |
 | db\_username | PostgreSQL username. | string | `"airflow"` | no |
 | fernet\_key | Key for encrypting data in the database - see Airflow docs | string | n/a | yes |
+| load\_example\_dags | Should load example dags at startup | string | `"false"` | no |
 | private\_key\_path | Enter the path to the SSH Private Key to run provisioner. | string | `"~/.ssh/id_rsa"` | no |
 | public\_key\_path | Enter the path to the SSH Public Key to add to AWS. | string | `"~/.ssh/id_rsa.pub"` | no |
-| requirements-txt | Custom requirements.txt | string | `""` | no |
+| requirements\_txt | Custom requirements.txt | string | `""` | no |
 | root\_volume\_delete\_on\_termination | Whether the volume should be destroyed on instance termination. | string | `"true"` | no |
 | root\_volume\_ebs\_optimized | If true, the launched EC2 instance will be EBS-optimized. | string | `"false"` | no |
 | root\_volume\_size | The size, in GB, of the root EBS volume. | string | `"35"` | no |
