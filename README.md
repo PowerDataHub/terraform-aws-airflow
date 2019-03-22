@@ -19,6 +19,7 @@ module "airflow-cluster" {
   fernet_key        = "your-fernet-key"
   vpc_id            = "some-vpc-id"  
   aws_key_name      = "airflow-key"
+  requirements_txt  = "./requirements.txt" # Optional
 }
 ```
 
