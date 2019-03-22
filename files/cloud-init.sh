@@ -1,61 +1,68 @@
 #!/bin/bash
 
-set -x
+set -ex
 
 function install_dependencyes() {
-    sudo apt-get update
-    sudo apt-get install -y \
-      bzip2 \
-      curl \
-      gcc \
-      git \
-      jq \
-      libcurl4-openssl-dev \
-      libssl-dev \
-      openssl \
-      postgresql-client \
-      python3 \
-      python3-dev \
-      python3-pip \
-      python3-wheel
+    sudo apt-get update -yqq && sudo apt-get upgrade -yqq
+	buildDeps=' \
+        freetds-dev \
+        libkrb5-dev \
+        libsasl2-dev \
+        libssl-dev \
+        libffi-dev \
+        libpq-dev \
+        git \
+    ' \
+    && sudo apt-get install -yqq --no-install-recommends \
+        $buildDeps \
+        freetds-bin \
+        build-essential \
+        default-libmysqlclient-dev \
+        apt-utils \
+        curl \
+        rsync \
+        netcat \
+        locales \
+    && sed -i 's/^# en_US.UTF-8 UTF-8$/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
+    && locale-gen \
+    && update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
+    && useradd -ms /bin/bash -d $AIRFLOW_HOME airflow
 }
 
 function install_python_and_python_packages() {
 
-	if [ ! -f /var/tmp/requirements.txt ]; then
-	    pip3 install -r /var/tmp/requirements.txt
+	if [ -e /var/tmp/requirements.txt ]; then
+	    SLUGIFY_USES_TEXT_UNIDECODE=yes pip3 install -r /var/tmp/requirements.txt
 	fi
 
     PYCURL_SSL_LIBRARY=openssl pip3 install \
       --no-cache-dir --compile --ignore-installed \
       pycurl
 
-    export SLUGIFY_USES_TEXT_UNIDECODE=yes
-    pip3 install -U \
-      cython \
-      pytz \
-      pyopenssl \
-      ndg-httpsclient \
-      pyasn1 \
-      wheel \
-      boto3 \
-	  boto \
-	  botocore \
-	  numpy \
-	  scipy \
-	  pandas \
-      setuptools \
-	  pendulum \
-      apache-airflow[celery,postgres,s3,crypto,jdbc]==1.10.2 \
-      celery[sqs] \
-      billiard==3.5.0.4 \
-      tenacity==4.12.0
+    SLUGIFY_USES_TEXT_UNIDECODE=yes pip3 install -U \
+		pytz \
+		pyOpenSSL \
+		ndg-httpsclient \
+		pyasn1 \
+		wheel \
+		boto3 \
+		boto \
+		botocore \
+		numpy \
+		scipy \
+		pandas \
+		setuptools \
+		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh]==1.10.2 \
+		celery[sqs] \
+		billiard==3.5.0.4 \
+		tenacity==4.12.0 \
+		'redis>=2.10.5,<3'
 }
 
 function setup_airflow() {
     export AIRFLOW_HOME=/etc/airflow
-    mkdir -p $AIRFLOW_HOME /var/log/airflow
-    airflow initdb
+    mkdir -p /var/log/airflow
+    AIRFLOW_HOME=/etc/airflow airflow initdb
 }
 
 

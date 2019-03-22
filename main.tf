@@ -102,7 +102,6 @@ resource "aws_instance" "airflow_webserver" {
     destination = "/var/tmp/requirements.txt"
 
     connection {
-      agent       = false
       type        = "ssh"
       user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
@@ -139,7 +138,6 @@ resource "aws_instance" "airflow_scheduler" {
     destination = "/var/tmp/requirements.txt"
 
     connection {
-      agent       = false
       type        = "ssh"
       user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
@@ -176,7 +174,6 @@ resource "aws_instance" "airflow_worker" {
     destination = "/var/tmp/requirements.txt"
 
     connection {
-      agent       = false
       type        = "ssh"
       user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"

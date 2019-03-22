@@ -1,4 +1,4 @@
-[![Maintained by Powerdatahub.com](https://img.shields.io/badge/maintained%20by-powerdatahub.com-%235849a6.svg)](https://powerdatahub.com/?ref=repo_aws_airflow)
+[![Maintained by Powerdatahub.com](https://img.shields.io/badge/maintained%20by-powerdatahub.com-%235849a6.svg)](https://powerdatahub.com/?ref=repo_aws_airflow) [![Apache Airflow 1.10.2](https://img.shields.io/badge/Apache%20Airflow-1.10.2-5849a6.svg)](https://github.com/apache/airflow/)
 
 > WIP: NOT READY FOR PRODUCTION YET
 
@@ -58,7 +58,7 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | requirements\_txt | Custom requirements.txt | string | `""` | no |
 | root\_volume\_delete\_on\_termination | Whether the volume should be destroyed on instance termination. | string | `"true"` | no |
 | root\_volume\_ebs\_optimized | If true, the launched EC2 instance will be EBS-optimized. | string | `"false"` | no |
-| root\_volume\_size | The size, in GB, of the root EBS volume. | string | `"30"` | no |
+| root\_volume\_size | The size, in GB, of the root EBS volume. | string | `"35"` | no |
 | root\_volume\_type | The type of volume. Must be one of: standard, gp2, or io1. | string | `"standard"` | no |
 | s3\_bucket\_name |  | string | `""` | no |
 | scheduler\_instance\_type | Instance type for the Airflow Scheduler | string | `"t3.micro"` | no |
