@@ -71,7 +71,8 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 
 | Name | Description |
 |------|-------------|
-| airflow\_database\_username | Username to connect to RDS metadata |
+| airflow\_database\_endpoint | Endpoint to connect to RDS metadata DB |
+| airflow\_database\_username | Username to connect to RDS metadata DB |
 | airflow\_webserver\_public\_dns | Public DNS for the Airflow Webserver instance |
 | airflow\_webserver\_public\_ip | Public IP address for the Airflow Webserver instance |
 

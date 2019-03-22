@@ -51,7 +51,7 @@ resource "aws_key_pair" "auth" {
 # -------------------------------------------
 
 resource "aws_s3_bucket" "airflow-logs" {
-  bucket = "${module.airflow_labels.id}"
+  bucket = "${module.airflow_labels.id}-logs"
   acl    = "private"
   tags   = "${module.airflow_labels.tags}"
 }
@@ -67,7 +67,18 @@ module "sg_airflow" {
   vpc_id              = "${data.aws_vpc.default.id}"
   ingress_cidr_blocks = ["0.0.0.0/0"]
   ingress_rules       = ["http-80-tcp", "https-443-tcp", "ssh-tcp"]
-  egress_rules        = ["all-all"]
+
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 8080
+      to_port     = 8080
+      protocol    = "tcp"
+      description = "${module.airflow_labels.id} webserver"
+      cidr_blocks = "0.0.0.0/0"
+    },
+  ]
+
+  egress_rules = ["all-all"]
 
   tags = "${module.airflow_labels.tags}"
 }
@@ -199,10 +210,13 @@ module "sg_database" {
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
 
+  number_of_computed_ingress_with_source_security_group_id = 1
+
   computed_ingress_with_source_security_group_id = [
     {
       rule                     = "postgresql-tcp"
       source_security_group_id = "${module.sg_airflow.this_security_group_id}"
+      description              = "Allow ${module.airflow_labels.id} machines"
     },
   ]
 
