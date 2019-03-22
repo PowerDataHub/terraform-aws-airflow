@@ -19,7 +19,7 @@ module "airflow-cluster" {
   fernet_key        = "your-fernet-key"
   vpc_id            = "some-vpc-id"  
   aws_key_name      = "airflow-key"
-  requirements_txt  = "./requirements.txt" # Optional
+  requirements-txt  = "./requirements.txt" # Optional
 }
 ```
 
@@ -55,7 +55,7 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | fernet\_key | Key for encrypting data in the database - see Airflow docs | string | n/a | yes |
 | private\_key\_path | Enter the path to the SSH Private Key to run provisioner. | string | `"~/.ssh/id_rsa"` | no |
 | public\_key\_path | Enter the path to the SSH Public Key to add to AWS. | string | `"~/.ssh/id_rsa.pub"` | no |
-| requirements\_txt | Custom requirements.txt | string | `""` | no |
+| requirements-txt | Custom requirements.txt | string | `""` | no |
 | root\_volume\_delete\_on\_termination | Whether the volume should be destroyed on instance termination. | string | `"true"` | no |
 | root\_volume\_ebs\_optimized | If true, the launched EC2 instance will be EBS-optimized. | string | `"false"` | no |
 | root\_volume\_size | The size, in GB, of the root EBS volume. | string | `"35"` | no |
