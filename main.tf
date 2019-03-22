@@ -56,6 +56,20 @@ resource "aws_s3_bucket" "airflow-logs" {
   tags   = "${module.airflow_labels.tags}"
 }
 
+# -------------------------------------------
+# CREATE A SQS TOPIC
+# ---------------------------------------
+
+resource "aws_sqs_queue" "airflow-queue" {
+  name                      = "${module.airflow_labels.id}-queue"
+  delay_seconds             = 90
+  max_message_size          = 2048
+  message_retention_seconds = 86400
+  receive_wait_time_seconds = 10
+
+  tags = "${module.airflow_labels.tags}"
+}
+
 # ----------------------------------------------------------------------------------------
 # CREATE A SECURITY GROUP TO CONTROL WHAT REQUESTS CAN GO IN AND OUT OF EACH EC2 INSTANCE
 # ----------------------------------------------------------------------------------------
