@@ -54,6 +54,11 @@ variable "fernet_key" {
   description = "Key for encrypting data in the database - see Airflow docs"
 }
 
+variable "requirements.txt" {
+  type        = "string"
+  description = "Custom requirements.txt"
+}
+
 ######
 # S3 #
 ######
@@ -169,4 +174,8 @@ data "aws_security_group" "default" {
 
 data "template_file" "provisioner" {
   template = "${file("${path.module}/files/cloud-init.sh")}"
+}
+
+data "template_file" "requirements.txt" {
+  template = "${file("${var.requirements.txt}")}"
 }

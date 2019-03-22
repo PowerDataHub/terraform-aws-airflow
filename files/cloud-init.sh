@@ -27,7 +27,7 @@ function install_python_and_python_packages() {
       pycurl
 
     export SLUGIFY_USES_TEXT_UNIDECODE=yes
-    pip3 install \
+    pip3 install -U \
       cython \
       pytz \
       pyopenssl \
@@ -35,8 +35,13 @@ function install_python_and_python_packages() {
       pyasn1 \
       wheel \
       boto3 \
-      pendulum \
+	  boto \
+	  botocore \
+	  numpy \
+	  scipy \
+	  pandas \
       setuptools \
+	  pendulum \
       apache-airflow[celery,postgres,s3,crypto,jdbc]==1.10.2 \
       celery[sqs] \
       billiard==3.5.0.4 \
