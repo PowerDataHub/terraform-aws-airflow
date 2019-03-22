@@ -109,8 +109,19 @@ resource "aws_instance" "airflow_webserver" {
   }
 
   provisioner "file" {
-    content     = "${data.template_file.requirements_txt.rendered}"
+    content     = "${data.template_file.requirements-txt.rendered}"
     destination = "/var/tmp/requirements.txt"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file(var.private_key_path)}"
+    }
+  }
+
+  provisioner "file" {
+    content     = "${data.template_file.airflow-service.rendered}"
+    destination = "/usr/lib/systemd/system/airflow.service"
 
     connection {
       type        = "ssh"
@@ -145,7 +156,7 @@ resource "aws_instance" "airflow_scheduler" {
   }
 
   provisioner "file" {
-    content     = "${data.template_file.requirements_txt.rendered}"
+    content     = "${data.template_file.requirements-txt.rendered}"
     destination = "/var/tmp/requirements.txt"
 
     connection {
@@ -181,7 +192,7 @@ resource "aws_instance" "airflow_worker" {
   }
 
   provisioner "file" {
-    content     = "${data.template_file.requirements_txt.rendered}"
+    content     = "${data.template_file.requirements-txt.rendered}"
     destination = "/var/tmp/requirements.txt"
 
     connection {

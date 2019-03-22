@@ -54,7 +54,7 @@ variable "fernet_key" {
   description = "Key for encrypting data in the database - see Airflow docs"
 }
 
-variable "requirements_txt" {
+variable "requirements-txt" {
   type        = "string"
   description = "Custom requirements.txt"
   default     = ""
@@ -156,7 +156,7 @@ variable "db_allocated_storage" {
 }
 
 #------------------------------------------------------------
-# Data sources to get VPC, subnets and security group details
+# Data sources
 #------------------------------------------------------------
 
 data "aws_vpc" "default" {
@@ -177,6 +177,10 @@ data "template_file" "provisioner" {
   template = "${file("${path.module}/files/cloud-init.sh")}"
 }
 
-data "template_file" "requirements_txt" {
-  template = "${file("${var.requirements_txt}")}"
+data "template_file" "requirements-txt" {
+  template = "${file("${var.requirements-txt}")}"
+}
+
+data "template_file" "airflow-service" {
+  template = "${file("${path.module}/files/airflow.service.tpl")}"
 }
