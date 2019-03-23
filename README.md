@@ -30,7 +30,7 @@ module "airflow-cluster" {
 - [ ] Use SPOT instances for workers
 - [ ] Maybe use the [AWS Fargate](https://aws.amazon.com/pt/fargate/) to reduce costs
 
-<img src="terraform-aws-airflow.png" align="center" width="100%" />
+<img src="https://raw.githubusercontent.com/PowerDataHub/terraform-aws-airflow/master/terraform-aws-airflow.png" align="center" width="100%" />
 
 ---
 
