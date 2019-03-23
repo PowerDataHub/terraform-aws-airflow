@@ -185,16 +185,16 @@ data "aws_security_group" "default" {
   name   = "default"
 }
 
-data "template_file" "provisioner" {
-  template = "${file("${path.module}/files/cloud-init.sh")}"
-}
-
 data "template_file" "requirements_txt" {
   template = "${file("${var.requirements_txt}")}"
 }
 
 data "template_file" "airflow-service" {
   template = "${file("${path.module}/files/airflow.service")}"
+}
+
+data "template_file" "airflow-environment" {
+  template = "${file("${path.module}/files/airflow.environment")}"
 
   vars = {
     AWS_REGION         = "${var.aws_region}"
@@ -211,8 +211,4 @@ data "template_file" "airflow-service" {
     WEBSERVER_PORT = "8080"
     QUEUE_NAME     = "${module.airflow_labels.id}-queue"
   }
-}
-
-data "template_file" "airflow-environment" {
-  template = "${file("${path.module}/files/airflow.environment")}"
 }
