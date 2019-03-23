@@ -24,6 +24,9 @@ module "airflow-cluster" {
 }
 ```
 
+<img src="terraform-aws-airflow.png" align="center" width="100%" />
+
+
 ### Todo
 
 - [ ] Run airflow as systemd service

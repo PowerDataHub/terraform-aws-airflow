@@ -188,5 +188,25 @@ data "template_file" "requirements_txt" {
 }
 
 data "template_file" "airflow-service" {
-  template = "${file("${path.module}/files/airflow.service.tpl")}"
+  template = "${file("${path.module}/files/airflow.service")}"
+}
+
+data "template_file" "airflow-environment" {
+  template = "${file("${path.module}/files/airflow.environment")}"
+
+  vars = {
+    AWS_REGION         = "${var.aws_region}"
+    FERNET_KEY         = "${var.fernet_key}"
+    LOAD_EXAMPLE_DAGS  = "${var.load_example_dags}"
+    LOAD_DEFAULT_CONNS = false
+    DB_USERNAME        = "${var.db_username}"
+    DB_PASSWORD        = "${var.db_password}"
+    DB_ENDPOINT        = "${aws_db_instance.airflow-database.endpoint}"
+    DB_DBNAME          = "${var.db_dbname}"
+    S3_BUCKET          = "${aws_s3_bucket.airflow-logs.id}"
+
+    # WEBSERVER_HOST     = "${aws_instance.airflow_webserver.public_dns}"
+    WEBSERVER_PORT = "8080"
+    QUEUE_NAME     = "${module.airflow_labels.id}-queue"
+  }
 }

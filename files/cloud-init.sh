@@ -2,9 +2,9 @@
 
 set -x
 
-function install_dependencyes() {
+function install_dependencies() {
     sudo apt-get update -yqq && sudo apt-get upgrade -yqq
-	buildDeps='freetds-dev libkrb5-dev libsasl2-dev libssl-dev libffi-dev libpq-dev git libcurl4-openssl-dev' \
+	buildDeps='freetds-dev libkrb5-dev libsasl2-dev libssl-dev libffi-dev libpq-dev git' \
     && sudo apt-get install -yqq --no-install-recommends \
         $buildDeps \
 		bzip2 \
@@ -26,10 +26,10 @@ function install_dependencyes() {
         locales \
         netcat \
         rsync \
-    && sed -i 's/^# en_US.UTF-8 UTF-8$/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
+    && sudo sed -i 's/^# en_US.UTF-8 UTF-8$/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
     && locale-gen \
     && sudo update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
-    && sudo useradd -ms /bin/bash -d $AIRFLOW_HOME airflow \
+    && sudo useradd -ms /bin/bash -d /etc/airflow airflow \
 	&& sudo apt-get purge -y --auto-remove $buildDeps
 }
 
@@ -65,17 +65,42 @@ function install_python_and_python_packages() {
 		'redis>=2.10.5,<3'
 }
 
+function setup_services() {
+	source /etc/environment
+	sudo tee -a /usr/bin/terraform-aws-airflow <<EOL
+#!/bin/sh
+if [ "$AIRFLOW_ROLE" == "SCHEDULER" ]
+then exec airflow scheduler
+elif [ "$AIRFLOW_ROLE" == "WEBSERVER" ]
+then exec airflow webserver
+elif [ "$AIRFLOW_ROLE" == "WORKER" ]
+then exec airflow worker
+else echo "AIRFLOW_ROLE value unknown" && exit 1
+fi
+EOL
+
+	sudo chmod 755 /usr/bin/terraform-aws-airflow
+	echo "AIRFLOW_HOME=/etc/airflow" | sudo tee -a /etc/environment
+	cat /var/tmp/airflow-environment | sudo tee -a /etc/airflow/environment
+	sudo cat /var/tmp/airflow.service >> /etc/systemd/system/airflow.service
+	sudo systemctl enable airflow.service
+	sudo systemctl start airflow.service
+	sudo systemctl status airflow.service
+
+}
+
 function setup_airflow() {
-    export AIRFLOW_HOME=/etc/airflow
+	sudo chown -R airflow: /etc/airflow
     sudo mkdir -p /var/log/airflow
-    AIRFLOW_HOME=/etc/airflow airflow initdb
+    airflow upgradedb
 }
 
 
 START_TIME=$(date +%s)
 
-install_dependencyes
+install_dependencies
 install_python_and_python_packages
+setup_services
 setup_airflow
 
 END_TIME=$(date +%s)

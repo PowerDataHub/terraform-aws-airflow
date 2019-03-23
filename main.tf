@@ -134,8 +134,31 @@ resource "aws_instance" "airflow_webserver" {
   }
 
   provisioner "file" {
+    content     = "${data.template_file.airflow-environment.rendered}"
+    destination = "/var/tmp/airflow-environment"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file(var.private_key_path)}"
+    }
+  }
+
+  provisioner "file" {
     content     = "${data.template_file.airflow-service.rendered}"
-    destination = "/usr/lib/systemd/system/airflow.service"
+    destination = "/var/tmp/airflow.service"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file(var.private_key_path)}"
+    }
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "echo AIRFLOW_ROLE=WEBSERVER | sudo tee -a /etc/environment",
+    ]
 
     connection {
       type        = "ssh"
@@ -180,6 +203,40 @@ resource "aws_instance" "airflow_scheduler" {
     }
   }
 
+  provisioner "file" {
+    content     = "${data.template_file.airflow-environment.rendered}"
+    destination = "/var/tmp/airflow-environment"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file(var.private_key_path)}"
+    }
+  }
+
+  provisioner "file" {
+    content     = "${data.template_file.airflow-service.rendered}"
+    destination = "/var/tmp/airflow.service"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file(var.private_key_path)}"
+    }
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "echo AIRFLOW_ROLE=SCHEDULER | sudo tee -a /etc/environment",
+    ]
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file(var.private_key_path)}"
+    }
+  }
+
   user_data = "${data.template_file.provisioner.rendered}"
 }
 
@@ -208,6 +265,40 @@ resource "aws_instance" "airflow_worker" {
   provisioner "file" {
     content     = "${data.template_file.requirements_txt.rendered}"
     destination = "/var/tmp/requirements.txt"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file(var.private_key_path)}"
+    }
+  }
+
+  provisioner "file" {
+    content     = "${data.template_file.airflow-environment.rendered}"
+    destination = "/var/tmp/airflow-environment"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file(var.private_key_path)}"
+    }
+  }
+
+  provisioner "file" {
+    content     = "${data.template_file.airflow-service.rendered}"
+    destination = "/var/tmp/airflow.service"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file(var.private_key_path)}"
+    }
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "echo AIRFLOW_ROLE=WORKER | sudo tee -a /etc/environment",
+    ]
 
     connection {
       type        = "ssh"
