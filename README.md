@@ -16,7 +16,7 @@ module "airflow-cluster" {
   cluster_name      = "my-airflow"
   cluster_stage     = "dev"
   db_password       = "rds-master-password"
-  fernet_key        = "your-fernet-key"
+  fernet_key        = "your-fernet-key" # https://airflow.readthedocs.io/en/stable/howto/secure-connections.html
   vpc_id            = "some-vpc-id"  
   aws_key_name      = "airflow-key"
   requirements_txt  = "./requirements.txt" # Optional
