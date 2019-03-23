@@ -1,15 +1,14 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -x
 
 function install_dependencies() {
     sudo apt-get update -yqq && sudo apt-get upgrade -yqq
-	buildDeps='freetds-dev libkrb5-dev libsasl2-dev libssl-dev libffi-dev libpq-dev git' \
+	buildDeps='freetds-dev libkrb5-dev libsasl2-dev libffi-dev libpq-dev' \
     && sudo apt-get install -yqq --no-install-recommends \
         $buildDeps \
 		bzip2 \
 		curl \
-		gcc \
 		git \
 		jq \
 		libcurl4-openssl-dev \
@@ -68,7 +67,7 @@ function install_python_and_python_packages() {
 function setup_services() {
 	source /etc/environment
 	sudo tee -a /usr/bin/terraform-aws-airflow <<EOL
-#!/bin/sh
+#!/usr/bin/env bash
 if [ "$AIRFLOW_ROLE" == "SCHEDULER" ]
 then exec airflow scheduler
 elif [ "$AIRFLOW_ROLE" == "WEBSERVER" ]
