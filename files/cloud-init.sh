@@ -38,7 +38,6 @@ function install_dependencies() {
 
 function install_python_and_python_packages() {
 
-
     PYCURL_SSL_LIBRARY=openssl pip3 install \
       --no-cache-dir --compile --ignore-installed \
       pycurl
