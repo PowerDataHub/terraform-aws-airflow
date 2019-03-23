@@ -1,7 +1,5 @@
 [![Maintained by Powerdatahub.com](https://img.shields.io/badge/maintained%20by-powerdatahub.com-%235849a6.svg)](https://powerdatahub.com/?ref=repo_aws_airflow) [![Apache Airflow 1.10.2](https://img.shields.io/badge/Apache%20Airflow-1.10.2-5849a6.svg)](https://github.com/apache/airflow/)
 
-> WIP: NOT READY FOR PRODUCTION YET
-
 # Airflow AWS Module
 
 Terraform module to deploy an [Apache Airflow](https://airflow.apache.org/) instance on [AWS](https://aws.amazon.com/) backed by RDS PostgreSQL for storage, S3 for logs and SQS as message broker with CeleryExecutor.
