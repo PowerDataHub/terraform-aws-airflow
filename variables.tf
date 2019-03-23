@@ -62,7 +62,13 @@ variable "requirements_txt" {
 
 variable "load_example_dags" {
   type        = "string"
-  description = "Should load example dags at startup"
+  description = "Load the example DAGs distributed with Airflow. Useful if deploying a stack for demonstrating a few topologies, operators and scheduling strategies."
+  default     = false
+}
+
+variable "load_default_conns" {
+  type        = "string"
+  description = "Load the default connections initialized by Airflow. Most consider these unnecessary, which is why the default is to not load them."
   default     = false
 }
 
@@ -189,10 +195,6 @@ data "template_file" "requirements_txt" {
 
 data "template_file" "airflow-service" {
   template = "${file("${path.module}/files/airflow.service")}"
-}
-
-data "template_file" "airflow-environment" {
-  template = "${file("${path.module}/files/airflow.environment")}"
 
   vars = {
     AWS_REGION         = "${var.aws_region}"
@@ -209,4 +211,8 @@ data "template_file" "airflow-environment" {
     WEBSERVER_PORT = "8080"
     QUEUE_NAME     = "${module.airflow_labels.id}-queue"
   }
+}
+
+data "template_file" "airflow-environment" {
+  template = "${file("${path.module}/files/airflow.environment")}"
 }

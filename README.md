@@ -57,7 +57,8 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | db\_password | PostgreSQL password. | string | n/a | yes |
 | db\_username | PostgreSQL username. | string | `"airflow"` | no |
 | fernet\_key | Key for encrypting data in the database - see Airflow docs | string | n/a | yes |
-| load\_example\_dags | Should load example dags at startup | string | `"false"` | no |
+| load\_default\_conns | Load the default connections initialized by Airflow. Most consider these unnecessary, which is why the default is to not load them. | string | `"false"` | no |
+| load\_example\_dags | Load the example DAGs distributed with Airflow. Useful if deploying a stack for demonstrating a few topologies, operators and scheduling strategies. | string | `"false"` | no |
 | private\_key\_path | Enter the path to the SSH Private Key to run provisioner. | string | `"~/.ssh/id_rsa"` | no |
 | public\_key\_path | Enter the path to the SSH Public Key to add to AWS. | string | `"~/.ssh/id_rsa.pub"` | no |
 | requirements\_txt | Custom requirements.txt | string | `""` | no |
