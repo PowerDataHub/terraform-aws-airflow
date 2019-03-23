@@ -138,6 +138,17 @@ resource "aws_instance" "airflow_webserver" {
   }
 
   provisioner "file" {
+    content     = "${data.template_file.airflow-environment.rendered}"
+    destination = "/var/tmp/airflow-environment"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file(var.private_key_path)}"
+    }
+  }
+
+  provisioner "file" {
     content     = "${data.template_file.airflow-service.rendered}"
     destination = "/var/tmp/airflow.service"
 
@@ -160,7 +171,7 @@ resource "aws_instance" "airflow_webserver" {
     }
   }
 
-  user_data = "${data.template_file.provisioner.rendered}"
+  user_data = "${file("${path.module}/files/cloud-init.sh")}"
 }
 
 resource "aws_instance" "airflow_scheduler" {
@@ -197,6 +208,17 @@ resource "aws_instance" "airflow_scheduler" {
   }
 
   provisioner "file" {
+    content     = "${data.template_file.airflow-environment.rendered}"
+    destination = "/var/tmp/airflow-environment"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file(var.private_key_path)}"
+    }
+  }
+
+  provisioner "file" {
     content     = "${data.template_file.airflow-service.rendered}"
     destination = "/var/tmp/airflow.service"
 
@@ -219,7 +241,7 @@ resource "aws_instance" "airflow_scheduler" {
     }
   }
 
-  user_data = "${data.template_file.provisioner.rendered}"
+  user_data = "${file("${path.module}/files/cloud-init.sh")}"
 }
 
 resource "aws_instance" "airflow_worker" {
@@ -256,6 +278,17 @@ resource "aws_instance" "airflow_worker" {
   }
 
   provisioner "file" {
+    content     = "${data.template_file.airflow-environment.rendered}"
+    destination = "/var/tmp/airflow-environment"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file(var.private_key_path)}"
+    }
+  }
+
+  provisioner "file" {
     content     = "${data.template_file.airflow-service.rendered}"
     destination = "/var/tmp/airflow.service"
 
@@ -278,7 +311,7 @@ resource "aws_instance" "airflow_worker" {
     }
   }
 
-  user_data = "${data.template_file.provisioner.rendered}"
+  user_data = "${file("${path.module}/files/cloud-init.sh")}"
 }
 
 #-----------
