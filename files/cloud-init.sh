@@ -3,10 +3,13 @@
 set -x
 
 function install_dependencies() {
-    sudo apt-get update -yqq && sudo apt-get upgrade -yqq
-	buildDeps='freetds-dev libkrb5-dev libsasl2-dev libffi-dev libpq-dev' \
+    sudo apt-get update -yqq && sudo apt-get upgrade -yqq \
     && sudo apt-get install -yqq --no-install-recommends \
-        $buildDeps \
+        freetds-dev \
+		libkrb5-dev \
+		libsasl2-dev \
+		libffi-dev \
+		libpq-dev\
 		bzip2 \
 		curl \
 		git \
@@ -28,21 +31,20 @@ function install_dependencies() {
     && sudo sed -i 's/^# en_US.UTF-8 UTF-8$/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
     && locale-gen \
     && sudo update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
-    && sudo useradd -ms /bin/bash -d /etc/airflow airflow \
-	&& sudo apt-get purge -y --auto-remove $buildDeps
+    && sudo useradd -ms /bin/bash -d /etc/airflow airflow
 }
 
 function install_python_and_python_packages() {
-
-	if [ -e /var/tmp/requirements.txt ]; then
-	    SLUGIFY_USES_TEXT_UNIDECODE=yes pip3 install -r /var/tmp/requirements.txt
-	fi
 
     PYCURL_SSL_LIBRARY=openssl pip3 install \
       --no-cache-dir --compile --ignore-installed \
       pycurl
 
-	pip3 install -qU setuptools --ignore-installed
+	pip3 install -qU setuptools wheel --ignore-installed
+
+	if [ -e /var/tmp/requirements.txt ]; then
+		SLUGIFY_USES_TEXT_UNIDECODE=yes pip3 install -r /var/tmp/requirements.txt
+	fi
 
     SLUGIFY_USES_TEXT_UNIDECODE=yes pip3 install -U \
 		Cython \
@@ -50,7 +52,6 @@ function install_python_and_python_packages() {
 		pyOpenSSL \
 		ndg-httpsclient \
 		pyasn1 \
-		wheel \
 		boto3 \
 		boto \
 		botocore \
@@ -80,7 +81,6 @@ EOL
 
 	sudo chmod 755 /usr/bin/terraform-aws-airflow
 	echo "AIRFLOW_HOME=/etc/airflow" | sudo tee -a /etc/environment
-	cat /var/tmp/airflow-environment | sudo tee -a /etc/airflow/environment
 	sudo cat /var/tmp/airflow.service >> /etc/systemd/system/airflow.service
 	sudo systemctl enable airflow.service
 	sudo systemctl start airflow.service
@@ -99,8 +99,8 @@ START_TIME=$(date +%s)
 
 install_dependencies
 install_python_and_python_packages
-setup_services
 setup_airflow
+setup_services
 
 END_TIME=$(date +%s)
 ELAPSED=$(($END_TIME - $START_TIME))

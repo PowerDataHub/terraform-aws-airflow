@@ -1,10 +1,14 @@
 # ---------------------------------------
-# DEPLOY AN AIRFLOW CLUSTER IN AWS
+# AIRFLOW CLUSTER RESOURCES
 # ---------------------------------------
 
 terraform {
   required_version = ">= 0.9.3, != 0.9.5"
 }
+
+# ---------------------------------------
+# LABELS
+# ---------------------------------------
 
 module "airflow_labels" {
   source    = "git::https://github.com/cloudposse/terraform-terraform-label.git?ref=master"
@@ -354,6 +358,6 @@ resource "aws_db_instance" "airflow-database" {
   publicly_accessible     = false
   apply_immediately       = true
   skip_final_snapshot     = true
-  vpc_security_group_ids  = ["${module.sg_airflow.this_security_group_id}"]
+  vpc_security_group_ids  = ["${module.sg_database.this_security_group_id}"]
   port                    = "5432"
 }
