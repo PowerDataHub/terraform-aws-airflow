@@ -24,16 +24,15 @@ module "airflow-cluster" {
 }
 ```
 
-<img src="terraform-aws-airflow.png" align="center" width="100%" />
-
-
 ### Todo
 
 - [x] Run airflow as systemd service
+- [x] Provide a way to users pass a custom requirements.txt and packages.txt files
 - [ ] Auto Scalling for workers
 - [ ] Use SPOT instances for workers
 - [ ] Maybe use the [AWS Fargate](https://aws.amazon.com/pt/fargate/) to reduce costs
-- [x] Provide a way to users pass a custom requirements.txt and packages.txt files
+
+<img src="terraform-aws-airflow.png" align="center" width="100%" />
 
 ---
 
