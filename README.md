@@ -29,7 +29,7 @@ module "airflow-cluster" {
 
 ### Todo
 
-- [ ] Run airflow as systemd service
+- [x] Run airflow as systemd service
 - [ ] Auto Scalling for workers
 - [ ] Use SPOT instances for workers
 - [ ] Maybe use the [AWS Fargate](https://aws.amazon.com/pt/fargate/) to reduce costs
