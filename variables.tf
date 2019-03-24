@@ -189,11 +189,11 @@ data "template_file" "requirements_txt" {
   template = "${file("${var.requirements_txt}")}"
 }
 
-data "template_file" "airflow-service" {
+data "template_file" "airflow_service" {
   template = "${file("${path.module}/files/airflow.service")}"
 }
 
-data "template_file" "airflow-environment" {
+data "template_file" "airflow_environment" {
   template = "${file("${path.module}/files/airflow.environment")}"
 
   vars = {
