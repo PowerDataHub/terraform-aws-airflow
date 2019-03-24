@@ -4,3 +4,6 @@ terraform.tfvars
 *.tfstate
 *.tfstate.backup
 requirements.txt
+ansible
+dags
+plugins

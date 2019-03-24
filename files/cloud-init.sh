@@ -81,8 +81,7 @@ fi
 EOL
 
 	sudo chmod 755 /usr/bin/terraform-aws-airflow
-	sudo mkdir -p /var/log/airflow /etc/airflow
-	sudo chown -R ubuntu: /etc/airflow
+	sudo mkdir -p /var/log/airflow /etc/airflow /etc/airflow/dags /etc/airflow/plugins
 	sudo chmod -R 755 /etc/airflow
 	sudo mkdir -p /etc/sysconfig/
 
@@ -94,6 +93,8 @@ EOL
 	source /etc/environment
 
 	airflow initdb
+
+	sudo chown -R ubuntu: /etc/airflow
 
 	sudo systemctl enable airflow.service
 	sudo systemctl start airflow.service
