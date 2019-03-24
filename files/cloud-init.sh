@@ -87,9 +87,9 @@ EOL
 	sudo mkdir -p /etc/sysconfig/
 
 	cat /etc/environment | sudo tee -a /etc/sysconfig/airflow
-	sed 's/^/export /' -- </var/tmp/airflow-environment | sudo tee -a /etc/environment
+	sed 's/^/export /' -- </var/tmp/airflow_environment | sudo tee -a /etc/environment
 	sudo cat /var/tmp/airflow.service >> /etc/systemd/system/airflow.service
-	cat /var/tmp/airflow-environment | sudo tee -a /etc/sysconfig/airflow
+	cat /var/tmp/airflow_environment | sudo tee -a /etc/sysconfig/airflow
 
 	source /etc/environment
 

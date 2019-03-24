@@ -138,8 +138,8 @@ resource "aws_instance" "airflow_webserver" {
   }
 
   provisioner "file" {
-    content     = "${data.template_file.airflow-environment.rendered}"
-    destination = "/var/tmp/airflow-environment"
+    content     = "${data.template_file.airflow_environment.rendered}"
+    destination = "/var/tmp/airflow_environment"
 
     connection {
       type        = "ssh"
@@ -149,7 +149,7 @@ resource "aws_instance" "airflow_webserver" {
   }
 
   provisioner "file" {
-    content     = "${data.template_file.airflow-service.rendered}"
+    content     = "${data.template_file.airflow_service.rendered}"
     destination = "/var/tmp/airflow.service"
 
     connection {
@@ -208,8 +208,8 @@ resource "aws_instance" "airflow_scheduler" {
   }
 
   provisioner "file" {
-    content     = "${data.template_file.airflow-environment.rendered}"
-    destination = "/var/tmp/airflow-environment"
+    content     = "${data.template_file.airflow_environment.rendered}"
+    destination = "/var/tmp/airflow_environment"
 
     connection {
       type        = "ssh"
@@ -219,7 +219,7 @@ resource "aws_instance" "airflow_scheduler" {
   }
 
   provisioner "file" {
-    content     = "${data.template_file.airflow-service.rendered}"
+    content     = "${data.template_file.airflow_service.rendered}"
     destination = "/var/tmp/airflow.service"
 
     connection {
@@ -278,8 +278,8 @@ resource "aws_instance" "airflow_worker" {
   }
 
   provisioner "file" {
-    content     = "${data.template_file.airflow-environment.rendered}"
-    destination = "/var/tmp/airflow-environment"
+    content     = "${data.template_file.airflow_environment.rendered}"
+    destination = "/var/tmp/airflow_environment"
 
     connection {
       type        = "ssh"
@@ -289,7 +289,7 @@ resource "aws_instance" "airflow_worker" {
   }
 
   provisioner "file" {
-    content     = "${data.template_file.airflow-service.rendered}"
+    content     = "${data.template_file.airflow_service.rendered}"
     destination = "/var/tmp/airflow.service"
 
     connection {
@@ -343,7 +343,7 @@ module "sg_database" {
   tags = "${module.airflow_labels.tags}"
 }
 
-resource "aws_db_instance" "airflow-database" {
+resource "aws_db_instance" "airflow_database" {
   identifier              = "${module.airflow_labels.id}-db"
   allocated_storage       = "${var.db_allocated_storage}"
   engine                  = "postgres"

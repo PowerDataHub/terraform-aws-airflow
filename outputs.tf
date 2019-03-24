@@ -9,11 +9,11 @@ output "airflow_webserver_public_ip" {
 }
 
 output "airflow_database_endpoint" {
-  value       = "${aws_db_instance.airflow-database.endpoint}"
+  value       = "${aws_db_instance.airflow_database.endpoint}"
   description = "Endpoint to connect to RDS metadata DB"
 }
 
 output "airflow_database_username" {
-  value       = "${aws_db_instance.airflow-database.username}"
+  value       = "${aws_db_instance.airflow_database.username}"
   description = "Username to connect to RDS metadata DB"
 }
