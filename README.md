@@ -43,7 +43,7 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| ami | Default is: Ubuntu Server 18.04 LTS (HVM), SSD Volume Type. | string | `"ami-0a313d6098716f372"` | no |
+| ami | Default is `Ubuntu Server 18.04 LTS (HVM), SSD Volume Type.` | string | `"ami-0a313d6098716f372"` | no |
 | aws\_key\_name | AWS KeyPair name | string | n/a | yes |
 | aws\_region | AWS Region | string | `"us-east-1"` | no |
 | cluster\_name | The name of the Airflow cluster (e.g. airflow-xyz). This variable is used to namespace all resources created by this module. | string | n/a | yes |
@@ -63,7 +63,7 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | root\_volume\_ebs\_optimized | If true, the launched EC2 instance will be EBS-optimized. | string | `"false"` | no |
 | root\_volume\_size | The size, in GB, of the root EBS volume. | string | `"35"` | no |
 | root\_volume\_type | The type of volume. Must be one of: standard, gp2, or io1. | string | `"standard"` | no |
-| s3\_bucket\_name |  | string | `""` | no |
+| s3\_bucket\_name | S3 Bucket to save airflow logs. | string | `""` | no |
 | scheduler\_instance\_type | Instance type for the Airflow Scheduler | string | `"t3.micro"` | no |
 | spot\_price | The maximum hourly price to pay for EC2 Spot Instances. | string | `""` | no |
 | vpc\_id | The ID of the VPC in which the nodes will be deployed.  Uses default VPC if not supplied. | string | `""` | no |

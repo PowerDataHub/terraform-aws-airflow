@@ -12,25 +12,25 @@
 ###########
 
 variable "cluster_name" {
-  type        = "string"
   description = "The name of the Airflow cluster (e.g. airflow-xyz). This variable is used to namespace all resources created by this module."
+  type        = "string"
 }
 
 variable "cluster_stage" {
-  type        = "string"
   description = "The stage of the Airflow cluster (e.g. prod)."
+  type        = "string"
   default     = "dev"
 }
 
 variable "aws_region" {
-  type        = "string"
   description = "AWS Region"
+  type        = "string"
   default     = "us-east-1"
 }
 
 variable "aws_key_name" {
-  type        = "string"
   description = "AWS KeyPair name"
+  type        = "string"
 }
 
 variable "private_key_path" {
@@ -44,31 +44,31 @@ variable "public_key_path" {
 }
 
 variable "vpc_id" {
-  type        = "string"
   description = "The ID of the VPC in which the nodes will be deployed.  Uses default VPC if not supplied."
+  type        = "string"
   default     = ""
 }
 
 variable "fernet_key" {
-  type        = "string"
   description = "Key for encrypting data in the database - see Airflow docs"
+  type        = "string"
 }
 
 variable "requirements_txt" {
-  type        = "string"
   description = "Custom requirements.txt"
+  type        = "string"
   default     = ""
 }
 
 variable "load_example_dags" {
-  type        = "string"
   description = "Load the example DAGs distributed with Airflow. Useful if deploying a stack for demonstrating a few topologies, operators and scheduling strategies."
+  type        = "string"
   default     = false
 }
 
 variable "load_default_conns" {
-  type        = "string"
   description = "Load the default connections initialized by Airflow. Most consider these unnecessary, which is why the default is to not load them."
+  type        = "string"
   default     = false
 }
 
@@ -77,8 +77,9 @@ variable "load_default_conns" {
 ######
 
 variable "s3_bucket_name" {
-  type    = "string"
-  default = ""
+  description = "S3 Bucket to save airflow logs."
+  type        = "string"
+  default     = ""
 }
 
 #######
@@ -86,27 +87,27 @@ variable "s3_bucket_name" {
 #######
 
 variable "webserver_instance_type" {
+  description = "Instance type for the Airflow Webserver"
   type        = "string"
   default     = "t3.micro"
-  description = "Instance type for the Airflow Webserver"
 }
 
 variable "scheduler_instance_type" {
+  description = "Instance type for the Airflow Scheduler"
   type        = "string"
   default     = "t3.micro"
-  description = "Instance type for the Airflow Scheduler"
 }
 
 variable "worker_instance_type" {
+  description = "Instance type for the Celery Worker"
   type        = "string"
   default     = "t3.small"
-  description = "Instance type for the Celery Worker"
 }
 
 variable "ami" {
+  description = "Default is `Ubuntu Server 18.04 LTS (HVM), SSD Volume Type.`"
   type        = "string"
   default     = "ami-0a313d6098716f372"
-  description = "Default is: Ubuntu Server 18.04 LTS (HVM), SSD Volume Type."
 }
 
 variable "spot_price" {
@@ -115,20 +116,20 @@ variable "spot_price" {
 }
 
 variable "root_volume_ebs_optimized" {
-  type        = "string"
   description = "If true, the launched EC2 instance will be EBS-optimized."
+  type        = "string"
   default     = false
 }
 
 variable "root_volume_type" {
-  type        = "string"
   description = "The type of volume. Must be one of: standard, gp2, or io1."
+  type        = "string"
   default     = "standard"
 }
 
 variable "root_volume_size" {
-  type        = "string"
   description = "The size, in GB, of the root EBS volume."
+  type        = "string"
   default     = 35
 }
 
@@ -142,9 +143,9 @@ variable "root_volume_delete_on_termination" {
 ############
 
 variable "db_instance_type" {
+  description = "Instance type for PostgreSQL database"
   type        = "string"
   default     = "db.t2.micro"
-  description = "Instance type for PostgreSQL database"
 }
 
 variable "db_username" {
@@ -162,8 +163,8 @@ variable "db_password" {
 }
 
 variable "db_allocated_storage" {
-  type        = "string"
   description = "Dabatase disk size."
+  type        = "string"
   default     = 20
 }
 
