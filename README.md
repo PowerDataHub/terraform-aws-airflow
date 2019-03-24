@@ -30,7 +30,7 @@ module "airflow-cluster" {
 - [ ] Use SPOT instances for workers
 - [ ] Maybe use the [AWS Fargate](https://aws.amazon.com/pt/fargate/) to reduce costs
 
-<img src="https://raw.githubusercontent.com/PowerDataHub/terraform-aws-airflow/master/terraform-aws-airflow.png" align="center" width="100%" />
+<img src="https://raw.githubusercontent.com/PowerDataHub/terraform-aws-airflow/master/terraform-aws-airflow.png?raw" align="center" width="100%" />
 
 ---
 
@@ -74,9 +74,11 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 
 | Name | Description |
 |------|-------------|
-| airflow\_database\_endpoint | Endpoint to connect to RDS metadata DB |
-| airflow\_database\_username | Username to connect to RDS metadata DB |
-| airflow\_webserver\_public\_dns | Public DNS for the Airflow Webserver instance |
-| airflow\_webserver\_public\_ip | Public IP address for the Airflow Webserver instance |
+| database\_endpoint | Endpoint to connect to RDS metadata DB |
+| database\_username | Username to connect to RDS metadata DB |
+| this\_cluster\_security\_group\_id | The ID of the security group |
+| this\_database\_security\_group\_id | The ID of the security group |
+| webserver\_admin\_url | Public DNS for the Airflow Webserver instance |
+| webserver\_public\_ip | Public IP address for the Airflow Webserver instance |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
