@@ -60,7 +60,7 @@ resource "aws_s3_bucket" "airflow_logs" {
   tags   = "${module.airflow_labels.tags}"
 }
 
-# -------------------------------------------
+# ---------------------------------------
 # CREATE A SQS TOPIC
 # ---------------------------------------
 
@@ -72,6 +72,47 @@ resource "aws_sqs_queue" "airflow_queue" {
   receive_wait_time_seconds = 10
 
   tags = "${module.airflow_labels.tags}"
+}
+
+# ---------------------------------------
+# Policies and profile
+# ---------------------------------------
+
+module "ami_instance_profile" {
+  source = "github.com/traveloka/terraform-aws-iam-role.git//modules/instance"
+
+  service_name = "${module.airflow_labels.namespace}"
+  cluster_role = "${module.airflow_labels.stage}"
+}
+
+resource "aws_iam_role_policy_attachment" "s3_policy" {
+  role       = "${module.ami_instance_profile.role_name}"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "sqs_policy" {
+  role       = "${module.ami_instance_profile.role_name}"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSQSFullAccess"
+}
+
+resource "aws_sqs_queue_policy" "sqs_permission" {
+  queue_url = "${aws_sqs_queue.airflow_queue.id}"
+
+  policy = <<POLICY
+{
+  "Version": "2012-10-17",
+  "Id": "sqspolicy",
+  "Statement": [
+    {
+      "Sid": "First",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "SQS:*",
+      "Resource": "${aws_sqs_queue.airflow_queue.arn}"
+    }
+  ]
+}
+POLICY
 }
 
 # ----------------------------------------------------------------------------------------
@@ -112,6 +153,7 @@ resource "aws_instance" "airflow_webserver" {
   key_name               = "${aws_key_pair.auth.id}"
   vpc_security_group_ids = ["${module.sg_airflow.this_security_group_id}"]
   subnet_id              = "${element(data.aws_subnet_ids.selected.ids, 0)}"
+  iam_instance_profile   = "${module.ami_instance_profile.instance_profile_name}"
 
   associate_public_ip_address = true
 
@@ -183,6 +225,7 @@ resource "aws_instance" "airflow_scheduler" {
   key_name               = "${aws_key_pair.auth.id}"
   vpc_security_group_ids = ["${module.sg_airflow.this_security_group_id}"]
   subnet_id              = "${element(data.aws_subnet_ids.selected.ids, 0)}"
+  iam_instance_profile   = "${module.ami_instance_profile.instance_profile_name}"
 
   associate_public_ip_address = true
 
@@ -254,6 +297,7 @@ resource "aws_instance" "airflow_worker" {
   key_name               = "${aws_key_pair.auth.id}"
   vpc_security_group_ids = ["${module.sg_airflow.this_security_group_id}"]
   subnet_id              = "${element(data.aws_subnet_ids.selected.ids, 0)}"
+  iam_instance_profile   = "${module.ami_instance_profile.instance_profile_name}"
 
   associate_public_ip_address = true
 
