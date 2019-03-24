@@ -105,7 +105,8 @@ module "sg_airflow" {
 # EC2
 #-------------------------------------------------------------------------
 resource "aws_instance" "airflow_webserver" {
-  count                  = 1
+  count = 1
+
   instance_type          = "${var.scheduler_instance_type}"
   ami                    = "${var.ami}"
   key_name               = "${aws_key_pair.auth.id}"
@@ -118,12 +119,6 @@ resource "aws_instance" "airflow_webserver" {
     volume_type           = "${var.root_volume_type}"
     volume_size           = "${var.root_volume_size}"
     delete_on_termination = "${var.root_volume_delete_on_termination}"
-  }
-
-  tags = "${module.airflow_labels_webserver.tags}"
-
-  lifecycle {
-    create_before_destroy = true
   }
 
   provisioner "file" {
@@ -172,10 +167,17 @@ resource "aws_instance" "airflow_webserver" {
   }
 
   user_data = "${file("${path.module}/files/cloud-init.sh")}"
+
+  tags = "${module.airflow_labels_webserver.tags}"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_instance" "airflow_scheduler" {
-  count                  = 1
+  count = 1
+
   instance_type          = "${var.scheduler_instance_type}"
   ami                    = "${var.ami}"
   key_name               = "${aws_key_pair.auth.id}"
@@ -188,12 +190,6 @@ resource "aws_instance" "airflow_scheduler" {
     volume_type           = "${var.root_volume_type}"
     volume_size           = "${var.root_volume_size}"
     delete_on_termination = "${var.root_volume_delete_on_termination}"
-  }
-
-  tags = "${module.airflow_labels_scheduler.tags}"
-
-  lifecycle {
-    create_before_destroy = true
   }
 
   provisioner "file" {
@@ -242,10 +238,17 @@ resource "aws_instance" "airflow_scheduler" {
   }
 
   user_data = "${file("${path.module}/files/cloud-init.sh")}"
+
+  tags = "${module.airflow_labels_scheduler.tags}"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_instance" "airflow_worker" {
-  count                  = 1
+  count = 1
+
   instance_type          = "${var.worker_instance_type}"
   ami                    = "${var.ami}"
   key_name               = "${aws_key_pair.auth.id}"
@@ -258,12 +261,6 @@ resource "aws_instance" "airflow_worker" {
     volume_type           = "${var.root_volume_type}"
     volume_size           = "${var.root_volume_size}"
     delete_on_termination = "${var.root_volume_delete_on_termination}"
-  }
-
-  tags = "${module.airflow_labels_worker.tags}"
-
-  lifecycle {
-    create_before_destroy = true
   }
 
   provisioner "file" {
@@ -312,6 +309,12 @@ resource "aws_instance" "airflow_worker" {
   }
 
   user_data = "${file("${path.module}/files/cloud-init.sh")}"
+
+  tags = "${module.airflow_labels_worker.tags}"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 #-----------
