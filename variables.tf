@@ -203,7 +203,7 @@ data "template_file" "airflow_environment" {
     LOAD_DEFAULT_CONNS = false
     DB_USERNAME        = "${var.db_username}"
     DB_PASSWORD        = "${var.db_password}"
-    DB_ENDPOINT        = "${aws_db_instance.airflow-database.endpoint}"
+    DB_ENDPOINT        = "${aws_db_instance.airflow_database.endpoint}"
     DB_DBNAME          = "${var.db_dbname}"
     S3_BUCKET          = "${aws_s3_bucket.airflow_logs.id}"
 
