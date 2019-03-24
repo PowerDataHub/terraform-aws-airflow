@@ -1,19 +1,29 @@
-output "airflow_webserver_public_dns" {
-  value       = "${aws_instance.airflow_webserver.public_dns}"
+output "this_cluster_security_group_id" {
+  description = "The ID of the security group"
+  value       = "${module.sg_airflow.this_security_group_id}"
+}
+
+output "this_database_security_group_id" {
+  description = "The ID of the security group"
+  value       = "${module.sg_database.this_security_group_id}"
+}
+
+output "webserver_admin_url" {
   description = "Public DNS for the Airflow Webserver instance"
+  value       = "http://${aws_instance.airflow_webserver.public_dns}:8080"
 }
 
-output "airflow_webserver_public_ip" {
-  value       = "${aws_instance.airflow_webserver.public_ip}"
+output "webserver_public_ip" {
   description = "Public IP address for the Airflow Webserver instance"
+  value       = "${aws_instance.airflow_webserver.public_ip}"
 }
 
-output "airflow_database_endpoint" {
-  value       = "${aws_db_instance.airflow_database.endpoint}"
+output "database_endpoint" {
   description = "Endpoint to connect to RDS metadata DB"
+  value       = "${aws_db_instance.airflow_database.endpoint}"
 }
 
-output "airflow_database_username" {
-  value       = "${aws_db_instance.airflow_database.username}"
+output "database_username" {
   description = "Username to connect to RDS metadata DB"
+  value       = "${aws_db_instance.airflow_database.username}"
 }
