@@ -13,11 +13,11 @@ module "airflow-cluster" {
   source            = "powerdatahub/airflow/aws"
   cluster_name      = "my-airflow"
   cluster_stage     = "dev"
-  db_password       = "rds-master-password"
-  fernet_key        = "your-fernet-key" # https://airflow.readthedocs.io/en/stable/howto/secure-connections.html
+  db_password       = "your-rds-master-password"
+  fernet_key        = "your-fernet-key" # see https://airflow.readthedocs.io/en/stable/howto/secure-connections.html
   vpc_id            = "some-vpc-id"  
   aws_key_name      = "airflow-key"
-  requirements_txt  = "./requirements.txt" # Optional
+  requirements_txt  = "path/to/custom/requirements.txt" # Optional
   load_example_dags = false # Optional
 }
 ```
@@ -25,7 +25,7 @@ module "airflow-cluster" {
 ### Todo
 
 - [x] Run airflow as systemd service
-- [x] Provide a way to users pass a custom requirements.txt and packages.txt files
+- [x] Provide a way to pass a custom requirements.txt and packages.txt files on provision step
 - [ ] Auto Scalling for workers
 - [ ] Use SPOT instances for workers
 - [ ] Maybe use the [AWS Fargate](https://aws.amazon.com/pt/fargate/) to reduce costs
