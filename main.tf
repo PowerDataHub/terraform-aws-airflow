@@ -54,7 +54,7 @@ resource "aws_key_pair" "auth" {
 # CREATE A S3 BUCKET TO STORAGE AIRFLOW LOGS
 # -------------------------------------------
 
-resource "aws_s3_bucket" "airflow-logs" {
+resource "aws_s3_bucket" "airflow_logs" {
   bucket = "${module.airflow_labels.id}-logs"
   acl    = "private"
   tags   = "${module.airflow_labels.tags}"
@@ -64,7 +64,7 @@ resource "aws_s3_bucket" "airflow-logs" {
 # CREATE A SQS TOPIC
 # ---------------------------------------
 
-resource "aws_sqs_queue" "airflow-queue" {
+resource "aws_sqs_queue" "airflow_queue" {
   name                      = "${module.airflow_labels.id}-queue"
   delay_seconds             = 90
   max_message_size          = 2048

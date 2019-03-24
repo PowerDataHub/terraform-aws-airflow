@@ -205,7 +205,7 @@ data "template_file" "airflow_environment" {
     DB_PASSWORD        = "${var.db_password}"
     DB_ENDPOINT        = "${aws_db_instance.airflow-database.endpoint}"
     DB_DBNAME          = "${var.db_dbname}"
-    S3_BUCKET          = "${aws_s3_bucket.airflow-logs.id}"
+    S3_BUCKET          = "${aws_s3_bucket.airflow_logs.id}"
 
     # WEBSERVER_HOST     = "${aws_instance.airflow_webserver.public_dns}"
     WEBSERVER_PORT = "8080"
