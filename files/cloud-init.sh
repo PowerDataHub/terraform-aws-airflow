@@ -93,11 +93,12 @@ EOL
 
 	source /etc/environment
 
+	airflow initdb
+
 	sudo systemctl enable airflow.service
 	sudo systemctl start airflow.service
 	sudo systemctl status airflow.service
 
-    airflow initdb
 }
 
 
