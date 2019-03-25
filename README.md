@@ -4,6 +4,9 @@
 
 Terraform module to deploy an [Apache Airflow](https://airflow.apache.org/) instance on [AWS](https://aws.amazon.com/) backed by RDS PostgreSQL for storage, S3 for logs and SQS as message broker with CeleryExecutor.
 
+
+<img src="https://raw.githubusercontent.com/PowerDataHub/terraform-aws-airflow/master/terraform-aws-airflow.png?raw" align="center" width="100%" />
+
 ## Usage
 
 You can use this module from the [Terraform Registry](https://registry.terraform.io/modules/powerdatahub/airflow/aws/)
@@ -22,15 +25,22 @@ module "airflow-cluster" {
 }
 ```
 
+## Inspecting service logs
+
+The Airflow service runs under systemd, so logs are available through journalctl. Most often used arguments include the --follow (-f) to keep the logs coming, or the --no-pager to directly dump the text lines, but it offers much more.
+
+$ journalctl -u airflow -n 50
+
 ### Todo
 
 - [x] Run airflow as systemd service
-- [x] Provide a way to pass a custom requirements.txt and packages.txt files on provision step
+- [x] Provide a way to pass a custom requirements.txt files on provision step
+- [ ] Provide a way to pass a custom packages.txt files on provision step
+- [ ] RBAC
+- [ ] Provide a way inject envinronment variables to airflow
 - [ ] Auto Scalling for workers
 - [ ] Use SPOT instances for workers
 - [ ] Maybe use the [AWS Fargate](https://aws.amazon.com/pt/fargate/) to reduce costs
-
-<img src="https://raw.githubusercontent.com/PowerDataHub/terraform-aws-airflow/master/terraform-aws-airflow.png?raw" align="center" width="100%" />
 
 ---
 

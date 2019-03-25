@@ -213,11 +213,3 @@ data "template_file" "airflow_environment" {
     QUEUE_NAME     = "${module.airflow_labels.id}-queue"
   }
 }
-
-data "aws_iam_policy_document" "bucket_policy" {
-  statement {
-    sid       = "AllowFullS3Access"
-    actions   = ["s3:*"]
-    resources = ["*"]
-  }
-}
