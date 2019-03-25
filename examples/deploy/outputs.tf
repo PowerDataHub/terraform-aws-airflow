@@ -13,17 +13,17 @@ output "webserver_admin_url" {
   value       = "http://${aws_instance.airflow_webserver.public_dns}:8080"
 }
 
-output "webserver_public_ip" {
+output "this_webserver_public_ip" {
   description = "Public IP address for the Airflow Webserver instance"
   value       = "${aws_instance.airflow_webserver.public_ip}"
 }
 
-output "database_endpoint" {
+output "this_database_endpoint" {
   description = "Endpoint to connect to RDS metadata DB"
   value       = "${aws_db_instance.airflow_database.endpoint}"
 }
 
-output "database_username" {
+output "this_database_username" {
   description = "Username to connect to RDS metadata DB"
   value       = "${aws_db_instance.airflow_database.username}"
 }
