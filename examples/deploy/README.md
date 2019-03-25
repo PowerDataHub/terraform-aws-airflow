@@ -3,8 +3,6 @@
 
 ## Usage
 
-Before running the commands above make sure to create a file named `terraform.tfvars` 
-
 To run this example you need to execute:
 
 ```
@@ -23,11 +21,11 @@ Note that this example may create resources which cost money. Run `terraform des
 
 | Name | Description |
 |------|-------------|
-| database\_endpoint | Endpoint to connect to RDS metadata DB |
-| database\_username | Username to connect to RDS metadata DB |
 | this\_cluster\_security\_group\_id | The ID of the security group |
+| this\_database\_endpoint | Endpoint to connect to RDS metadata DB |
 | this\_database\_security\_group\_id | The ID of the security group |
+| this\_database\_username | Username to connect to RDS metadata DB |
+| this\_webserver\_public\_ip | Public IP address for the Airflow Webserver instance |
 | webserver\_admin\_url | Public DNS for the Airflow Webserver instance |
-| webserver\_public\_ip | Public IP address for the Airflow Webserver instance |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
