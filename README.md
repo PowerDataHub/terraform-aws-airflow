@@ -25,13 +25,13 @@ module "airflow-cluster" {
 }
 ```
 
-## Inspecting service logs
+## Debug and logs
 
-The Airflow service runs under systemd, so logs are available through journalctl. Most often used arguments include the --follow (-f) to keep the logs coming, or the --no-pager to directly dump the text lines, but it offers much more.
+The Airflow service runs under systemd, so logs are available through journalctl.
 
 $ journalctl -u airflow -n 50
 
-### Todo
+## Todo
 
 - [x] Run airflow as systemd service
 - [x] Provide a way to pass a custom requirements.txt files on provision step
@@ -92,3 +92,5 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | webserver\_public\_ip | Public IP address for the Airflow Webserver instance |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
+[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/winter-is-coming.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/contains-cat-gifs.svg)](https://forthebadge.com)
