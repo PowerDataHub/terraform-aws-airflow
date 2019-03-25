@@ -55,9 +55,11 @@ resource "aws_key_pair" "auth" {
 # -------------------------------------------
 
 resource "aws_s3_bucket" "airflow_logs" {
-  bucket = "${module.airflow_labels.id}-logs"
-  acl    = "private"
-  tags   = "${module.airflow_labels.tags}"
+  bucket        = "${module.airflow_labels.id}-logs"
+  acl           = "private"
+  force_destroy = true
+
+  tags = "${module.airflow_labels.tags}"
 }
 
 # ---------------------------------------

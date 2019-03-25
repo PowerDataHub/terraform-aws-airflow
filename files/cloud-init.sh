@@ -21,6 +21,7 @@ function install_dependencies() {
 		libssl-dev \
 		openssl \
 		postgresql-client \
+		python \
 		python3 \
 		python3-pip \
 		python3-dev \
@@ -60,7 +61,7 @@ function install_python_and_python_packages() {
 		numpy \
 		scipy \
 		pandas \
-		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh]==1.10.2 \
+		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh,google_auth]==1.10.2 \
 		celery[sqs] \
 		billiard==3.5.0.4 \
 		tenacity==4.12.0 \
