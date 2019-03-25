@@ -29,7 +29,7 @@ module "airflow-cluster" {
 
 The Airflow service runs under systemd, so logs are available through journalctl.
 
-$ journalctl -u airflow -n 50
+`$ journalctl -u airflow -n 50`
 
 ## Todo
 
