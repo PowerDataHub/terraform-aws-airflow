@@ -72,7 +72,7 @@ function setup_airflow() {
 	sudo tee -a /usr/bin/terraform-aws-airflow <<EOL
 #!/usr/bin/env bash
 if [ "\$AIRFLOW_ROLE" == "SCHEDULER" ]
-then exec airflow scheduler
+then exec airflow scheduler -n 10
 elif [ "\$AIRFLOW_ROLE" == "WEBSERVER" ]
 then exec airflow webserver
 elif [ "\$AIRFLOW_ROLE" == "WORKER" ]
