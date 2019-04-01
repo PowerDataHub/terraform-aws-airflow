@@ -21,11 +21,10 @@ Note that this example may create resources which cost money. Run `terraform des
 
 **WARNING - Database passwords and Fernet Key are hardcoded in the sample configuration: do not use these in production**
 
-
 ## Deploy
 
 ```bash
-ansible-playbook --inventory-file=/path/to/terraform-inventory -u ubuntu ansible/deploy_dags.yml
+ansible-playbook --inventory-file=/usr/local/bin/terraform-inventory --ssh-common-args='-o StrictHostKeyChecking=no' -u ubuntu ansible/deploy_dags.yml
 ```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
