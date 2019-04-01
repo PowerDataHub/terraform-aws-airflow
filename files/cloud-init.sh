@@ -85,10 +85,17 @@ EOL
 	sudo cat /var/tmp/airflow.service >> /etc/systemd/system/airflow.service
 	cat /var/tmp/airflow_environment | sudo tee -a /etc/sysconfig/airflow
 
-	source /etc/environment
+	if [ "$LOAD_DEFAULT_CONNS" = false ]; then
+		airflow upgradedb
+	else
+		airflow initdb
+	fi
 
-	airflow initdb
+	if [ "$RBAC" = true ]; then
+		airflow create_user -r Admin -u $ADMIN_USERNAME -f $ADMIN_USERNAME -p $ADMIN_PASSWORD
+	fi
 
+	# airflow create_user -r Admin -u $ADMIN_USERNAME -f $ADMIN_USERNAME -p $ADMIN_PASSWORD
 	sudo chown -R ubuntu: /etc/airflow
 
 	sudo systemctl enable airflow.service

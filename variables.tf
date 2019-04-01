@@ -72,6 +72,24 @@ variable "load_default_conns" {
   default     = false
 }
 
+variable "rbac" {
+  description = "Enable support for Role-Based Access Control (RBAC)."
+  type        = "string"
+  default     = false
+}
+
+variable "admin_username" {
+  description = "Provide an user If RBAC is enabled, this user will be created in the first run only."
+  type        = "string"
+  default     = "admin"
+}
+
+variable "admin_password" {
+  description = "Provide an user password If RBAC is enabled."
+  type        = "string"
+  default     = false
+}
+
 ######
 # S3 #
 ######
@@ -202,6 +220,32 @@ data "template_file" "airflow_environment" {
     FERNET_KEY         = "${var.fernet_key}"
     LOAD_EXAMPLE_DAGS  = "${var.load_example_dags}"
     LOAD_DEFAULT_CONNS = "${var.load_default_conns}"
+    RBAC               = "${var.rbac}"
+    ADMIN_USERNAME     = "${var.admin_username}"
+    ADMIN_PASSWORD     = "${var.admin_password}"
+    DB_USERNAME        = "${var.db_username}"
+    DB_PASSWORD        = "${var.db_password}"
+    DB_ENDPOINT        = "${aws_db_instance.airflow_database.endpoint}"
+    DB_DBNAME          = "${var.db_dbname}"
+    S3_BUCKET          = "${aws_s3_bucket.airflow_logs.id}"
+
+    # WEBSERVER_HOST     = "${aws_instance.airflow_webserver.public_dns}"
+    WEBSERVER_PORT = "8080"
+    QUEUE_NAME     = "${module.airflow_labels.id}-queue"
+  }
+}
+
+data "template_file" "provisioner" {
+  template = "${file("${path.module}/files/cloud-init.sh")}"
+
+  vars = {
+    AWS_REGION         = "${var.aws_region}"
+    FERNET_KEY         = "${var.fernet_key}"
+    LOAD_EXAMPLE_DAGS  = "${var.load_example_dags}"
+    LOAD_DEFAULT_CONNS = "${var.load_default_conns}"
+    RBAC               = "${var.rbac}"
+    ADMIN_USERNAME     = "${var.admin_username}"
+    ADMIN_PASSWORD     = "${var.admin_password}"
     DB_USERNAME        = "${var.db_username}"
     DB_PASSWORD        = "${var.db_password}"
     DB_ENDPOINT        = "${aws_db_instance.airflow_database.endpoint}"
