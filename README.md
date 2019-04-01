@@ -61,8 +61,8 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| admin\_password | Provide an user password If RBAC is enabled. | string | `"false"` | no |
-| admin\_username | Provide an user If RBAC is enabled, this user will be created in the first run only. | string | `"admin"` | no |
+| admin\_password | Provide an user password. Only If RBAC is enabled. | string | `"false"` | no |
+| admin\_username | Provide an user. Only If RBAC is enabled, this user will be created in the first run only. | string | `"admin"` | no |
 | ami | Default is `Ubuntu Server 18.04 LTS (HVM), SSD Volume Type.` | string | `"ami-0a313d6098716f372"` | no |
 | aws\_key\_name | AWS KeyPair name | string | n/a | yes |
 | aws\_region | AWS Region | string | `"us-east-1"` | no |
