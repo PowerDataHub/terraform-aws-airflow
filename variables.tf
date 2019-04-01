@@ -78,6 +78,24 @@ variable "rbac" {
   default     = false
 }
 
+variable "admin_name" {
+  description = "Admin name. Only If RBAC is enabled, this user will be created in the first run only."
+  type        = "string"
+  default     = "John"
+}
+
+variable "admin_lastname" {
+  description = "Admin lastname. Only If RBAC is enabled, this user will be created in the first run only."
+  type        = "string"
+  default     = "Doe"
+}
+
+variable "admin_email" {
+  description = "Admin email. Only If RBAC is enabled, this user will be created in the first run only."
+  type        = "string"
+  default     = "admin@admin.com"
+}
+
 variable "admin_username" {
   description = "Admin username used to authenticate. Only If RBAC is enabled, this user will be created in the first run only."
   type        = "string"
@@ -221,6 +239,9 @@ data "template_file" "airflow_environment" {
     LOAD_EXAMPLE_DAGS  = "${var.load_example_dags}"
     LOAD_DEFAULT_CONNS = "${var.load_default_conns}"
     RBAC               = "${var.rbac}"
+    ADMIN_NAME         = "${var.admin_name}"
+    ADMIN_LASTNAME     = "${var.admin_lastname}"
+    ADMIN_EMAIL        = "${var.admin_email}"
     ADMIN_USERNAME     = "${var.admin_username}"
     ADMIN_PASSWORD     = "${var.admin_password}"
     DB_USERNAME        = "${var.db_username}"
@@ -244,6 +265,9 @@ data "template_file" "provisioner" {
     LOAD_EXAMPLE_DAGS  = "${var.load_example_dags}"
     LOAD_DEFAULT_CONNS = "${var.load_default_conns}"
     RBAC               = "${var.rbac}"
+    ADMIN_NAME         = "${var.admin_name}"
+    ADMIN_LASTNAME     = "${var.admin_lastname}"
+    ADMIN_EMAIL        = "${var.admin_email}"
     ADMIN_USERNAME     = "${var.admin_username}"
     ADMIN_PASSWORD     = "${var.admin_password}"
     DB_USERNAME        = "${var.db_username}"

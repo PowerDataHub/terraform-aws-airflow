@@ -87,14 +87,14 @@ EOL
 
 	source /etc/environment
 
-	if [ "\$AIRFLOW__CORE__LOAD_DEFAULTS" = false ]; then
+	if [ "$AIRFLOW__CORE__LOAD_DEFAULTS" = 0 ]; then
 		airflow upgradedb
 	else
 		airflow initdb
 	fi
 
-	if [ "\$AIRFLOW__WEBSERVER__RBAC" = true ]; then
-		airflow create_user -r Admin -u ${ADMIN_USERNAME} -f ${ADMIN_USERNAME} -p ${ADMIN_PASSWORD}
+	if [ "$AIRFLOW__WEBSERVER__RBAC" = 1 ]; then
+		airflow create_user -r Admin -u ${ADMIN_USERNAME} -f ${ADMIN_NAME} -l ${ADMIN_LASTNAME} -e ${ADMIN_EMAIL} -p ${ADMIN_PASSWORD}
 	fi
 
 	sudo chown -R ubuntu: /etc/airflow
