@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: True
+  tasks:
+  - name: Copy dag files
+    synchronize:
+      src: ../dags/
+      dest: /etc/airflow/dags/
+      delete: yes
+      recursive: yes
+
+  - name: Copy plugins files
+    synchronize:
+      src: ../plugins/
+      dest: /etc/airflow/plugins/
+      delete: yes
+      recursive: yes
