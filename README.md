@@ -22,16 +22,16 @@ module "airflow-cluster" {
   fernet_key        = "your-fernet-key" # see https://airflow.readthedocs.io/en/stable/howto/secure-connections.html
   
   # OPTIONALS
-  vpc_id              = "some-vpc-id" # Optional, use default if not provided  
+  vpc_id              = "some-vpc-id"                     # Use default if not provided  
   requirements_txt    = "path/to/custom/requirements.txt"
   load_example_dags   = false
   load_default_conns  = false
   rbac                = true
-  admin_name          = "John" # Only if rbac is true
-  admin_lastname      = "Doe" # Only if rbac is true
-  admin_email         = "admin@admin.com" # Only if rbac is true
-  admin_username      = "admin" # Only if rbac is true
-  admin_password      = "supersecretpassword" # Only if rbac is true
+  admin_name          = "John"                            # Only if rbac is true
+  admin_lastname      = "Doe"                             # Only if rbac is true
+  admin_email         = "admin@admin.com"                 # Only if rbac is true
+  admin_username      = "admin"                           # Only if rbac is true
+  admin_password      = "supersecretpassword"             # Only if rbac is true
 }
 ```
 
