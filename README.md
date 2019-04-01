@@ -26,7 +26,7 @@ module "airflow-cluster" {
   requirements_txt  = "path/to/custom/requirements.txt"
   load_example_dags = false
   load_default_conns = false
-  rbac = false
+  rbac = true
   admin_username = "admin" # Only if rbac is true
   admin_password = "supersecretpassword" # Only if rbac is true
 }
