@@ -54,6 +54,8 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
+| admin\_password | Provide an user password If RBAC is enabled. | string | `"false"` | no |
+| admin\_username | Provide an user If RBAC is enabled, this user will be created in the first run only. | string | `"admin"` | no |
 | ami | Default is `Ubuntu Server 18.04 LTS (HVM), SSD Volume Type.` | string | `"ami-0a313d6098716f372"` | no |
 | aws\_key\_name | AWS KeyPair name | string | n/a | yes |
 | aws\_region | AWS Region | string | `"us-east-1"` | no |
@@ -69,6 +71,7 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | load\_example\_dags | Load the example DAGs distributed with Airflow. Useful if deploying a stack for demonstrating a few topologies, operators and scheduling strategies. | string | `"false"` | no |
 | private\_key\_path | Enter the path to the SSH Private Key to run provisioner. | string | `"~/.ssh/id_rsa"` | no |
 | public\_key\_path | Enter the path to the SSH Public Key to add to AWS. | string | `"~/.ssh/id_rsa.pub"` | no |
+| rbac | Enable support for Role-Based Access Control (RBAC). | string | `"false"` | no |
 | requirements\_txt | Custom requirements.txt | string | `""` | no |
 | root\_volume\_delete\_on\_termination | Whether the volume should be destroyed on instance termination. | string | `"true"` | no |
 | root\_volume\_ebs\_optimized | If true, the launched EC2 instance will be EBS-optimized. | string | `"false"` | no |
