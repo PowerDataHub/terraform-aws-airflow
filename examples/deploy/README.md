@@ -1,11 +1,17 @@
 # How to create a basic cluster and deploy some DAGs
 
 
+## Requirements
+
+- Terraform
+- Ansible
+- [terraform-inventory](https://github.com/adammck/terraform-inventory)
+
 ## Usage
 
 To run this example you need to execute:
 
-```
+```bash
 $ terraform init
 $ terraform plan
 $ terraform apply
@@ -16,16 +22,12 @@ Note that this example may create resources which cost money. Run `terraform des
 **WARNING - Database passwords and Fernet Key are hardcoded in the sample configuration: do not use these in production**
 
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-## Outputs
+## Deploy
 
-| Name | Description |
-|------|-------------|
-| this\_cluster\_security\_group\_id | The ID of the security group |
-| this\_database\_endpoint | Endpoint to connect to RDS metadata DB |
-| this\_database\_security\_group\_id | The ID of the security group |
-| this\_database\_username | Username to connect to RDS metadata DB |
-| this\_webserver\_public\_ip | Public IP address for the Airflow Webserver instance |
-| webserver\_admin\_url | Public DNS for the Airflow Webserver instance |
+```bash
+ansible-playbook --inventory-file=/path/to/terraform-inventory -u ubuntu ansible/deploy_dags.yml
+```
+
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
