@@ -17,7 +17,7 @@ module "airflow-cluster" {
   source            = "powerdatahub/airflow/aws"
   aws_key_name      = "airflow-key"
   cluster_name      = "my-airflow"
-  cluster_stage     = "dev"
+  cluster_stage     = "prod" # Default is 'dev'
   db_password       = "your-rds-master-password"
   fernet_key        = "your-fernet-key" # see https://airflow.readthedocs.io/en/stable/howto/secure-connections.html
   
