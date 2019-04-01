@@ -85,6 +85,8 @@ EOL
 	sudo cat /tmp/airflow.service >> /etc/systemd/system/airflow.service
 	cat /tmp/airflow_environment | sudo tee -a /etc/sysconfig/airflow
 
+	source /etc/environment
+
 	if [ "${LOAD_DEFAULT_CONNS}" = false ]; then
 		airflow upgradedb
 	else
