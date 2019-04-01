@@ -46,7 +46,7 @@ The Airflow service runs under systemd, so logs are available through journalctl
 - [x] Run airflow as systemd service
 - [x] Provide a way to pass a custom requirements.txt files on provision step
 - [ ] Provide a way to pass a custom packages.txt files on provision step
-- [ ] RBAC
+- [x] RBAC
 - [ ] Flower
 - [ ] Provide a way inject environment variables to airflow
 - [ ] Auto Scalling for workers
