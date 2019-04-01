@@ -167,7 +167,7 @@ resource "aws_instance" "airflow_webserver" {
 
   provisioner "file" {
     content     = "${data.template_file.requirements_txt.rendered}"
-    destination = "/var/tmp/requirements.txt"
+    destination = "/tmp/requirements.txt"
 
     connection {
       type        = "ssh"
@@ -178,7 +178,7 @@ resource "aws_instance" "airflow_webserver" {
 
   provisioner "file" {
     content     = "${data.template_file.airflow_environment.rendered}"
-    destination = "/var/tmp/airflow_environment"
+    destination = "/tmp/airflow_environment"
 
     connection {
       type        = "ssh"
@@ -189,7 +189,7 @@ resource "aws_instance" "airflow_webserver" {
 
   provisioner "file" {
     content     = "${data.template_file.airflow_service.rendered}"
-    destination = "/var/tmp/airflow.service"
+    destination = "/tmp/airflow.service"
 
     connection {
       type        = "ssh"
@@ -239,7 +239,7 @@ resource "aws_instance" "airflow_scheduler" {
 
   provisioner "file" {
     content     = "${data.template_file.requirements_txt.rendered}"
-    destination = "/var/tmp/requirements.txt"
+    destination = "/tmp/requirements.txt"
 
     connection {
       type        = "ssh"
@@ -250,7 +250,7 @@ resource "aws_instance" "airflow_scheduler" {
 
   provisioner "file" {
     content     = "${data.template_file.airflow_environment.rendered}"
-    destination = "/var/tmp/airflow_environment"
+    destination = "/tmp/airflow_environment"
 
     connection {
       type        = "ssh"
@@ -261,7 +261,7 @@ resource "aws_instance" "airflow_scheduler" {
 
   provisioner "file" {
     content     = "${data.template_file.airflow_service.rendered}"
-    destination = "/var/tmp/airflow.service"
+    destination = "/tmp/airflow.service"
 
     connection {
       type        = "ssh"
@@ -311,7 +311,7 @@ resource "aws_instance" "airflow_worker" {
 
   provisioner "file" {
     content     = "${data.template_file.requirements_txt.rendered}"
-    destination = "/var/tmp/requirements.txt"
+    destination = "/tmp/requirements.txt"
 
     connection {
       type        = "ssh"
@@ -322,7 +322,7 @@ resource "aws_instance" "airflow_worker" {
 
   provisioner "file" {
     content     = "${data.template_file.airflow_environment.rendered}"
-    destination = "/var/tmp/airflow_environment"
+    destination = "/tmp/airflow_environment"
 
     connection {
       type        = "ssh"
@@ -333,7 +333,7 @@ resource "aws_instance" "airflow_worker" {
 
   provisioner "file" {
     content     = "${data.template_file.airflow_service.rendered}"
-    destination = "/var/tmp/airflow.service"
+    destination = "/tmp/airflow.service"
 
     connection {
       type        = "ssh"
