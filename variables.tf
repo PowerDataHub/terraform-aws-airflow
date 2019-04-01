@@ -201,7 +201,7 @@ data "template_file" "airflow_environment" {
     AWS_REGION         = "${var.aws_region}"
     FERNET_KEY         = "${var.fernet_key}"
     LOAD_EXAMPLE_DAGS  = "${var.load_example_dags}"
-    LOAD_DEFAULT_CONNS = false
+    LOAD_DEFAULT_CONNS = "${var.load_default_conns}"
     DB_USERNAME        = "${var.db_username}"
     DB_PASSWORD        = "${var.db_password}"
     DB_ENDPOINT        = "${aws_db_instance.airflow_database.endpoint}"
