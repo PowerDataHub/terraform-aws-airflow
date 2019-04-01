@@ -13,15 +13,22 @@ You can use this module from the [Terraform Registry](https://registry.terraform
 
 ```terraform
 module "airflow-cluster" {
+  # REQUIRED
   source            = "powerdatahub/airflow/aws"
   aws_key_name      = "airflow-key"
   cluster_name      = "my-airflow"
   cluster_stage     = "dev"
   db_password       = "your-rds-master-password"
   fernet_key        = "your-fernet-key" # see https://airflow.readthedocs.io/en/stable/howto/secure-connections.html
+  
+  # OPTIONALS
   vpc_id            = "some-vpc-id" # Optional, use default if not provided  
-  requirements_txt  = "path/to/custom/requirements.txt" # Optional
-  load_example_dags = false # Optional
+  requirements_txt  = "path/to/custom/requirements.txt"
+  load_example_dags = false
+  load_default_conns = false
+  rbac = false
+  admin_username = "admin" # Only if rbac is true
+  admin_password = "supersecretpassword" # Only if rbac is true
 }
 ```
 
