@@ -210,7 +210,7 @@ resource "aws_instance" "airflow_webserver" {
     }
   }
 
-  user_data = "${file("${path.module}/files/cloud-init.sh")}"
+  user_data = "${data.template_file.provisioner.rendered}"
 
   tags = "${module.airflow_labels_webserver.tags}"
 
@@ -282,7 +282,7 @@ resource "aws_instance" "airflow_scheduler" {
     }
   }
 
-  user_data = "${file("${path.module}/files/cloud-init.sh")}"
+  user_data = "${data.template_file.provisioner.rendered}"
 
   tags = "${module.airflow_labels_scheduler.tags}"
 
@@ -354,7 +354,7 @@ resource "aws_instance" "airflow_worker" {
     }
   }
 
-  user_data = "${file("${path.module}/files/cloud-init.sh")}"
+  user_data = "${data.template_file.provisioner.rendered}"
 
   tags = "${module.airflow_labels_worker.tags}"
 
