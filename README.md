@@ -2,7 +2,7 @@
 
 # Airflow AWS Module
 
-Terraform module to deploy an [Apache Airflow](https://airflow.apache.org/) instance on [AWS](https://aws.amazon.com/) backed by RDS PostgreSQL for storage, S3 for logs and SQS as message broker with CeleryExecutor.
+Terraform module to deploy an [Apache Airflow](https://airflow.apache.org/) cluster on [AWS](https://aws.amazon.com/) backed by RDS PostgreSQL for storage, S3 for logs and SQS as message broker with CeleryExecutor.
 
 
 <img src="https://raw.githubusercontent.com/PowerDataHub/terraform-aws-airflow/master/terraform-aws-airflow.png?raw" align="center" width="100%" />
