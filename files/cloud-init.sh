@@ -58,14 +58,8 @@ function install_python_and_python_packages() {
 		boto3 \
 		boto \
 		botocore \
-		numpy \
-		scipy \
-		pandas \
 		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh,google_auth]==1.10.2 \
-		celery[sqs] \
-		billiard==3.5.0.4 \
-		tenacity==4.12.0 \
-		'redis>=2.10.5,<3'
+		celery[sqs]
 }
 
 function setup_airflow() {
