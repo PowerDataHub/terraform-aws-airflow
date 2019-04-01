@@ -38,7 +38,7 @@ The Airflow service runs under systemd, so logs are available through journalctl
 - [ ] Provide a way to pass a custom packages.txt files on provision step
 - [ ] RBAC
 - [ ] Flower
-- [ ] Provide a way inject envinronment variables to airflow
+- [ ] Provide a way inject environment variables to airflow
 - [ ] Auto Scalling for workers
 - [ ] Use SPOT instances for workers
 - [ ] Maybe use the [AWS Fargate](https://aws.amazon.com/pt/fargate/) to reduce costs
