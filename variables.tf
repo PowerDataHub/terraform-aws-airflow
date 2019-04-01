@@ -79,13 +79,13 @@ variable "rbac" {
 }
 
 variable "admin_username" {
-  description = "Provide an user. Only If RBAC is enabled, this user will be created in the first run only."
+  description = "Admin username used to authenticate. Only If RBAC is enabled, this user will be created in the first run only."
   type        = "string"
   default     = "admin"
 }
 
 variable "admin_password" {
-  description = "Provide an user password. Only If RBAC is enabled."
+  description = "Admin password. Only If RBAC is enabled."
   type        = "string"
   default     = false
 }

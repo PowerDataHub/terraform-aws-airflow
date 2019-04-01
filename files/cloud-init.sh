@@ -45,8 +45,8 @@ function install_python_and_python_packages() {
 
 	pip3 install -qU setuptools wheel --ignore-installed
 
-	if [ -e /var/tmp/requirements.txt ]; then
-		SLUGIFY_USES_TEXT_UNIDECODE=yes pip3 install -r /var/tmp/requirements.txt
+	if [ -e /tmp/requirements.txt ]; then
+		SLUGIFY_USES_TEXT_UNIDECODE=yes pip3 install -r /tmp/requirements.txt
 	fi
 
     SLUGIFY_USES_TEXT_UNIDECODE=yes pip3 install -U \
@@ -81,27 +81,25 @@ EOL
 	sudo mkdir -p /etc/sysconfig/
 
 	cat /etc/environment | sudo tee -a /etc/sysconfig/airflow
-	sed 's/^/export /' -- </var/tmp/airflow_environment | sudo tee -a /etc/environment
-	sudo cat /var/tmp/airflow.service >> /etc/systemd/system/airflow.service
-	cat /var/tmp/airflow_environment | sudo tee -a /etc/sysconfig/airflow
+	sed 's/^/export /' -- </tmp/airflow_environment | sudo tee -a /etc/environment
+	sudo cat /tmp/airflow.service >> /etc/systemd/system/airflow.service
+	cat /tmp/airflow_environment | sudo tee -a /etc/sysconfig/airflow
 
-	if [ "$LOAD_DEFAULT_CONNS" = false ]; then
+	if [ "${LOAD_DEFAULT_CONNS}" = false ]; then
 		airflow upgradedb
 	else
 		airflow initdb
 	fi
 
-	if [ "$RBAC" = true ]; then
-		airflow create_user -r Admin -u $ADMIN_USERNAME -f $ADMIN_USERNAME -p $ADMIN_PASSWORD
+	if [ "${RBAC}" = true ]; then
+		airflow create_user -r Admin -u ${ADMIN_USERNAME} -f ${ADMIN_USERNAME} -p ${ADMIN_PASSWORD}
 	fi
 
-	# airflow create_user -r Admin -u $ADMIN_USERNAME -f $ADMIN_USERNAME -p $ADMIN_PASSWORD
 	sudo chown -R ubuntu: /etc/airflow
 
 	sudo systemctl enable airflow.service
 	sudo systemctl start airflow.service
 	sudo systemctl status airflow.service
-
 }
 
 
