@@ -166,6 +166,17 @@ resource "aws_instance" "airflow_webserver" {
   }
 
   provisioner "file" {
+    content     = "${file(var.custom_env)}"
+    destination = "/tmp/custom_env"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file(var.private_key_path)}"
+    }
+  }
+
+  provisioner "file" {
     content     = "${data.template_file.requirements_txt.rendered}"
     destination = "/tmp/requirements.txt"
 
@@ -238,6 +249,17 @@ resource "aws_instance" "airflow_scheduler" {
   }
 
   provisioner "file" {
+    content     = "${file(var.custom_env)}"
+    destination = "/tmp/custom_env"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file(var.private_key_path)}"
+    }
+  }
+
+  provisioner "file" {
     content     = "${data.template_file.requirements_txt.rendered}"
     destination = "/tmp/requirements.txt"
 
@@ -307,6 +329,17 @@ resource "aws_instance" "airflow_worker" {
     volume_type           = "${var.root_volume_type}"
     volume_size           = "${var.root_volume_size}"
     delete_on_termination = "${var.root_volume_delete_on_termination}"
+  }
+
+  provisioner "file" {
+    content     = "${file(var.custom_env)}"
+    destination = "/tmp/custom_env"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file(var.private_key_path)}"
+    }
   }
 
   provisioner "file" {

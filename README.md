@@ -74,6 +74,7 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | aws\_region | AWS Region | string | `"us-east-1"` | no |
 | cluster\_name | The name of the Airflow cluster (e.g. airflow-xyz). This variable is used to namespace all resources created by this module. | string | n/a | yes |
 | cluster\_stage | The stage of the Airflow cluster (e.g. prod). | string | `"dev"` | no |
+| custom\_env | Custom airflow environments variables | string | `"./.env.airflow"` | no |
 | db\_allocated\_storage | Dabatase disk size. | string | `"20"` | no |
 | db\_dbname | PostgreSQL database name. | string | `"airflow"` | no |
 | db\_instance\_type | Instance type for PostgreSQL database | string | `"db.t2.micro"` | no |
@@ -85,7 +86,7 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | private\_key\_path | Enter the path to the SSH Private Key to run provisioner. | string | `"~/.ssh/id_rsa"` | no |
 | public\_key\_path | Enter the path to the SSH Public Key to add to AWS. | string | `"~/.ssh/id_rsa.pub"` | no |
 | rbac | Enable support for Role-Based Access Control (RBAC). | string | `"false"` | no |
-| requirements\_txt | Custom requirements.txt | string | `""` | no |
+| requirements\_txt | Custom requirements.txt | string | `"./requirements.txt"` | no |
 | root\_volume\_delete\_on\_termination | Whether the volume should be destroyed on instance termination. | string | `"true"` | no |
 | root\_volume\_ebs\_optimized | If true, the launched EC2 instance will be EBS-optimized. | string | `"false"` | no |
 | root\_volume\_size | The size, in GB, of the root EBS volume. | string | `"35"` | no |

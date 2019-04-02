@@ -80,7 +80,8 @@ EOL
 	sudo chmod -R 755 /etc/airflow
 	sudo mkdir -p /etc/sysconfig/
 
-	cat /etc/environment | sudo tee -a /etc/sysconfig/airflow
+	cat /etc/environment | sudo tee -a /tmp/airflow_environment
+	cat /tmp/custom_env | sudo tee -a /tmp/airflow_environment
 	sed 's/^/export /' -- </tmp/airflow_environment | sudo tee -a /etc/environment
 	sudo cat /tmp/airflow.service >> /etc/systemd/system/airflow.service
 	cat /tmp/airflow_environment | sudo tee -a /etc/sysconfig/airflow

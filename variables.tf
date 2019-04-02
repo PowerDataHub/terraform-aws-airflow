@@ -57,7 +57,13 @@ variable "fernet_key" {
 variable "requirements_txt" {
   description = "Custom requirements.txt"
   type        = "string"
-  default     = ""
+  default     = "./requirements.txt"
+}
+
+variable "custom_env" {
+  description = "Custom airflow environments variables"
+  type        = "string"
+  default     = "./.env.airflow"
 }
 
 variable "load_example_dags" {
