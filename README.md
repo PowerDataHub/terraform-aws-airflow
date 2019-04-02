@@ -15,7 +15,7 @@ You can use this module from the [Terraform Registry](https://registry.terraform
 module "airflow-cluster" {
   # REQUIRED
   source            = "powerdatahub/airflow/aws"
-  aws_key_name      = "airflow-key"
+  key_name      = "airflow-key"
   cluster_name      = "my-airflow"
   cluster_stage     = "prod" # Default is 'dev'
   db_password       = "your-rds-master-password"
@@ -44,7 +44,7 @@ The Airflow service runs under systemd, so logs are available through journalctl
 ## Todo
 
 - [x] Run airflow as systemd service
-- [x] Provide a way to pass a custom requirements.txt files on provision step
+- [ ] Provide a way to pass a custom requirements.txt files on provision step
 - [ ] Provide a way to pass a custom packages.txt files on provision step
 - [x] RBAC
 - [ ] Flower
@@ -70,23 +70,23 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | admin\_password | Admin password. Only If RBAC is enabled. | string | `"false"` | no |
 | admin\_username | Admin username used to authenticate. Only If RBAC is enabled, this user will be created in the first run only. | string | `"admin"` | no |
 | ami | Default is `Ubuntu Server 18.04 LTS (HVM), SSD Volume Type.` | string | `"ami-0a313d6098716f372"` | no |
-| aws\_key\_name | AWS KeyPair name | string | n/a | yes |
 | aws\_region | AWS Region | string | `"us-east-1"` | no |
 | cluster\_name | The name of the Airflow cluster (e.g. airflow-xyz). This variable is used to namespace all resources created by this module. | string | n/a | yes |
 | cluster\_stage | The stage of the Airflow cluster (e.g. prod). | string | `"dev"` | no |
-| custom\_env | Custom airflow environments variables | string | `"./.env.airflow"` | no |
+| custom\_env | Path to custom airflow environments variables | string | `""` | no |
 | db\_allocated\_storage | Dabatase disk size. | string | `"20"` | no |
 | db\_dbname | PostgreSQL database name. | string | `"airflow"` | no |
 | db\_instance\_type | Instance type for PostgreSQL database | string | `"db.t2.micro"` | no |
 | db\_password | PostgreSQL password. | string | n/a | yes |
 | db\_username | PostgreSQL username. | string | `"airflow"` | no |
 | fernet\_key | Key for encrypting data in the database - see Airflow docs | string | n/a | yes |
+| key\_name | AWS KeyPair name | string | n/a | yes |
 | load\_default\_conns | Load the default connections initialized by Airflow. Most consider these unnecessary, which is why the default is to not load them. | string | `"false"` | no |
 | load\_example\_dags | Load the example DAGs distributed with Airflow. Useful if deploying a stack for demonstrating a few topologies, operators and scheduling strategies. | string | `"false"` | no |
 | private\_key\_path | Enter the path to the SSH Private Key to run provisioner. | string | `"~/.ssh/id_rsa"` | no |
 | public\_key\_path | Enter the path to the SSH Public Key to add to AWS. | string | `"~/.ssh/id_rsa.pub"` | no |
 | rbac | Enable support for Role-Based Access Control (RBAC). | string | `"false"` | no |
-| requirements\_txt | Custom requirements.txt | string | `"./requirements.txt"` | no |
+| requirements\_txt | Path to custom requirements.txt | string | `""` | no |
 | root\_volume\_delete\_on\_termination | Whether the volume should be destroyed on instance termination. | string | `"true"` | no |
 | root\_volume\_ebs\_optimized | If true, the launched EC2 instance will be EBS-optimized. | string | `"false"` | no |
 | root\_volume\_size | The size, in GB, of the root EBS volume. | string | `"35"` | no |

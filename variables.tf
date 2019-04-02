@@ -28,7 +28,7 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
-variable "aws_key_name" {
+variable "key_name" {
   description = "AWS KeyPair name"
   type        = "string"
 }
@@ -55,15 +55,15 @@ variable "fernet_key" {
 }
 
 variable "requirements_txt" {
-  description = "Custom requirements.txt"
+  description = "Path to custom requirements.txt"
   type        = "string"
-  default     = "./requirements.txt"
+  default     = ""
 }
 
 variable "custom_env" {
-  description = "Custom airflow environments variables"
+  description = "Path to custom airflow environments variables"
   type        = "string"
-  default     = "./.env.airflow"
+  default     = ""
 }
 
 variable "load_example_dags" {
@@ -228,12 +228,16 @@ data "aws_security_group" "default" {
   name   = "default"
 }
 
-data "template_file" "requirements_txt" {
-  template = "${file("${var.requirements_txt}")}"
-}
-
 data "template_file" "airflow_service" {
   template = "${file("${path.module}/files/airflow.service")}"
+}
+
+data "template_file" "custom_env" {
+  template = "${var.custom_env}"
+}
+
+data "template_file" "requirements_txt" {
+  template = "${var.requirements_txt}"
 }
 
 data "template_file" "airflow_environment" {

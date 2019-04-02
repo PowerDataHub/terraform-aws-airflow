@@ -46,7 +46,7 @@ module "airflow_labels_worker" {
 }
 
 resource "aws_key_pair" "auth" {
-  key_name   = "${module.airflow_labels.id}"
+  key_name   = "${var.key_name != "" ? var.key_name : module.airflow_labels.id}"
   public_key = "${file(var.public_key_path)}"
 }
 
@@ -159,6 +159,8 @@ resource "aws_instance" "airflow_webserver" {
 
   associate_public_ip_address = true
 
+  volume_tags = "${module.airflow_labels_webserver.tags}"
+
   root_block_device {
     volume_type           = "${var.root_volume_type}"
     volume_size           = "${var.root_volume_size}"
@@ -166,7 +168,7 @@ resource "aws_instance" "airflow_webserver" {
   }
 
   provisioner "file" {
-    content     = "${file(var.custom_env)}"
+    content     = "${data.template_file.custom_env.rendered}"
     destination = "/tmp/custom_env"
 
     connection {
@@ -176,16 +178,16 @@ resource "aws_instance" "airflow_webserver" {
     }
   }
 
-  provisioner "file" {
-    content     = "${data.template_file.requirements_txt.rendered}"
-    destination = "/tmp/requirements.txt"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file(var.private_key_path)}"
-    }
-  }
+  # provisioner "file" {
+  #   content     = "${file(var.requirements_txt)}"
+  #   destination = "/tmp/requirements.txt"
+  #
+  #   connection {
+  #     type        = "ssh"
+  #     user        = "ubuntu"
+  #     private_key = "${file(var.private_key_path)}"
+  #   }
+  # }
 
   provisioner "file" {
     content     = "${data.template_file.airflow_environment.rendered}"
@@ -197,7 +199,6 @@ resource "aws_instance" "airflow_webserver" {
       private_key = "${file(var.private_key_path)}"
     }
   }
-
   provisioner "file" {
     content     = "${data.template_file.airflow_service.rendered}"
     destination = "/tmp/airflow.service"
@@ -208,7 +209,6 @@ resource "aws_instance" "airflow_webserver" {
       private_key = "${file(var.private_key_path)}"
     }
   }
-
   provisioner "remote-exec" {
     inline = [
       "echo AIRFLOW_ROLE=WEBSERVER | sudo tee -a /etc/environment",
@@ -220,11 +220,8 @@ resource "aws_instance" "airflow_webserver" {
       private_key = "${file(var.private_key_path)}"
     }
   }
-
   user_data = "${data.template_file.provisioner.rendered}"
-
-  tags = "${module.airflow_labels_webserver.tags}"
-
+  tags      = "${module.airflow_labels_webserver.tags}"
   lifecycle {
     create_before_destroy = true
   }
@@ -242,6 +239,8 @@ resource "aws_instance" "airflow_scheduler" {
 
   associate_public_ip_address = true
 
+  volume_tags = "${module.airflow_labels_webserver.tags}"
+
   root_block_device {
     volume_type           = "${var.root_volume_type}"
     volume_size           = "${var.root_volume_size}"
@@ -249,7 +248,7 @@ resource "aws_instance" "airflow_scheduler" {
   }
 
   provisioner "file" {
-    content     = "${file(var.custom_env)}"
+    content     = "${data.template_file.custom_env.rendered}"
     destination = "/tmp/custom_env"
 
     connection {
@@ -259,16 +258,16 @@ resource "aws_instance" "airflow_scheduler" {
     }
   }
 
-  provisioner "file" {
-    content     = "${data.template_file.requirements_txt.rendered}"
-    destination = "/tmp/requirements.txt"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file(var.private_key_path)}"
-    }
-  }
+  # provisioner "file" {
+  #   content     = "${file(var.requirements_txt)}"
+  #   destination = "/tmp/requirements.txt"
+  #
+  #   connection {
+  #     type        = "ssh"
+  #     user        = "ubuntu"
+  #     private_key = "${file(var.private_key_path)}"
+  #   }
+  # }
 
   provisioner "file" {
     content     = "${data.template_file.airflow_environment.rendered}"
@@ -280,7 +279,6 @@ resource "aws_instance" "airflow_scheduler" {
       private_key = "${file(var.private_key_path)}"
     }
   }
-
   provisioner "file" {
     content     = "${data.template_file.airflow_service.rendered}"
     destination = "/tmp/airflow.service"
@@ -291,7 +289,6 @@ resource "aws_instance" "airflow_scheduler" {
       private_key = "${file(var.private_key_path)}"
     }
   }
-
   provisioner "remote-exec" {
     inline = [
       "echo AIRFLOW_ROLE=SCHEDULER | sudo tee -a /etc/environment",
@@ -303,11 +300,8 @@ resource "aws_instance" "airflow_scheduler" {
       private_key = "${file(var.private_key_path)}"
     }
   }
-
   user_data = "${data.template_file.provisioner.rendered}"
-
-  tags = "${module.airflow_labels_scheduler.tags}"
-
+  tags      = "${module.airflow_labels_scheduler.tags}"
   lifecycle {
     create_before_destroy = true
   }
@@ -325,6 +319,8 @@ resource "aws_instance" "airflow_worker" {
 
   associate_public_ip_address = true
 
+  volume_tags = "${module.airflow_labels_webserver.tags}"
+
   root_block_device {
     volume_type           = "${var.root_volume_type}"
     volume_size           = "${var.root_volume_size}"
@@ -332,7 +328,7 @@ resource "aws_instance" "airflow_worker" {
   }
 
   provisioner "file" {
-    content     = "${file(var.custom_env)}"
+    content     = "${data.template_file.custom_env.rendered}"
     destination = "/tmp/custom_env"
 
     connection {
@@ -342,16 +338,16 @@ resource "aws_instance" "airflow_worker" {
     }
   }
 
-  provisioner "file" {
-    content     = "${data.template_file.requirements_txt.rendered}"
-    destination = "/tmp/requirements.txt"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file(var.private_key_path)}"
-    }
-  }
+  # provisioner "file" {
+  #   content     = "${file(var.requirements_txt)}"
+  #   destination = "/tmp/requirements.txt"
+  #
+  #   connection {
+  #     type        = "ssh"
+  #     user        = "ubuntu"
+  #     private_key = "${file(var.private_key_path)}"
+  #   }
+  # }
 
   provisioner "file" {
     content     = "${data.template_file.airflow_environment.rendered}"
@@ -363,7 +359,6 @@ resource "aws_instance" "airflow_worker" {
       private_key = "${file(var.private_key_path)}"
     }
   }
-
   provisioner "file" {
     content     = "${data.template_file.airflow_service.rendered}"
     destination = "/tmp/airflow.service"
@@ -374,7 +369,6 @@ resource "aws_instance" "airflow_worker" {
       private_key = "${file(var.private_key_path)}"
     }
   }
-
   provisioner "remote-exec" {
     inline = [
       "echo AIRFLOW_ROLE=WORKER | sudo tee -a /etc/environment",
@@ -386,11 +380,8 @@ resource "aws_instance" "airflow_worker" {
       private_key = "${file(var.private_key_path)}"
     }
   }
-
   user_data = "${data.template_file.provisioner.rendered}"
-
-  tags = "${module.airflow_labels_worker.tags}"
-
+  tags      = "${module.airflow_labels_worker.tags}"
   lifecycle {
     create_before_destroy = true
   }
