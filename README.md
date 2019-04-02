@@ -14,16 +14,16 @@ You can use this module from the [Terraform Registry](https://registry.terraform
 ```terraform
 module "airflow-cluster" {
   # REQUIRED
-  source            = "powerdatahub/airflow/aws"
-  key_name      = "airflow-key"
-  cluster_name      = "my-airflow"
-  cluster_stage     = "prod" # Default is 'dev'
-  db_password       = "your-rds-master-password"
-  fernet_key        = "your-fernet-key" # see https://airflow.readthedocs.io/en/stable/howto/secure-connections.html
+  source              = "powerdatahub/airflow/aws"
+  key_name            = "airflow-key"
+  cluster_name        = "my-airflow"
+  cluster_stage       = "prod" # Default is 'dev'
+  db_password         = "your-rds-master-password"
+  fernet_key          = "your-fernet-key" # see https://airflow.readthedocs.io/en/stable/howto/secure-connections.html
   
   # OPTIONALS
   vpc_id              = "some-vpc-id"                     # Use default if not provided  
-  custom_requirements    = "path/to/custom/requirements.txt"
+  custom_requirements = "path/to/custom/requirements.txt"
   load_example_dags   = false
   load_default_conns  = false
   rbac                = true
