@@ -15,7 +15,7 @@ module "airflow_cluster" {
   s3_bucket_name    = "airflow-example-deploy-logs"
   db_password       = "123456789A*"                                  # Just for example purposes, for real projects you may want to create a terraform.tfvars file
   fernet_key        = "HeY9Aivs7vADx5oy7SBKHfRJdj3fhpD_6IX2LnlDN74=" # Just for example purposes, for real projects you may want to create a terraform.tfvars file
-  aws_key_name      = "airflow-example-deploy-key"
+  key_name          = "airflow-example-deploy-key"
   vpc_id            = "${data.aws_vpc.default.id}"
   load_example_dags = false
 }

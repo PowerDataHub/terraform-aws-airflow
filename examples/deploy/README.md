@@ -32,5 +32,11 @@ ansible-playbook --inventory-file=/usr/local/bin/terraform-inventory --ssh-commo
 ```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| webserver\_admin\_url | Public DNS for the Airflow Webserver instance |
+| webserver\_public\_ip | Public IP address for the Airflow Webserver instance |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
