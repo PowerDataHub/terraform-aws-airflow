@@ -54,7 +54,7 @@ variable "fernet_key" {
   type        = "string"
 }
 
-variable "requirements_txt" {
+variable "custom_requirements" {
   description = "Path to custom requirements.txt"
   type        = "string"
   default     = ""
@@ -236,8 +236,8 @@ data "template_file" "custom_env" {
   template = "${var.custom_env}"
 }
 
-data "template_file" "requirements_txt" {
-  template = "${var.requirements_txt}"
+data "template_file" "custom_requirements" {
+  template = "${var.custom_requirements}"
 }
 
 data "template_file" "airflow_environment" {

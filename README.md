@@ -23,7 +23,7 @@ module "airflow-cluster" {
   
   # OPTIONALS
   vpc_id              = "some-vpc-id"                     # Use default if not provided  
-  requirements_txt    = "path/to/custom/requirements.txt"
+  custom_requirements    = "path/to/custom/requirements.txt"
   load_example_dags   = false
   load_default_conns  = false
   rbac                = true
@@ -74,6 +74,7 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | cluster\_name | The name of the Airflow cluster (e.g. airflow-xyz). This variable is used to namespace all resources created by this module. | string | n/a | yes |
 | cluster\_stage | The stage of the Airflow cluster (e.g. prod). | string | `"dev"` | no |
 | custom\_env | Path to custom airflow environments variables | string | `""` | no |
+| custom\_requirements | Path to custom requirements.txt | string | `""` | no |
 | db\_allocated\_storage | Dabatase disk size. | string | `"20"` | no |
 | db\_dbname | PostgreSQL database name. | string | `"airflow"` | no |
 | db\_instance\_type | Instance type for PostgreSQL database | string | `"db.t2.micro"` | no |
@@ -86,7 +87,6 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | private\_key\_path | Enter the path to the SSH Private Key to run provisioner. | string | `"~/.ssh/id_rsa"` | no |
 | public\_key\_path | Enter the path to the SSH Public Key to add to AWS. | string | `"~/.ssh/id_rsa.pub"` | no |
 | rbac | Enable support for Role-Based Access Control (RBAC). | string | `"false"` | no |
-| requirements\_txt | Path to custom requirements.txt | string | `""` | no |
 | root\_volume\_delete\_on\_termination | Whether the volume should be destroyed on instance termination. | string | `"true"` | no |
 | root\_volume\_ebs\_optimized | If true, the launched EC2 instance will be EBS-optimized. | string | `"false"` | no |
 | root\_volume\_size | The size, in GB, of the root EBS volume. | string | `"35"` | no |
