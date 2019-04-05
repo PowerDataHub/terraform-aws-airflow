@@ -1,3 +1,7 @@
+terraform {
+  required_version = ">= 0.9.3, != 0.9.5"
+}
+
 # ---------------------------------------
 # AIRFLOW CLUSTER RESOURCES
 # ---------------------------------------
@@ -174,16 +178,16 @@ resource "aws_instance" "airflow_webserver" {
     }
   }
 
-  provisioner "file" {
-    content     = "${data.template_file.custom_requirements.rendered}"
-    destination = "/tmp/requirements.txt"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file(var.private_key_path)}"
-    }
-  }
+  # provisioner "file" {
+  #   content     = "${data.template_file.custom_requirements.rendered}"
+  #   destination = "/tmp/requirements.txt"
+  #
+  #   connection {
+  #     type        = "ssh"
+  #     user        = "ubuntu"
+  #     private_key = "${file(var.private_key_path)}"
+  #   }
+  # }
 
   provisioner "file" {
     content     = "${data.template_file.airflow_environment.rendered}"
@@ -195,7 +199,6 @@ resource "aws_instance" "airflow_webserver" {
       private_key = "${file(var.private_key_path)}"
     }
   }
-
   provisioner "file" {
     content     = "${data.template_file.airflow_service.rendered}"
     destination = "/tmp/airflow.service"
@@ -206,7 +209,6 @@ resource "aws_instance" "airflow_webserver" {
       private_key = "${file(var.private_key_path)}"
     }
   }
-
   provisioner "remote-exec" {
     inline = [
       "echo AIRFLOW_ROLE=WEBSERVER | sudo tee -a /etc/environment",
@@ -218,10 +220,8 @@ resource "aws_instance" "airflow_webserver" {
       private_key = "${file(var.private_key_path)}"
     }
   }
-
   user_data = "${data.template_file.provisioner.rendered}"
   tags      = "${module.airflow_labels_webserver.tags}"
-
   lifecycle {
     create_before_destroy = true
   }
@@ -258,16 +258,16 @@ resource "aws_instance" "airflow_scheduler" {
     }
   }
 
-  provisioner "file" {
-    content     = "${data.template_file.custom_requirements.rendered}"
-    destination = "/tmp/requirements.txt"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file(var.private_key_path)}"
-    }
-  }
+  # provisioner "file" {
+  #   content     = "${data.template_file.custom_requirements.rendered}"
+  #   destination = "/tmp/requirements.txt"
+  #
+  #   connection {
+  #     type        = "ssh"
+  #     user        = "ubuntu"
+  #     private_key = "${file(var.private_key_path)}"
+  #   }
+  # }
 
   provisioner "file" {
     content     = "${data.template_file.airflow_environment.rendered}"
@@ -279,7 +279,6 @@ resource "aws_instance" "airflow_scheduler" {
       private_key = "${file(var.private_key_path)}"
     }
   }
-
   provisioner "file" {
     content     = "${data.template_file.airflow_service.rendered}"
     destination = "/tmp/airflow.service"
@@ -290,7 +289,6 @@ resource "aws_instance" "airflow_scheduler" {
       private_key = "${file(var.private_key_path)}"
     }
   }
-
   provisioner "remote-exec" {
     inline = [
       "echo AIRFLOW_ROLE=SCHEDULER | sudo tee -a /etc/environment",
@@ -302,10 +300,8 @@ resource "aws_instance" "airflow_scheduler" {
       private_key = "${file(var.private_key_path)}"
     }
   }
-
   user_data = "${data.template_file.provisioner.rendered}"
   tags      = "${module.airflow_labels_scheduler.tags}"
-
   lifecycle {
     create_before_destroy = true
   }
@@ -342,16 +338,16 @@ resource "aws_instance" "airflow_worker" {
     }
   }
 
-  provisioner "file" {
-    content     = "${data.template_file.custom_requirements.rendered}"
-    destination = "/tmp/requirements.txt"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file(var.private_key_path)}"
-    }
-  }
+  # provisioner "file" {
+  #   content     = "${data.template_file.custom_requirements.rendered}"
+  #   destination = "/tmp/requirements.txt"
+  #
+  #   connection {
+  #     type        = "ssh"
+  #     user        = "ubuntu"
+  #     private_key = "${file(var.private_key_path)}"
+  #   }
+  # }
 
   provisioner "file" {
     content     = "${data.template_file.airflow_environment.rendered}"
@@ -363,7 +359,6 @@ resource "aws_instance" "airflow_worker" {
       private_key = "${file(var.private_key_path)}"
     }
   }
-
   provisioner "file" {
     content     = "${data.template_file.airflow_service.rendered}"
     destination = "/tmp/airflow.service"
@@ -374,7 +369,6 @@ resource "aws_instance" "airflow_worker" {
       private_key = "${file(var.private_key_path)}"
     }
   }
-
   provisioner "remote-exec" {
     inline = [
       "echo AIRFLOW_ROLE=WORKER | sudo tee -a /etc/environment",
@@ -386,10 +380,8 @@ resource "aws_instance" "airflow_worker" {
       private_key = "${file(var.private_key_path)}"
     }
   }
-
   user_data = "${data.template_file.provisioner.rendered}"
   tags      = "${module.airflow_labels_worker.tags}"
-
   lifecycle {
     create_before_destroy = true
   }

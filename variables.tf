@@ -11,6 +11,12 @@
 # Globals #
 ###########
 
+variable "ami" {
+  description = "Default is `Ubuntu Server 18.04 LTS (HVM), SSD Volume Type.`"
+  type        = "string"
+  default     = "ami-0a313d6098716f372"
+}
+
 variable "cluster_name" {
   description = "The name of the Airflow cluster (e.g. airflow-xyz). This variable is used to namespace all resources created by this module."
   type        = "string"
@@ -150,12 +156,6 @@ variable "worker_instance_count" {
   description = "Number of worker instances to create."
   type        = "string"
   default     = 1
-}
-
-variable "ami" {
-  description = "Default is `Ubuntu Server 18.04 LTS (HVM), SSD Volume Type.`"
-  type        = "string"
-  default     = "ami-0a313d6098716f372"
 }
 
 variable "spot_price" {

@@ -1,10 +1,22 @@
 #!/usr/bin/env bash
 
-set -x
+set -xeuf -o pipefail
+
+############################################################
+# Speedup DPKG and don't use cache for packages
+############################################################
+
+# Taken from here: https://gist.github.com/kwk/55bb5b6a4b7457bef38d
+#
+# this forces dpkg not to call sync() after package extraction and speeds up
+# install
+echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup
+#
 
 function install_dependencies() {
-    sudo apt-get update -yqq && sudo apt-get upgrade -yqq \
-    && sudo apt-get install -yqq --no-install-recommends \
+	DEBIAN_FRONTEND=noninteractive sudo apt-get update -yqq \
+	&& DEBIAN_FRONTEND=noninteractive sudo apt-get upgrade -yqq \
+    && DEBIAN_FRONTEND=noninteractive sudo apt-get install -yqq --no-install-recommends \
         freetds-dev \
 		libkrb5-dev \
 		libsasl2-dev \
