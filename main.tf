@@ -137,6 +137,13 @@ module "sg_airflow" {
       description = "${module.airflow_labels.id} webserver"
       cidr_blocks = "0.0.0.0/0"
     },
+    {
+      from_port   = 5555
+      to_port     = 5555
+      protocol    = "tcp"
+      description = "${module.airflow_labels.id} flower"
+      cidr_blocks = "0.0.0.0/0"
+    },
   ]
 
   egress_rules = ["all-all"]

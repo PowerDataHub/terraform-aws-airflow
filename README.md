@@ -47,8 +47,11 @@ The Airflow service runs under systemd, so logs are available through journalctl
 - [x] Provide a way to pass a custom requirements.txt files on provision step
 - [ ] Provide a way to pass a custom packages.txt files on provision step
 - [x] RBAC
-- [ ] Flower
+- [ ] Support for [Google OAUTH ](https://incubator-airflow.readthedocs.io/en/latest/security.html#google-authentication)
+- [x] Flower
+- [ ] Secure Flower install 
 - [x] Provide a way inject environment variables to airflow
+- [ ] Split services into multiples files
 - [ ] Auto Scalling for workers
 - [ ] Use SPOT instances for workers
 - [ ] Maybe use the [AWS Fargate](https://aws.amazon.com/pt/fargate/) to reduce costs
