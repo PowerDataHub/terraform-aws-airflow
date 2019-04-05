@@ -110,7 +110,7 @@ EOL
 		airflow create_user -r Admin -u ${ADMIN_USERNAME} -f ${ADMIN_NAME} -l ${ADMIN_LASTNAME} -e ${ADMIN_EMAIL} -p ${ADMIN_PASSWORD}
 	fi
 
-	sudo chown -R ubuntu: /etc/airflow
+	sudo chown -R admin: /etc/airflow
 
 	sudo systemctl enable airflow.service
 	sudo systemctl start airflow.service

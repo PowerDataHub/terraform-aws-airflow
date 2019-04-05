@@ -4,8 +4,8 @@ After=network.target
 
 [Service]
 EnvironmentFile=/etc/sysconfig/airflow
-User=ubuntu
-Group=ubuntu
+User=admin
+Group=admin
 Type=simple
 Restart=always
 ExecStart=/usr/bin/terraform-aws-airflow
