@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -xeuf -o pipefail
+set -x
 
 ############################################################
 # Speedup DPKG and don't use cache for packages
@@ -44,24 +44,40 @@ function install_dependencies() {
         locales \
         netcat \
         rsync \
+		zlib1g \
+		zlib1g-dev \
+		libncurses5-dev \
+		libgdbm-dev \
+		libnss3-dev \
+		libssl-dev \
+		libreadline-dev \
+		libffi-dev \
     && sudo sed -i 's/^# en_US.UTF-8 UTF-8$/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
     && locale-gen \
     && sudo update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+	#
+	# cd /usr/src
+	# wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz
+	# sudo tar xzf Python-3.7.3.tgz
+	# cd Python-3.7.3
+	# sudo ./configure --enable-optimizations
+	# sudo make altinstall
+	# sudo mv python /usr/bin/python3
 }
 
 function install_python_and_python_packages() {
 
-    PYCURL_SSL_LIBRARY=openssl pip3 install \
+    PYCURL_SSL_LIBRARY=openssl $(which pip3) install -U \
       --no-cache-dir --compile --ignore-installed \
       pycurl
 
-	pip3 install -qU setuptools wheel --ignore-installed
+	$(which pip3) install -qU setuptools wheel --ignore-installed
 
 	if [ -e /tmp/requirements.txt ]; then
-		SLUGIFY_USES_TEXT_UNIDECODE=yes pip3 install -r /tmp/requirements.txt
+		SLUGIFY_USES_TEXT_UNIDECODE=yes $(which pip3) install -U -r /tmp/requirements.txt
 	fi
 
-    SLUGIFY_USES_TEXT_UNIDECODE=yes pip3 install -U \
+    SLUGIFY_USES_TEXT_UNIDECODE=yes $(which pip3) install -U \
 		Cython \
 		pytz \
 		pyOpenSSL \
