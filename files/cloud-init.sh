@@ -58,7 +58,7 @@ function install_python_and_python_packages() {
 		boto3 \
 		boto \
 		botocore \
-		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh,google_auth]==1.10.2 \
+		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh]==1.10.2 \
 		celery[sqs]
 }
 
