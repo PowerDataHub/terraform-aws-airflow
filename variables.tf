@@ -146,6 +146,12 @@ variable "worker_instance_type" {
   default     = "t3.small"
 }
 
+variable "worker_instance_count" {
+  description = "Number of worker instances"
+  type        = "string"
+  default     = 1
+}
+
 variable "ami" {
   description = "Default is `Ubuntu Server 18.04 LTS (HVM), SSD Volume Type.`"
   type        = "string"

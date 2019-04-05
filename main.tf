@@ -304,7 +304,7 @@ resource "aws_instance" "airflow_scheduler" {
 }
 
 resource "aws_instance" "airflow_worker" {
-  count = 1
+  count = "${var.worker_instance_count}"
 
   instance_type          = "${var.worker_instance_type}"
   ami                    = "${var.ami}"
