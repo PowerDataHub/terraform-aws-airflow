@@ -50,7 +50,7 @@ The Airflow service runs under systemd, so logs are available through journalctl
 - [ ] Support for [Google OAUTH ](https://incubator-airflow.readthedocs.io/en/latest/security.html#google-authentication)
 - [x] Flower
 - [ ] Secure Flower install 
-- [x] Provide a way inject environment variables to airflow
+- [x] Provide a way to inject environment variables into airflow
 - [ ] Split services into multiples files
 - [ ] Auto Scalling for workers
 - [ ] Use SPOT instances for workers
