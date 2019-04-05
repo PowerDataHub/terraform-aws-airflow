@@ -29,7 +29,7 @@ variable "aws_region" {
 }
 
 variable "key_name" {
-  description = "AWS KeyPair name"
+  description = "AWS KeyPair name."
   type        = "string"
 }
 
@@ -50,18 +50,18 @@ variable "vpc_id" {
 }
 
 variable "fernet_key" {
-  description = "Key for encrypting data in the database - see Airflow docs"
+  description = "Key for encrypting data in the database - see Airflow docs."
   type        = "string"
 }
 
 variable "custom_requirements" {
-  description = "Path to custom requirements.txt"
+  description = "Path to custom requirements.txt."
   type        = "string"
   default     = ""
 }
 
 variable "custom_env" {
-  description = "Path to custom airflow environments variables"
+  description = "Path to custom airflow environments variables."
   type        = "string"
   default     = ""
 }
@@ -129,25 +129,25 @@ variable "s3_bucket_name" {
 #######
 
 variable "webserver_instance_type" {
-  description = "Instance type for the Airflow Webserver"
+  description = "Instance type for the Airflow Webserver."
   type        = "string"
   default     = "t3.micro"
 }
 
 variable "scheduler_instance_type" {
-  description = "Instance type for the Airflow Scheduler"
+  description = "Instance type for the Airflow Scheduler."
   type        = "string"
   default     = "t3.micro"
 }
 
 variable "worker_instance_type" {
-  description = "Instance type for the Celery Worker"
+  description = "Instance type for the Celery Worker."
   type        = "string"
   default     = "t3.small"
 }
 
 variable "worker_instance_count" {
-  description = "Number of worker instances"
+  description = "Number of worker instances to create."
   type        = "string"
   default     = 1
 }
