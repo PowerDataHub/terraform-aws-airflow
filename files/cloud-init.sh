@@ -21,7 +21,7 @@ function install_dependencies() {
 		libkrb5-dev \
 		libsasl2-dev \
 		libffi-dev \
-		libpq-dev\
+		libpq-dev \
 		libxslt-dev \
 		libxml2-dev \
 		liblapack-dev \
@@ -34,9 +34,8 @@ function install_dependencies() {
 		openssl \
 		postgresql-client \
 		python \
-		python3 \
-		python3-pip \
 		python3-dev \
+		python-dev \
         apt-utils \
         build-essential \
         curl \
@@ -51,33 +50,37 @@ function install_dependencies() {
 		libnss3-dev \
 		libssl-dev \
 		libreadline-dev \
+		libbz2-dev \
 		libffi-dev \
     && sudo sed -i 's/^# en_US.UTF-8 UTF-8$/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
     && locale-gen \
     && sudo update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
-	#
-	# cd /usr/src
-	# wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz
-	# sudo tar xzf Python-3.7.3.tgz
-	# cd Python-3.7.3
-	# sudo ./configure --enable-optimizations
-	# sudo make altinstall
-	# sudo mv python /usr/bin/python3
+
+	cd /usr/src
+	wget https://www.python.org/ftp/python/3.6.8/Python-3.6.8.tgz
+	sudo tar xzf Python-3.6.8.tgz
+	cd Python-3.6.8
+	sudo ./configure --enable-optimizations --with-ensurepip=install
+	sudo make altinstall
+	# sudo ln -s /usr/bin/python3 python
+	$(which python3) --version
+
+	sudo apt-get install -yqq python3-pip --no-install-recommends
 }
 
 function install_python_and_python_packages() {
 
-    PYCURL_SSL_LIBRARY=openssl $(which pip3) install -U \
+    sudo -H PYCURL_SSL_LIBRARY=openssl $(which pip3) install -U \
       --no-cache-dir --compile --ignore-installed \
       pycurl
 
-	$(which pip3) install -qU setuptools wheel --ignore-installed
+	sudo -H $(which pip3) install -qU setuptools wheel --ignore-installed
 
 	if [ -e /tmp/requirements.txt ]; then
-		SLUGIFY_USES_TEXT_UNIDECODE=yes $(which pip3) install -U -r /tmp/requirements.txt
+		sudo -H SLUGIFY_USES_TEXT_UNIDECODE=yes $(which pip3) install -U -r /tmp/requirements.txt
 	fi
 
-    SLUGIFY_USES_TEXT_UNIDECODE=yes $(which pip3) install -U \
+    sudo -H SLUGIFY_USES_TEXT_UNIDECODE=yes $(which pip3) install -U \
 		Cython \
 		pytz \
 		pyOpenSSL \
