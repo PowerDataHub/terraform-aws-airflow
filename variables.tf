@@ -12,9 +12,9 @@
 ###########
 
 variable "ami" {
-  description = "Default is `debian-stretch-hvm-x86_64-gp2.`"
+  description = "Default is `Ubuntu Server 18.04 LTS (HVM), SSD Volume Type.`"
   type        = "string"
-  default     = "ami-0f9e7e8867f55fd8e"
+  default     = "ami-0a313d6098716f372"
 }
 
 variable "cluster_name" {

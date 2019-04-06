@@ -180,7 +180,7 @@ resource "aws_instance" "airflow_webserver" {
 
     connection {
       type        = "ssh"
-      user        = "admin"
+      user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
     }
   }
@@ -191,7 +191,7 @@ resource "aws_instance" "airflow_webserver" {
 
     connection {
       type        = "ssh"
-      user        = "admin"
+      user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
     }
   }
@@ -202,7 +202,7 @@ resource "aws_instance" "airflow_webserver" {
 
     connection {
       type        = "ssh"
-      user        = "admin"
+      user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
     }
   }
@@ -213,7 +213,7 @@ resource "aws_instance" "airflow_webserver" {
 
     connection {
       type        = "ssh"
-      user        = "admin"
+      user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
     }
   }
@@ -225,7 +225,7 @@ resource "aws_instance" "airflow_webserver" {
 
     connection {
       type        = "ssh"
-      user        = "admin"
+      user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
     }
   }
@@ -264,7 +264,7 @@ resource "aws_instance" "airflow_scheduler" {
 
     connection {
       type        = "ssh"
-      user        = "admin"
+      user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
     }
   }
@@ -275,7 +275,7 @@ resource "aws_instance" "airflow_scheduler" {
 
     connection {
       type        = "ssh"
-      user        = "admin"
+      user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
     }
   }
@@ -286,7 +286,7 @@ resource "aws_instance" "airflow_scheduler" {
 
     connection {
       type        = "ssh"
-      user        = "admin"
+      user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
     }
   }
@@ -297,7 +297,7 @@ resource "aws_instance" "airflow_scheduler" {
 
     connection {
       type        = "ssh"
-      user        = "admin"
+      user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
     }
   }
@@ -309,7 +309,7 @@ resource "aws_instance" "airflow_scheduler" {
 
     connection {
       type        = "ssh"
-      user        = "admin"
+      user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
     }
   }
@@ -348,7 +348,7 @@ resource "aws_instance" "airflow_worker" {
 
     connection {
       type        = "ssh"
-      user        = "admin"
+      user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
     }
   }
@@ -359,7 +359,7 @@ resource "aws_instance" "airflow_worker" {
 
     connection {
       type        = "ssh"
-      user        = "admin"
+      user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
     }
   }
@@ -370,7 +370,7 @@ resource "aws_instance" "airflow_worker" {
 
     connection {
       type        = "ssh"
-      user        = "admin"
+      user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
     }
   }
@@ -381,7 +381,7 @@ resource "aws_instance" "airflow_worker" {
 
     connection {
       type        = "ssh"
-      user        = "admin"
+      user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
     }
   }
@@ -393,7 +393,7 @@ resource "aws_instance" "airflow_worker" {
 
     connection {
       type        = "ssh"
-      user        = "admin"
+      user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
     }
   }
