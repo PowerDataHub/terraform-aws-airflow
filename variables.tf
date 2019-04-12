@@ -239,11 +239,11 @@ data "template_file" "airflow_service" {
 }
 
 data "template_file" "custom_env" {
-  template = "${file("${var.custom_env != "" ? var.custom_env : "${path.module}/.env.custom.airflow"}")}"
+  template = "${file(coalesce(var.custom_env, "${path.module}/.env.custom.airflow"))}"
 }
 
 data "template_file" "custom_requirements" {
-  template = "${file("${var.custom_requirements != "" ? var.custom_requirements : "${path.module}/requirements.txt"}")}"
+  template = "${file(coalesce(var.custom_requirements, "${path.module}/requirements.txt"))}"
 }
 
 data "template_file" "airflow_environment" {

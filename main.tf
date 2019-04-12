@@ -179,7 +179,7 @@ resource "aws_instance" "airflow_webserver" {
     destination = "/tmp/custom_env"
 
     connection {
-      agent       = "false"
+      agent       = false
       type        = "ssh"
       user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
@@ -191,7 +191,7 @@ resource "aws_instance" "airflow_webserver" {
     destination = "/tmp/requirements.txt"
 
     connection {
-      agent       = "false"
+      agent       = false
       type        = "ssh"
       user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
@@ -203,7 +203,7 @@ resource "aws_instance" "airflow_webserver" {
     destination = "/tmp/airflow_environment"
 
     connection {
-      agent       = "false"
+      agent       = false
       type        = "ssh"
       user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
@@ -215,7 +215,7 @@ resource "aws_instance" "airflow_webserver" {
     destination = "/tmp/airflow.service"
 
     connection {
-      agent       = "false"
+      agent       = false
       type        = "ssh"
       user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
@@ -228,7 +228,7 @@ resource "aws_instance" "airflow_webserver" {
     ]
 
     connection {
-      agent       = "false"
+      agent       = false
       type        = "ssh"
       user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
@@ -268,7 +268,7 @@ resource "aws_instance" "airflow_scheduler" {
     destination = "/tmp/custom_env"
 
     connection {
-      agent       = "false"
+      agent       = false
       type        = "ssh"
       user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
@@ -280,7 +280,7 @@ resource "aws_instance" "airflow_scheduler" {
     destination = "/tmp/requirements.txt"
 
     connection {
-      agent       = "false"
+      agent       = false
       type        = "ssh"
       user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
@@ -292,7 +292,7 @@ resource "aws_instance" "airflow_scheduler" {
     destination = "/tmp/airflow_environment"
 
     connection {
-      agent       = "false"
+      agent       = false
       type        = "ssh"
       user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
@@ -304,7 +304,7 @@ resource "aws_instance" "airflow_scheduler" {
     destination = "/tmp/airflow.service"
 
     connection {
-      agent       = "false"
+      agent       = false
       type        = "ssh"
       user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
@@ -317,7 +317,7 @@ resource "aws_instance" "airflow_scheduler" {
     ]
 
     connection {
-      agent       = "false"
+      agent       = false
       type        = "ssh"
       user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
@@ -357,7 +357,7 @@ resource "aws_instance" "airflow_worker" {
     destination = "/tmp/custom_env"
 
     connection {
-      agent       = "false"
+      agent       = false
       type        = "ssh"
       user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
@@ -369,7 +369,7 @@ resource "aws_instance" "airflow_worker" {
     destination = "/tmp/requirements.txt"
 
     connection {
-      agent       = "false"
+      agent       = false
       type        = "ssh"
       user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
@@ -381,7 +381,7 @@ resource "aws_instance" "airflow_worker" {
     destination = "/tmp/airflow_environment"
 
     connection {
-      agent       = "false"
+      agent       = false
       type        = "ssh"
       user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
@@ -393,7 +393,7 @@ resource "aws_instance" "airflow_worker" {
     destination = "/tmp/airflow.service"
 
     connection {
-      agent       = "false"
+      agent       = false
       type        = "ssh"
       user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
@@ -406,7 +406,7 @@ resource "aws_instance" "airflow_worker" {
     ]
 
     connection {
-      agent       = "false"
+      agent       = false
       type        = "ssh"
       user        = "ubuntu"
       private_key = "${file(var.private_key_path)}"
