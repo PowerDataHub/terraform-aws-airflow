@@ -247,7 +247,7 @@ data "template_file" "custom_requirements" {
 }
 
 data "template_file" "airflow_environment" {
-  template = "${file("${path.module}/files/airflow.environment")}"
+  template = "${file("${path.module}/files/.env.airflow")}"
 
   vars = {
     AWS_REGION         = "${var.aws_region}"
