@@ -57,16 +57,18 @@ function install_python_and_python_packages() {
 	fi
 
     SLUGIFY_USES_TEXT_UNIDECODE=yes pip3 install -U \
-		Cython \
+		cython \
 		pytz \
-		pyOpenSSL \
+		pyopenssl \
 		ndg-httpsclient \
 		pyasn1 \
-		boto3 \
-		boto \
-		botocore \
-		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh]==1.10.2 \
-		celery[sqs]
+		flask-appbuilder \
+		apache-airflow[all]==1.10.2 \
+		celery[sqs] \
+		"redis>=2.10.5,<3"
+
+		sudo ln -sf /usr/bin/python3 /usr/bin/python
+		sudo ln -sf /usr/bin/pip3 /usr/bin/pip
 }
 
 function setup_airflow() {
@@ -75,7 +77,7 @@ function setup_airflow() {
 if [ "\$AIRFLOW_ROLE" == "SCHEDULER" ]
 then exec airflow scheduler -n 10
 elif [ "\$AIRFLOW_ROLE" == "WEBSERVER" ]
-then exec airflow webserver
+then exec airflow webserver && airflow flower
 elif [ "\$AIRFLOW_ROLE" == "WORKER" ]
 then exec airflow worker
 else echo "AIRFLOW_ROLE value unknown" && exit 1
