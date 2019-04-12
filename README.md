@@ -99,6 +99,7 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | spot\_price | The maximum hourly price to pay for EC2 Spot Instances. | string | `""` | no |
 | vpc\_id | The ID of the VPC in which the nodes will be deployed.  Uses default VPC if not supplied. | string | `""` | no |
 | webserver\_instance\_type | Instance type for the Airflow Webserver. | string | `"t3.micro"` | no |
+| webserver\_port | The port Airflow webserver will be listening. Ports below 1024 can be opened only with root privileges and the airflow process does not run as such. | string | `"8080"` | no |
 | worker\_instance\_count | Number of worker instances to create. | string | `"1"` | no |
 | worker\_instance\_type | Instance type for the Celery Worker. | string | `"t3.small"` | no |
 

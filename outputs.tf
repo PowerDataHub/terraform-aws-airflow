@@ -10,7 +10,7 @@ output "this_database_security_group_id" {
 
 output "webserver_admin_url" {
   description = "Url for the Airflow Webserver Admin"
-  value       = "http://${aws_instance.airflow_webserver.public_dns}:8080"
+  value       = "http://${aws_instance.airflow_webserver.public_dns}:${var.webserver_port}"
 }
 
 output "flower_url" {

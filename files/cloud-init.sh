@@ -63,7 +63,7 @@ function install_python_and_python_packages() {
 		ndg-httpsclient \
 		pyasn1 \
 		flask-appbuilder \
-		apache-airflow[all]==1.10.2 \
+		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh]==1.10.2 \
 		celery[sqs] \
 		"redis>=2.10.5,<3"
 

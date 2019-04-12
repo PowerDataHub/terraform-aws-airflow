@@ -140,6 +140,12 @@ variable "webserver_instance_type" {
   default     = "t3.micro"
 }
 
+variable "webserver_port" {
+  description = "The port Airflow webserver will be listening. Ports below 1024 can be opened only with root privileges and the airflow process does not run as such."
+  type        = "string"
+  default     = "8080"
+}
+
 variable "scheduler_instance_type" {
   description = "Instance type for the Airflow Scheduler."
   type        = "string"
@@ -267,7 +273,7 @@ data "template_file" "airflow_environment" {
     S3_BUCKET          = "${aws_s3_bucket.airflow_logs.id}"
 
     # WEBSERVER_HOST     = "${aws_instance.airflow_webserver.public_dns}"
-    WEBSERVER_PORT = "8080"
+    WEBSERVER_PORT = "${var.webserver_port}"
     QUEUE_NAME     = "${module.airflow_labels.id}-queue"
   }
 }
@@ -293,7 +299,7 @@ data "template_file" "provisioner" {
     S3_BUCKET          = "${aws_s3_bucket.airflow_logs.id}"
 
     # WEBSERVER_HOST     = "${aws_instance.airflow_webserver.public_dns}"
-    WEBSERVER_PORT = "8080"
+    WEBSERVER_PORT = "${var.webserver_port}"
     QUEUE_NAME     = "${module.airflow_labels.id}-queue"
   }
 }
