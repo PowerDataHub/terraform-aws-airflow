@@ -83,8 +83,8 @@ fi
 EOL
 
 	sudo chmod 755 /usr/bin/terraform-aws-airflow
-	sudo mkdir -p /var/log/airflow /etc/airflow /etc/airflow/dags /etc/airflow/plugins
-	sudo chmod -R 755 /etc/airflow
+	sudo mkdir -p /var/log/airflow /usr/local/airflow /usr/local/airflow/dags /usr/local/airflow/plugins
+	sudo chmod -R 755 /usr/local/airflow
 	sudo mkdir -p /etc/sysconfig/
 
 	cat /etc/environment | sudo tee -a /tmp/airflow_environment
@@ -105,7 +105,7 @@ EOL
 		airflow create_user -r Admin -u ${ADMIN_USERNAME} -f ${ADMIN_NAME} -l ${ADMIN_LASTNAME} -e ${ADMIN_EMAIL} -p ${ADMIN_PASSWORD}
 	fi
 
-	sudo chown -R ubuntu: /etc/airflow
+	sudo chown -R ubuntu: /usr/local/airflow
 
 	sudo systemctl enable airflow.service
 	sudo systemctl start airflow.service

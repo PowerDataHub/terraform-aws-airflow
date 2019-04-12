@@ -5,13 +5,13 @@
   - name: Copy dag files
     synchronize:
       src: ../dags/
-      dest: /etc/airflow/dags/
+      dest: /usr/local/airflow/dags/
       delete: yes
       recursive: yes
 
   - name: Copy plugins files
     synchronize:
       src: ../plugins/
-      dest: /etc/airflow/plugins/
+      dest: /usr/local/airflow/plugins/
       delete: yes
       recursive: yes
