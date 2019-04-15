@@ -157,7 +157,7 @@ module "sg_airflow" {
 resource "aws_instance" "airflow_webserver" {
   count = 1
 
-  instance_type          = "${var.scheduler_instance_type}"
+  instance_type          = "${var.webserver_instance_type}"
   ami                    = "${var.ami}"
   key_name               = "${aws_key_pair.auth.id}"
   vpc_security_group_ids = ["${module.sg_airflow.this_security_group_id}"]
