@@ -1,6 +1,6 @@
 # How to create a basic cluster passing a custom environment variables file
 
-To see how to configure airflow envs go to # see https://airflow.apache.org/howto/set-config.html
+To see how to configure airflow envs go to https://airflow.apache.org/howto/set-config.html
 
 > This envs will be appended and sourced by the airflow and OS system
 
