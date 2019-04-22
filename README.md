@@ -23,11 +23,11 @@ module "airflow-cluster" {
   
   # OPTIONALS
   vpc_id              = "some-vpc-id"                     # Use default if not provided  
-  custom_requirements = "path/to/custom/requirements.txt" # See [examples/custom_requirements](examples/custom_requirements)
-  custom_env          = "path/to/custom/env"              # See [examples/custom_env](examples/custom_env)
+  custom_requirements = "path/to/custom/requirements.txt" # See examples/custom_requirements for more details
+  custom_env          = "path/to/custom/env"              # See examples/custom_env for more details
   load_example_dags   = false
   load_default_conns  = false
-  rbac                = true
+  rbac                = true                              # See examples/rbac for more details
   admin_name          = "John"                            # Only if rbac is true
   admin_lastname      = "Doe"                             # Only if rbac is true
   admin_email         = "admin@admin.com"                 # Only if rbac is true
