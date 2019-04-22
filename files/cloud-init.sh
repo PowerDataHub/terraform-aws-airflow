@@ -8,6 +8,7 @@ function install_dependencies() {
 	sudo update-grub-legacy-ec2 -y
 
 	buildDeps=' \
+		freetds-dev \
 		libcurl4-openssl-dev \
 		libffi-dev \
 		libkrb5-dev \
@@ -18,7 +19,6 @@ function install_dependencies() {
 		libssl-dev \
 		libxml2-dev \
 		libxslt-dev \
-		freetds-dev \
         git \
     ' \
     sudo DEBIAN_FRONTEND=noninteractive apt-get update -yqq \
@@ -47,32 +47,31 @@ function install_dependencies() {
     && apt-get clean \
     && rm -rf \
         /var/lib/apt/lists/* \
-        /tmp/* \
-        /var/tmp/* \
         /usr/share/man \
         /usr/share/doc \
         /usr/share/doc-base
 }
 
 function install_python_and_python_packages() {
+	pip3 install -qU setuptools wheel --ignore-installed
 
-    PYCURL_SSL_LIBRARY=openssl pip3 install \
+	PYCURL_SSL_LIBRARY=openssl pip3 install \
       --no-cache-dir --compile --ignore-installed \
       pycurl
 
-	pip3 install -qU setuptools wheel --ignore-installed
 
 	if [ -e /tmp/requirements.txt ]; then
-		SLUGIFY_USES_TEXT_UNIDECODE=yes pip3 install -r /tmp/requirements.txt
+		pip3 install -r /tmp/requirements.txt
 	fi
 
-    SLUGIFY_USES_TEXT_UNIDECODE=yes pip3 install -U \
+    pip3 install -U \
 		cython \
 		pytz \
 		pyopenssl \
 		ndg-httpsclient \
 		pyasn1 \
 		flask-appbuilder \
+		psycopg2-binary \
 		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh]==1.10.3 \
 		celery[sqs] \
 		redis==3.2
