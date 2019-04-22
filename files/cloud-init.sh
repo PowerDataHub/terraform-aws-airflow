@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
-set -x
+set -ex
 
 function install_dependencies() {
 	sudo apt-get update
 	sudo rm /boot/grub/menu.lst
 	sudo update-grub-legacy-ec2 -y
-
     sudo DEBIAN_FRONTEND=noninteractive apt-get update -yqq \
 	&& sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -yqq \
     && sudo apt-get install -yqq --no-install-recommends \
 		apt-utils \
 		bzip2 \
 		curl \
+		freetds-dev \
 		git \
 		jq \
 		libcurl4-openssl-dev \
@@ -25,7 +25,6 @@ function install_dependencies() {
 		libssl-dev \
 		libxml2-dev \
 		libxslt-dev \
-		openssl \
 		postgresql-client \
 		python \
 		python3 \
@@ -33,42 +32,40 @@ function install_dependencies() {
 		python3-pip \
         build-essential \
         freetds-bin \
-        freetds-dev \
         locales \
         netcat \
         rsync \
     && sudo sed -i 's/^# en_US.UTF-8 UTF-8$/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
     && locale-gen \
-    && sudo update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
-	&& sudo apt autoremove --purge -y \
-	&& sudo apt-get autoclean -y
-}
+    && sudo update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 
 function install_python_and_python_packages() {
+	pip3 install -qU setuptools wheel --ignore-installed
 
-    PYCURL_SSL_LIBRARY=openssl pip3 install \
+	PYCURL_SSL_LIBRARY=openssl pip3 install \
       --no-cache-dir --compile --ignore-installed \
       pycurl
 
-	pip3 install -qU setuptools wheel --ignore-installed
 
 	if [ -e /tmp/requirements.txt ]; then
-		SLUGIFY_USES_TEXT_UNIDECODE=yes pip3 install -r /tmp/requirements.txt
+		pip3 install -r /tmp/requirements.txt
 	fi
 
-    SLUGIFY_USES_TEXT_UNIDECODE=yes pip3 install -U \
+    pip3 install -U \
 		cython \
 		pytz \
 		pyopenssl \
 		ndg-httpsclient \
 		pyasn1 \
 		flask-appbuilder \
-		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh]==1.10.2 \
+		psycopg2-binary \
+		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh]==1.10.3 \
 		celery[sqs] \
-		"redis>=2.10.5,<3"
+		redis==3.2
 
 		sudo ln -sf /usr/bin/python3 /usr/bin/python
 		sudo ln -sf /usr/bin/pip3 /usr/bin/pip
+	}
 }
 
 function setup_airflow() {
@@ -114,12 +111,23 @@ EOL
 	sudo systemctl status airflow.service
 }
 
+function cleanup() {
+	apt-get purge --auto-remove -yqq $buildDeps \
+	&& apt-get autoremove -yqq --purge \
+	&& apt-get clean \
+	&& rm -rf \
+		/var/lib/apt/lists/* \
+		/usr/share/man \
+		/usr/share/doc \
+		/usr/share/doc-base
+}
 
 START_TIME=$(date +%s)
 
 install_dependencies
 install_python_and_python_packages
 setup_airflow
+cleanup
 
 END_TIME=$(date +%s)
 ELAPSED=$(($END_TIME - $START_TIME))
