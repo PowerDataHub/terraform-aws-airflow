@@ -10,30 +10,30 @@ function install_dependencies() {
     sudo DEBIAN_FRONTEND=noninteractive apt-get update -yqq \
 	&& sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -yqq \
     && sudo apt-get install -yqq --no-install-recommends \
-        freetds-dev \
-		libkrb5-dev \
-		libsasl2-dev \
-		libffi-dev \
-		libpq-dev\
-		libxslt-dev \
-		libxml2-dev \
-		liblapack-dev \
+		apt-utils \
 		bzip2 \
 		curl \
 		git \
 		jq \
 		libcurl4-openssl-dev \
+		libffi-dev \
+		libkrb5-dev \
+		liblapack-dev \
+		libpq-dev \
+		libpq5 \
+		libsasl2-dev \
 		libssl-dev \
+		libxml2-dev \
+		libxslt-dev \
 		openssl \
 		postgresql-client \
 		python \
 		python3 \
-		python3-pip \
 		python3-dev \
-        apt-utils \
+		python3-pip \
         build-essential \
-        curl \
         freetds-bin \
+        freetds-dev \
         locales \
         netcat \
         rsync \
