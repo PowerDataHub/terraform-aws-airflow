@@ -1,5 +1,4 @@
 # Define AWS as our provider
 provider "aws" {
-  region  = "${var.aws_region}"
-  version = "~> 1.9"
+  region = "${var.aws_region}"
 }
