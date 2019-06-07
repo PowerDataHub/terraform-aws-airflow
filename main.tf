@@ -157,12 +157,13 @@ module "sg_airflow" {
 # EC2
 #-------------------------------------------------------------------------
 resource "aws_instance" "airflow_webserver" {
+  count = 1
+
   instance_type = "${var.webserver_instance_type}"
   ami = "${var.ami}"
   key_name = "${aws_key_pair.auth.id}"
   vpc_security_group_ids = ["${module.sg_airflow.this_security_group_id}"]
-  subnet_id = "${tolist(data.aws_subnet_ids.selected.ids)[0]}"
-  availability_zone = "${tolist(var.azs)[0]}"
+  subnet_id = "${tolist(data.aws_subnet_ids.selected.ids)[count.index]}"
   iam_instance_profile = "${module.ami_instance_profile.instance_profile_name}"
 
   associate_public_ip_address = true
@@ -250,12 +251,13 @@ resource "aws_instance" "airflow_webserver" {
 }
 
 resource "aws_instance" "airflow_scheduler" {
+  count = 1
+
   instance_type = "${var.scheduler_instance_type}"
   ami = "${var.ami}"
   key_name = "${aws_key_pair.auth.id}"
   vpc_security_group_ids = ["${module.sg_airflow.this_security_group_id}"]
-  subnet_id = "${tolist(data.aws_subnet_ids.selected.ids)[0]}"
-  availability_zone = "${tolist(var.azs)[0]}"
+  subnet_id = "${tolist(data.aws_subnet_ids.selected.ids)[count.index]}"
   iam_instance_profile = "${module.ami_instance_profile.instance_profile_name}"
 
   associate_public_ip_address = true
@@ -350,7 +352,6 @@ resource "aws_instance" "airflow_worker" {
   key_name = "${aws_key_pair.auth.id}"
   vpc_security_group_ids = ["${module.sg_airflow.this_security_group_id}"]
   subnet_id = "${tolist(data.aws_subnet_ids.selected.ids)[count.index]}"
-  availability_zone = "${tolist(var.azs)[0]}"
   iam_instance_profile = "${module.ami_instance_profile.instance_profile_name}"
 
   associate_public_ip_address = true
