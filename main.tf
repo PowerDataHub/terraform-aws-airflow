@@ -163,7 +163,7 @@ resource "aws_instance" "airflow_webserver" {
   ami = "${var.ami}"
   key_name = "${aws_key_pair.auth.id}"
   vpc_security_group_ids = ["${module.sg_airflow.this_security_group_id}"]
-  subnet_id = "${element(data.aws_subnet_ids.selected.ids, 0)}"
+  subnet_id = "${tolist(data.aws_subnet_ids.selected.ids)[count.index]}"
   iam_instance_profile = "${module.ami_instance_profile.instance_profile_name}"
 
   associate_public_ip_address = true
@@ -181,6 +181,7 @@ resource "aws_instance" "airflow_webserver" {
     destination = "/tmp/custom_env"
 
     connection {
+      host = "${self.public_ip}"
       agent = false
       type = "ssh"
       user = "ubuntu"
@@ -193,6 +194,7 @@ resource "aws_instance" "airflow_webserver" {
     destination = "/tmp/requirements.txt"
 
     connection {
+      host = "${self.public_ip}"
       agent = false
       type = "ssh"
       user = "ubuntu"
@@ -205,6 +207,7 @@ resource "aws_instance" "airflow_webserver" {
     destination = "/tmp/airflow_environment"
 
     connection {
+      host = "${self.public_ip}"
       agent = false
       type = "ssh"
       user = "ubuntu"
@@ -217,6 +220,7 @@ resource "aws_instance" "airflow_webserver" {
     destination = "/tmp/airflow.service"
 
     connection {
+      host = "${self.public_ip}"
       agent = false
       type = "ssh"
       user = "ubuntu"
@@ -230,6 +234,7 @@ resource "aws_instance" "airflow_webserver" {
     ]
 
     connection {
+      host = "${self.public_ip}"
       agent = false
       type = "ssh"
       user = "ubuntu"
@@ -252,7 +257,7 @@ resource "aws_instance" "airflow_scheduler" {
   ami = "${var.ami}"
   key_name = "${aws_key_pair.auth.id}"
   vpc_security_group_ids = ["${module.sg_airflow.this_security_group_id}"]
-  subnet_id = "${element(data.aws_subnet_ids.selected.ids, 0)}"
+  subnet_id = "${tolist(data.aws_subnet_ids.selected.ids)[count.index]}"
   iam_instance_profile = "${module.ami_instance_profile.instance_profile_name}"
 
   associate_public_ip_address = true
@@ -270,6 +275,7 @@ resource "aws_instance" "airflow_scheduler" {
     destination = "/tmp/custom_env"
 
     connection {
+      host = "${self.public_ip}"
       agent = false
       type = "ssh"
       user = "ubuntu"
@@ -282,6 +288,7 @@ resource "aws_instance" "airflow_scheduler" {
     destination = "/tmp/requirements.txt"
 
     connection {
+      host = "${self.public_ip}"
       agent = false
       type = "ssh"
       user = "ubuntu"
@@ -294,6 +301,7 @@ resource "aws_instance" "airflow_scheduler" {
     destination = "/tmp/airflow_environment"
 
     connection {
+      host = "${self.public_ip}"
       agent = false
       type = "ssh"
       user = "ubuntu"
@@ -306,6 +314,7 @@ resource "aws_instance" "airflow_scheduler" {
     destination = "/tmp/airflow.service"
 
     connection {
+      host = "${self.public_ip}"
       agent = false
       type = "ssh"
       user = "ubuntu"
@@ -319,6 +328,7 @@ resource "aws_instance" "airflow_scheduler" {
     ]
 
     connection {
+      host = "${self.public_ip}"
       agent = false
       type = "ssh"
       user = "ubuntu"
@@ -341,7 +351,7 @@ resource "aws_instance" "airflow_worker" {
   ami = "${var.ami}"
   key_name = "${aws_key_pair.auth.id}"
   vpc_security_group_ids = ["${module.sg_airflow.this_security_group_id}"]
-  subnet_id = "${element(data.aws_subnet_ids.selected.ids, 0)}"
+  subnet_id = "${tolist(data.aws_subnet_ids.selected.ids)[count.index]}"
   iam_instance_profile = "${module.ami_instance_profile.instance_profile_name}"
 
   associate_public_ip_address = true
@@ -359,6 +369,7 @@ resource "aws_instance" "airflow_worker" {
     destination = "/tmp/custom_env"
 
     connection {
+      host = "${self.public_ip}"
       agent = false
       type = "ssh"
       user = "ubuntu"
@@ -371,6 +382,7 @@ resource "aws_instance" "airflow_worker" {
     destination = "/tmp/requirements.txt"
 
     connection {
+      host = "${self.public_ip}"
       agent = false
       type = "ssh"
       user = "ubuntu"
@@ -383,6 +395,7 @@ resource "aws_instance" "airflow_worker" {
     destination = "/tmp/airflow_environment"
 
     connection {
+      host = "${self.public_ip}"
       agent = false
       type = "ssh"
       user = "ubuntu"
@@ -395,6 +408,7 @@ resource "aws_instance" "airflow_worker" {
     destination = "/tmp/airflow.service"
 
     connection {
+      host = "${self.public_ip}"
       agent = false
       type = "ssh"
       user = "ubuntu"
@@ -408,6 +422,7 @@ resource "aws_instance" "airflow_worker" {
     ]
 
     connection {
+      host = "${self.public_ip}"
       agent = false
       type = "ssh"
       user = "ubuntu"

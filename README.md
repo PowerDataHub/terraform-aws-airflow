@@ -110,7 +110,6 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 |------|-------------|
 | database\_endpoint | Endpoint to connect to RDS metadata DB |
 | database\_username | Username to connect to RDS metadata DB |
-| flower\_url | Url for the Flower Admin |
 | this\_cluster\_security\_group\_id | The ID of the security group |
 | this\_database\_security\_group\_id | The ID of the security group |
 | webserver\_admin\_url | Url for the Airflow Webserver Admin |
