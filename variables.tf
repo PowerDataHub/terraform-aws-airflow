@@ -134,6 +134,12 @@ variable "s3_bucket_name" {
 # EC2 #
 #######
 
+variable "azs" {
+  description = "Run the EC2 Instances in these Availability Zones"
+  type        = "list"
+  default     = ["us-east-1a", "us-east-1b", "us-east-1c"]
+}
+
 variable "webserver_instance_type" {
   description = "Instance type for the Airflow Webserver."
   type        = "string"
