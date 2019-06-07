@@ -81,11 +81,12 @@ resource "aws_sqs_queue" "airflow_queue" {
 # ---------------------------------------
 
 module "ami_instance_profile" {
-  source       = "github.com/traveloka/terraform-aws-iam-role.git//modules/instance"
-  service_name = "${module.airflow_labels.namespace}"
-  cluster_role = "${module.airflow_labels.stage}"
-  environment  = "${module.airflow_labels.stage}"
-  role_tags    = "${module.airflow_labels.tags}"
+  source         = "github.com/traveloka/terraform-aws-iam-role.git//modules/instance"
+  service_name   = "${module.airflow_labels.namespace}"
+  cluster_role   = "${module.airflow_labels.stage}"
+  environment    = "${module.airflow_labels.stage}"
+  product_domain = "${module.airflow_labels.stage}"
+  role_tags      = "${module.airflow_labels.tags}"
 }
 
 resource "aws_iam_role_policy_attachment" "s3_policy" {
