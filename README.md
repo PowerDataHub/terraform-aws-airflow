@@ -75,7 +75,7 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | admin\_username | Admin username used to authenticate. Only If RBAC is enabled, this user will be created in the first run only. | string | `"admin"` | no |
 | ami | Default is `Ubuntu Server 18.04 LTS (HVM), SSD Volume Type.` | string | `"ami-0a313d6098716f372"` | no |
 | aws\_region | AWS Region | string | `"us-east-1"` | no |
-| azs | Run the EC2 Instances in these Availability Zones | list | `[ "us-east-1a", "us-east-1b", "us-east-1c" ]` | no |
+| azs | Run the EC2 Instances in these Availability Zones | map | `{ "1": "us-east-1a", "2": "us-east-1b", "3": "us-east-1c", "4": "us-east-1d" }` | no |
 | cluster\_name | The name of the Airflow cluster (e.g. airflow-xyz). This variable is used to namespace all resources created by this module. | string | n/a | yes |
 | cluster\_stage | The stage of the Airflow cluster (e.g. prod). | string | `"dev"` | no |
 | custom\_env | Path to custom airflow environments variables. | string | `""` | no |

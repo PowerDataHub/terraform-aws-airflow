@@ -136,8 +136,13 @@ variable "s3_bucket_name" {
 
 variable "azs" {
   description = "Run the EC2 Instances in these Availability Zones"
-  type        = "list"
-  default     = ["us-east-1a", "us-east-1b", "us-east-1c"]
+  type        = "map"
+  default = {
+    "1" = "us-east-1a",
+    "2" = "us-east-1b",
+    "3" = "us-east-1c",
+    "4" = "us-east-1d"
+  }
 }
 
 variable "webserver_instance_type" {
