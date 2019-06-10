@@ -61,7 +61,7 @@ function install_python_and_python_packages() {
 		psycopg2-binary \
 		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh]==1.10.3 \
 		celery[sqs] \
-		redis==3.2
+		redis
 
 		sudo ln -sf /usr/bin/python3 /usr/bin/python
 		sudo ln -sf /usr/bin/pip3 /usr/bin/pip
@@ -94,13 +94,13 @@ EOL
 
 	source /etc/environment
 
-	if [ "$AIRFLOW__CORE__LOAD_DEFAULTS" = 0 ]; then
+	if [ "$AIRFLOW__CORE__LOAD_DEFAULTS" = false ]; then
 		airflow upgradedb
 	else
 		airflow initdb
 	fi
 
-	if [ "$AIRFLOW__WEBSERVER__RBAC" = 1 ]; then
+	if [ "$AIRFLOW__WEBSERVER__RBAC" = true ]; then
 		airflow create_user -r Admin -u ${ADMIN_USERNAME} -f ${ADMIN_NAME} -l ${ADMIN_LASTNAME} -e ${ADMIN_EMAIL} -p ${ADMIN_PASSWORD}
 	fi
 
