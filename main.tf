@@ -67,11 +67,8 @@ resource "aws_s3_bucket" "airflow_logs" {
 # ---------------------------------------
 
 resource "aws_sqs_queue" "airflow_queue" {
-  name                      = "${module.airflow_labels.id}-queue"
-  delay_seconds             = 90
-  max_message_size          = 2048
-  message_retention_seconds = 86400
-  receive_wait_time_seconds = 10
+  name             = "${module.airflow_labels.id}-queue"
+  max_message_size = 262144
 
   tags = "${module.airflow_labels.tags}"
 }
