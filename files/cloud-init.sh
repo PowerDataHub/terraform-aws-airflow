@@ -60,6 +60,7 @@ function install_python_and_python_packages() {
 		flask-appbuilder \
 		psycopg2-binary \
 		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh]==1.10.3 \
+		billiard==3.5.0.4 \
 		celery[sqs] \
 		redis
 
