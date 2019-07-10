@@ -61,7 +61,8 @@ function install_python_and_python_packages() {
 		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh]==1.10.3 \
 		billiard==3.5.0.4 \
 		celery[sqs] \
-		redis
+		redis \
+		werkzeug>=0.15.0
 
 		sudo ln -sf /usr/bin/python3 /usr/bin/python
 		sudo ln -sf /usr/bin/pip3 /usr/bin/pip
