@@ -1,5 +1,5 @@
 workflow "Terraform" {
-  resolves = "terraform-plan"
+  resolves = "terraform-validate"
   on = "pull_request"
 }
 
