@@ -2,16 +2,21 @@
 - hosts: all
   become: True
   tasks:
-  - name: Copy dag files
-    synchronize:
-      src: ../dags/
-      dest: /usr/local/airflow/dags/
-      delete: yes
-      recursive: yes
+    - name: Copy dag files
+      synchronize:
+        src: ../../dags/
+        dest: /usr/local/airflow/dags/
+        delete: yes
+        recursive: yes
 
-  - name: Copy plugins files
-    synchronize:
-      src: ../plugins/
-      dest: /usr/local/airflow/plugins/
-      delete: yes
-      recursive: yes
+    - name: Copy plugins files
+      synchronize:
+        src: ../../plugins/
+        dest: /usr/local/airflow/plugins/
+        delete: yes
+        recursive: yes
+
+    - name: Restart service airflow, in all cases
+      service:
+        name: airflow
+        state: restarted

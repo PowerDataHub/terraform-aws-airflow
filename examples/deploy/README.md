@@ -1,4 +1,4 @@
-# How to create a basic cluster and deploy some DAGs
+# How to create a basic cluster and deploy some DAGs and plugins
 
 Configuration in this directory creates a airflow cluster including EC2 instances, DB instance, SQS queue and S3 bucket.
 
