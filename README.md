@@ -5,12 +5,12 @@ Terraform module to deploy an [Apache Airflow](https://airflow.apache.org/) clus
 
 <img src="https://raw.githubusercontent.com/PowerDataHub/terraform-aws-airflow/master/terraform-aws-airflow.png?raw" align="center" width="100%" />
 
-Terraform supported versions:
+### Terraform supported versions:
 
 | Terraform version | Tag  | 
 |-------------------|------|
-| 0.11              | v0.7.x|
-| 0.12              | v0.8.x|
+| <= 0.11              | v0.7.x|
+| >= 0.12              | v0.8.x|
 
 ## Usage
 
