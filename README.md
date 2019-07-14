@@ -5,6 +5,13 @@ Terraform module to deploy an [Apache Airflow](https://airflow.apache.org/) clus
 
 <img src="https://raw.githubusercontent.com/PowerDataHub/terraform-aws-airflow/master/terraform-aws-airflow.png?raw" align="center" width="100%" />
 
+Terraform supported versions:
+
+| Terraform version | Tag  | 
+|-------------------|------|
+| 0.11              | v0.7.x|
+| 0.12              | v0.8.x|
+
 ## Usage
 
 You can use this module from the [Terraform Registry](https://registry.terraform.io/modules/powerdatahub/airflow/aws/)
