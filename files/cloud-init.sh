@@ -102,7 +102,7 @@ EOL
 	fi
 
 	if [ "$AIRFLOW__WEBSERVER__RBAC" = true ]; then
-		airflow create_user -r Admin -u ${ADMIN_USERNAME} -f ${ADMIN_NAME} -l ${ADMIN_LASTNAME} -e ${ADMIN_EMAIL} -p ${ADMIN_PASSWORD}
+		airflow create_user -r Admin -u "${ADMIN_USERNAME}" -f "${ADMIN_NAME}" -l "${ADMIN_LASTNAME}" -e "${ADMIN_EMAIL}" -p "${ADMIN_PASSWORD}"
 	fi
 
 	sudo chown -R ubuntu: /usr/local/airflow
