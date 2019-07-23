@@ -89,8 +89,10 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | db\_dbname | PostgreSQL database name. | string | `"airflow"` | no |
 | db\_instance\_type | Instance type for PostgreSQL database | string | `"db.t2.micro"` | no |
 | db\_password | PostgreSQL password. | string | n/a | yes |
+| db\_subnet\_group\_name | db subnet group, if assigned, db will create in that subnet, default create in default vpc | string | `""` | no |
 | db\_username | PostgreSQL username. | string | `"airflow"` | no |
 | fernet\_key | Key for encrypting data in the database - see Airflow docs. | string | n/a | yes |
+| instance\_subnet\_id | subnet id used for ec2 instances running airflow, if not defined, vpc's first element in subnetlist will be used | string | `""` | no |
 | key\_name | AWS KeyPair name. | string | n/a | yes |
 | load\_default\_conns | Load the default connections initialized by Airflow. Most consider these unnecessary, which is why the default is to not load them. | string | `"false"` | no |
 | load\_example\_dags | Load the example DAGs distributed with Airflow. Useful if deploying a stack for demonstrating a few topologies, operators and scheduling strategies. | string | `"false"` | no |
