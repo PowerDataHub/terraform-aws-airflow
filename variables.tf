@@ -145,6 +145,12 @@ variable "azs" {
   }
 }
 
+variable "instance_subnet_id" {
+  description = "subnet id used for ec2 instances running airflow, if not defined, vpc's first element in subnetlist will be used"
+  type        = "string"
+  default     = ""
+}
+
 variable "webserver_instance_type" {
   description = "Instance type for the Airflow Webserver."
   type        = "string"
@@ -231,6 +237,12 @@ variable "db_allocated_storage" {
   description = "Dabatase disk size."
   type        = "string"
   default     = 20
+}
+
+variable "db_subnet_group_name" {
+  description = "db subnet group, if assigned, db will create in that subnet, default create in default vpc"
+  type        = "string"
+  default     = ""
 }
 
 #------------------------------------------------------------

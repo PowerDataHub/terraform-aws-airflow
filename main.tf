@@ -160,7 +160,7 @@ resource "aws_instance" "airflow_webserver" {
   ami = "${var.ami}"
   key_name = "${aws_key_pair.auth.id}"
   vpc_security_group_ids = ["${module.sg_airflow.this_security_group_id}"]
-  subnet_id = "${tolist(data.aws_subnet_ids.selected.ids)[count.index]}"
+  subnet_id = coalesce("${var.instance_subnet_id}", "${tolist(data.aws_subnet_ids.selected.ids)[count.index]}")
   iam_instance_profile = "${module.ami_instance_profile.instance_profile_name}"
 
   associate_public_ip_address = true
@@ -254,7 +254,7 @@ resource "aws_instance" "airflow_scheduler" {
   ami = "${var.ami}"
   key_name = "${aws_key_pair.auth.id}"
   vpc_security_group_ids = ["${module.sg_airflow.this_security_group_id}"]
-  subnet_id = "${tolist(data.aws_subnet_ids.selected.ids)[count.index]}"
+  subnet_id = coalesce("${var.instance_subnet_id}", "${tolist(data.aws_subnet_ids.selected.ids)[count.index]}")
   iam_instance_profile = "${module.ami_instance_profile.instance_profile_name}"
 
   associate_public_ip_address = true
@@ -348,7 +348,7 @@ resource "aws_instance" "airflow_worker" {
   ami = "${var.ami}"
   key_name = "${aws_key_pair.auth.id}"
   vpc_security_group_ids = ["${module.sg_airflow.this_security_group_id}"]
-  subnet_id = "${tolist(data.aws_subnet_ids.selected.ids)[count.index]}"
+  subnet_id = coalesce("${var.instance_subnet_id}", "${tolist(data.aws_subnet_ids.selected.ids)[count.index]}")
   iam_instance_profile = "${module.ami_instance_profile.instance_profile_name}"
 
   associate_public_ip_address = true
@@ -481,4 +481,5 @@ resource "aws_db_instance" "airflow_database" {
   skip_final_snapshot = true
   vpc_security_group_ids = ["${module.sg_database.this_security_group_id}"]
   port = "5432"
+  db_subnet_group_name = "${var.db_subnet_group_name}"
 }
