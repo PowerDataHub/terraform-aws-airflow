@@ -84,6 +84,11 @@ variable "load_default_conns" {
   default     = false
 }
 
+variable "tags" {
+  description = "Additional tags used into terraform-terraform-labels module."
+  type = "map"
+}
+
 variable "rbac" {
   description = "Enable support for Role-Based Access Control (RBAC)."
   type        = "string"
