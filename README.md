@@ -30,6 +30,10 @@ module "airflow-cluster" {
   vpc_id              = "some-vpc-id"                     # Use default if not provided  
   custom_requirements = "path/to/custom/requirements.txt" # See examples/custom_requirements for more details
   custom_env          = "path/to/custom/env"              # See examples/custom_env for more details
+  tags = {
+    FirstKey          = "first-value"                     # Additional tags to use on resources
+    SecondKey         = "second-value"
+  }
   load_example_dags   = false
   load_default_conns  = false
   rbac                = true                              # See examples/rbac for more details
