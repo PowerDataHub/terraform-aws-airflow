@@ -18,4 +18,8 @@ module "airflow_cluster" {
   key_name          = "airflow-example-deploy-key"
   vpc_id            = "${data.aws_vpc.default.id}"
   load_example_dags = false
+  tags = {
+    Role            = "airflow-infrastructure"
+    Team            = "AI Labs"
+  }
 }
