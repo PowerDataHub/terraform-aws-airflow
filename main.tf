@@ -82,7 +82,7 @@ resource "aws_sqs_queue" "airflow_queue" {
 # ---------------------------------------
 
 module "ami_instance_profile" {
-  source         = "github.com/traveloka/terraform-aws-iam-role.git//modules/instance"
+  source         = "git::https://github.com/traveloka/terraform-aws-iam-role//modules/instance?ref=tags/v1.0.1"
   service_name   = "${module.airflow_labels.namespace}"
   cluster_role   = "${module.airflow_labels.stage}"
   environment    = "${module.airflow_labels.stage}"
@@ -126,6 +126,7 @@ POLICY
 
 module "sg_airflow" {
   source = "terraform-aws-modules/security-group/aws"
+  version = "3.1.0"
   name = "${module.airflow_labels.id}-sg"
   description = "Security group for ${module.airflow_labels.id} machines"
   vpc_id = "${data.aws_vpc.default.id}"
