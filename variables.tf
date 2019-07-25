@@ -82,7 +82,7 @@ variable "load_default_conns" {
 
 variable "tags" {
   description = "Additional tags used into terraform-terraform-labels module."
-  type = "map"
+  type        = "map"
 }
 
 variable "rbac" {

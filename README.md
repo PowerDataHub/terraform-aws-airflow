@@ -110,6 +110,7 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | s3\_bucket\_name | S3 Bucket to save airflow logs. | string | `""` | no |
 | scheduler\_instance\_type | Instance type for the Airflow Scheduler. | string | `"t3.micro"` | no |
 | spot\_price | The maximum hourly price to pay for EC2 Spot Instances. | string | `""` | no |
+| tags | Additional tags used into terraform-terraform-labels module. | map | n/a | yes |
 | vpc\_id | The ID of the VPC in which the nodes will be deployed.  Uses default VPC if not supplied. | string | `""` | no |
 | webserver\_instance\_type | Instance type for the Airflow Webserver. | string | `"t3.micro"` | no |
 | webserver\_port | The port Airflow webserver will be listening. Ports below 1024 can be opened only with root privileges and the airflow process does not run as such. | string | `"8080"` | no |
