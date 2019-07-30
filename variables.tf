@@ -105,6 +105,7 @@ variable "ingress_with_cidr_blocks" {
 variable "tags" {
   description = "Additional tags used into terraform-terraform-labels module."
   type        = "map"
+  default     = {}
 }
 
 variable "rbac" {
