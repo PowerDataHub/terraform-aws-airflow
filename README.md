@@ -19,29 +19,46 @@ You can use this module from the [Terraform Registry](https://registry.terraform
 ```terraform
 module "airflow-cluster" {
   # REQUIRED
-  source              = "powerdatahub/airflow/aws"
-  key_name            = "airflow-key"
-  cluster_name        = "my-airflow"
-  cluster_stage       = "prod" # Default is 'dev'
-  db_password         = "your-rds-master-password"
-  fernet_key          = "your-fernet-key" # see https://airflow.readthedocs.io/en/stable/howto/secure-connections.html
+  source                   = "powerdatahub/airflow/aws"
+  key_name                 = "airflow-key"
+  cluster_name             = "my-airflow"
+  cluster_stage            = "prod" # Default is 'dev'
+  db_password              = "your-rds-master-password"
+  fernet_key               = "your-fernet-key" # see https://airflow.readthedocs.io/en/stable/howto/secure-connections.html
   
   # OPTIONALS
-  vpc_id              = "some-vpc-id"                     # Use default if not provided  
-  custom_requirements = "path/to/custom/requirements.txt" # See examples/custom_requirements for more details
-  custom_env          = "path/to/custom/env"              # See examples/custom_env for more details
-  tags = {
-    FirstKey          = "first-value"                     # Additional tags to use on resources
-    SecondKey         = "second-value"
+  vpc_id                   = "some-vpc-id"                     # Use default if not provided  
+  custom_requirements      = "path/to/custom/requirements.txt" # See examples/custom_requirements for more details
+  custom_env               = "path/to/custom/env"              # See examples/custom_env for more details
+  ingress_cidr_blocks      = ["0.0.0.0/0"]                     # List of IPv4 CIDR ranges to use on all ingress rules
+  ingress_with_cidr_blocks = [                                 # List of computed ingress rules to create where 'cidr_blocks' is used
+    {
+      description = "List of computed ingress rules for Airflow webserver"
+      from_port   = 8080
+      to_port     = 8080
+      protocol    = "tcp"
+      cidr_blocks = "0.0.0.0/0"
+    },
+    {
+      description = "List of computed ingress rules for Airflow flower"
+      from_port   = 5555
+      to_port     = 5555
+      protocol    = "tcp"
+      cidr_blocks = "0.0.0.0/0"
+    }
+  ]
+  tags                     = {
+    FirstKey  = "first-value"                                  # Additional tags to use on resources
+    SecondKey = "second-value"
   }
-  load_example_dags   = false
-  load_default_conns  = false
-  rbac                = true                              # See examples/rbac for more details
-  admin_name          = "John"                            # Only if rbac is true
-  admin_lastname      = "Doe"                             # Only if rbac is true
-  admin_email         = "admin@admin.com"                 # Only if rbac is true
-  admin_username      = "admin"                           # Only if rbac is true
-  admin_password      = "supersecretpassword"             # Only if rbac is true
+  load_example_dags        = false
+  load_default_conns       = false
+  rbac                     = true                              # See examples/rbac for more details
+  admin_name               = "John"                            # Only if rbac is true
+  admin_lastname           = "Doe"                             # Only if rbac is true
+  admin_email              = "admin@admin.com"                 # Only if rbac is true
+  admin_username           = "admin"                           # Only if rbac is true
+  admin_password           = "supersecretpassword"             # Only if rbac is true
 }
 ```
 
