@@ -80,6 +80,33 @@ variable "load_default_conns" {
   default     = false
 }
 
+variable "ingress_cidr_blocks" {
+  description = "List of IPv4 CIDR ranges to use on all ingress rules"
+  type        = "list"
+  default     = ["0.0.0.0/0"]
+}
+
+variable "ingress_with_cidr_blocks" {
+  description = "List of computed ingress rules to create where 'cidr_blocks' is used"
+  type        = "list"
+  default     = [
+    {
+      description = "Airflow webserver"
+      from_port   = 8080
+      to_port     = 8080
+      protocol    = "tcp"
+      cidr_blocks = "0.0.0.0/0"
+    },
+    {
+      description = "Airflow flower"
+      from_port   = 5555
+      to_port     = 5555
+      protocol    = "tcp"
+      cidr_blocks = "0.0.0.0/0"
+    }
+  ]
+}
+
 variable "tags" {
   description = "Additional tags used into terraform-terraform-labels module."
   type        = "map"

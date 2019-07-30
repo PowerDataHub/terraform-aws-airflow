@@ -130,28 +130,10 @@ module "sg_airflow" {
   name = "${module.airflow_labels.id}-sg"
   description = "Security group for ${module.airflow_labels.id} machines"
   vpc_id = "${data.aws_vpc.default.id}"
-  ingress_cidr_blocks = ["0.0.0.0/0"]
+  ingress_cidr_blocks = "${var.ingress_cidr_blocks}"
   ingress_rules = ["http-80-tcp", "https-443-tcp", "ssh-tcp"]
-
-  ingress_with_cidr_blocks = [
-    {
-      from_port = 8080
-      to_port = 8080
-      protocol = "tcp"
-      description = "${module.airflow_labels.id} webserver"
-      cidr_blocks = "0.0.0.0/0"
-    },
-    {
-      from_port = 5555
-      to_port = 5555
-      protocol = "tcp"
-      description = "${module.airflow_labels.id} flower"
-      cidr_blocks = "0.0.0.0/0"
-    },
-  ]
-
+  ingress_with_cidr_blocks = "${var.ingress_with_cidr_blocks}"
   egress_rules = ["all-all"]
-
   tags = "${module.airflow_labels.tags}"
 }
 
@@ -453,19 +435,15 @@ module "sg_database" {
   name = "${module.airflow_labels.id}-database-sg"
   description = "Security group for ${module.airflow_labels.id} database"
   vpc_id = "${data.aws_vpc.default.id}"
-
-  ingress_cidr_blocks = ["0.0.0.0/0"]
-
+  ingress_cidr_blocks = "${var.ingress_cidr_blocks}"
   number_of_computed_ingress_with_source_security_group_id = 1
-
   computed_ingress_with_source_security_group_id = [
     {
       rule = "postgresql-tcp"
       source_security_group_id = "${module.sg_airflow.this_security_group_id}"
       description = "Allow ${module.airflow_labels.id} machines"
-    },
+    }
   ]
-
   tags = "${module.airflow_labels.tags}"
 }
 
