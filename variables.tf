@@ -1,8 +1,3 @@
-# ---------------------------------------------------------------------------------------------------------------------
-# ENVIRONMENT VARIABLES
-# Define these secrets as environment variables
-# ---------------------------------------------------------------------------------------------------------------------
-
 ###########
 # Globals #
 ###########
@@ -89,7 +84,7 @@ variable "ingress_cidr_blocks" {
 variable "ingress_with_cidr_blocks" {
   description = "List of computed ingress rules to create where 'cidr_blocks' is used"
   type        = "list"
-  default     = [
+  default = [
     {
       description = "Airflow webserver"
       from_port   = 8080

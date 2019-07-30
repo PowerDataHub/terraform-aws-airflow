@@ -113,6 +113,8 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | db\_subnet\_group\_name | db subnet group, if assigned, db will create in that subnet, default create in default vpc | string | `""` | no |
 | db\_username | PostgreSQL username. | string | `"airflow"` | no |
 | fernet\_key | Key for encrypting data in the database - see Airflow docs. | string | n/a | yes |
+| ingress\_cidr\_blocks | List of IPv4 CIDR ranges to use on all ingress rules | list | `[ "0.0.0.0/0" ]` | no |
+| ingress\_with\_cidr\_blocks | List of computed ingress rules to create where 'cidr_blocks' is used | list | `[ { "cidr_blocks": "0.0.0.0/0", "description": "Airflow webserver", "from_port": 8080, "protocol": "tcp", "to_port": 8080 }, { "cidr_blocks": "0.0.0.0/0", "description": "Airflow flower", "from_port": 5555, "protocol": "tcp", "to_port": 5555 } ]` | no |
 | instance\_subnet\_id | subnet id used for ec2 instances running airflow, if not defined, vpc's first element in subnetlist will be used | string | `""` | no |
 | key\_name | AWS KeyPair name. | string | n/a | yes |
 | load\_default\_conns | Load the default connections initialized by Airflow. Most consider these unnecessary, which is why the default is to not load them. | string | `"false"` | no |
