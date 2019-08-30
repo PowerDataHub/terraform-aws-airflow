@@ -58,11 +58,9 @@ function install_python_and_python_packages() {
 		ndg-httpsclient \
 		pyasn1 \
 		psycopg2-binary \
-		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh]==1.10.3 \
-		billiard==3.5.0.4 \
-		celery[sqs] \
-		redis \
-		werkzeug>=0.15.0
+		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh]==1.10.4 \
+		celery[sqs]==4.3.0 \
+		redis
 
 		sudo ln -sf /usr/bin/python3 /usr/bin/python
 		sudo ln -sf /usr/bin/pip3 /usr/bin/pip
