@@ -10,7 +10,7 @@ Terraform module to deploy an [Apache Airflow](https://airflow.apache.org/) clus
 | Terraform version | Tag  | 
 |-------------------|------|
 | <= 0.11              | v0.7.x|
-| >= 0.12              | v0.8.x|
+| >= 0.12              | >= v0.8.x|
 
 ## Usage
 
