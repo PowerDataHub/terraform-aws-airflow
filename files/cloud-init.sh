@@ -58,7 +58,7 @@ function install_python_and_python_packages() {
 		ndg-httpsclient \
 		pyasn1 \
 		psycopg2-binary \
-		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh]==1.10.4 \
+		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh]==1.10.5 \
 		celery[sqs]==4.3.0 \
 		redis
 
