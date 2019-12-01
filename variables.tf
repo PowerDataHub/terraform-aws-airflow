@@ -83,7 +83,13 @@ variable "ingress_cidr_blocks" {
 
 variable "ingress_with_cidr_blocks" {
   description = "List of computed ingress rules to create where 'cidr_blocks' is used"
-  type        = list(string)
+  type = list(object({
+    description = string
+    from_port   = number
+    to_port     = number
+    protocol    = string
+    cidr_blocks = string
+  }))
   default = [
     {
       description = "Airflow webserver"
@@ -352,4 +358,3 @@ data "template_file" "provisioner" {
     QUEUE_NAME     = "${module.airflow_labels.id}-queue"
   }
 }
-
