@@ -101,7 +101,7 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | admin\_username | Admin username used to authenticate. Only If RBAC is enabled, this user will be created in the first run only. | string | `"admin"` | no |
 | ami | Default is `Ubuntu Server 18.04 LTS (HVM), SSD Volume Type.` | string | `"ami-0a313d6098716f372"` | no |
 | aws\_region | AWS Region | string | `"us-east-1"` | no |
-| azs | Run the EC2 Instances in these Availability Zones | map | `{ "1": "us-east-1a", "2": "us-east-1b", "3": "us-east-1c", "4": "us-east-1d" }` | no |
+| azs | Run the EC2 Instances in these Availability Zones | map(string) | `{ "1": "us-east-1a", "2": "us-east-1b", "3": "us-east-1c", "4": "us-east-1d" }` | no |
 | cluster\_name | The name of the Airflow cluster (e.g. airflow-xyz). This variable is used to namespace all resources created by this module. | string | n/a | yes |
 | cluster\_stage | The stage of the Airflow cluster (e.g. prod). | string | `"dev"` | no |
 | custom\_env | Path to custom airflow environments variables. | string | `""` | no |
@@ -113,8 +113,8 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | db\_subnet\_group\_name | db subnet group, if assigned, db will create in that subnet, default create in default vpc | string | `""` | no |
 | db\_username | PostgreSQL username. | string | `"airflow"` | no |
 | fernet\_key | Key for encrypting data in the database - see Airflow docs. | string | n/a | yes |
-| ingress\_cidr\_blocks | List of IPv4 CIDR ranges to use on all ingress rules | list | `[ "0.0.0.0/0" ]` | no |
-| ingress\_with\_cidr\_blocks | List of computed ingress rules to create where 'cidr_blocks' is used | list | `[ { "cidr_blocks": "0.0.0.0/0", "description": "Airflow webserver", "from_port": 8080, "protocol": "tcp", "to_port": 8080 }, { "cidr_blocks": "0.0.0.0/0", "description": "Airflow flower", "from_port": 5555, "protocol": "tcp", "to_port": 5555 } ]` | no |
+| ingress\_cidr\_blocks | List of IPv4 CIDR ranges to use on all ingress rules | list(string) | `[ "0.0.0.0/0" ]` | no |
+| ingress\_with\_cidr\_blocks | List of computed ingress rules to create where 'cidr_blocks' is used | list(string) | `[ { "cidr_blocks": "0.0.0.0/0", "description": "Airflow webserver", "from_port": 8080, "protocol": "tcp", "to_port": 8080 }, { "cidr_blocks": "0.0.0.0/0", "description": "Airflow flower", "from_port": 5555, "protocol": "tcp", "to_port": 5555 } ]` | no |
 | instance\_subnet\_id | subnet id used for ec2 instances running airflow, if not defined, vpc's first element in subnetlist will be used | string | `""` | no |
 | key\_name | AWS KeyPair name. | string | n/a | yes |
 | load\_default\_conns | Load the default connections initialized by Airflow. Most consider these unnecessary, which is why the default is to not load them. | string | `"false"` | no |
@@ -129,7 +129,7 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | s3\_bucket\_name | S3 Bucket to save airflow logs. | string | `""` | no |
 | scheduler\_instance\_type | Instance type for the Airflow Scheduler. | string | `"t3.micro"` | no |
 | spot\_price | The maximum hourly price to pay for EC2 Spot Instances. | string | `""` | no |
-| tags | Additional tags used into terraform-terraform-labels module. | map | `{}` | no |
+| tags | Additional tags used into terraform-terraform-labels module. | map(string) | `{}` | no |
 | vpc\_id | The ID of the VPC in which the nodes will be deployed.  Uses default VPC if not supplied. | string | `""` | no |
 | webserver\_instance\_type | Instance type for the Airflow Webserver. | string | `"t3.micro"` | no |
 | webserver\_port | The port Airflow webserver will be listening. Ports below 1024 can be opened only with root privileges and the airflow process does not run as such. | string | `"8080"` | no |
