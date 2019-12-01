@@ -1,4 +1,4 @@
-[![Maintained by Powerdatahub.com](https://img.shields.io/badge/maintained%20by-powerdatahub.com-%233D4DFE.svg?style=for-the-badge)](https://powerdatahub.com/?ref=repo_aws_airflow) [![Apache Airflow 1.10.4](https://img.shields.io/badge/Apache%20Airflow-1.10.4-3D4DFE.svg?style=for-the-badge)](https://github.com/apache/airflow/)
+[![Maintained by Powerdatahub.com](https://img.shields.io/badge/maintained%20by-powerdatahub.com-%233D4DFE.svg?style=for-the-badge)](https://powerdatahub.com/?ref=repo_aws_airflow) [![Apache Airflow 1.10.5](https://img.shields.io/badge/Apache%20Airflow-1.10.5-3D4DFE.svg?style=for-the-badge)](https://github.com/apache/airflow/)
 
 # Airflow AWS Module
 Terraform module to deploy an [Apache Airflow](https://airflow.apache.org/) cluster on AWS, backed by RDS PostgreSQL for metadata, [S3](https://aws.amazon.com/s3/) for logs and [SQS](https://aws.amazon.com/sqs/) as message broker with CeleryExecutor
