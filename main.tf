@@ -113,7 +113,7 @@ resource "aws_instance" "airflow_webserver" {
   # brackets to avoid interpretation as a list of lists. If the expression
   # returns a single list item then leave it as-is and remove this TODO comment.
   vpc_security_group_ids = [module.sg_airflow.this_security_group_id]
-  subnet_id              = var.instance_subnet_id
+  subnet_id              = coalesce("${var.instance_subnet_id}", tolist(data.aws_subnet_ids.all.ids)[count.index])
   iam_instance_profile   = module.ami_instance_profile.instance_profile_name
 
   associate_public_ip_address = true
@@ -215,7 +215,7 @@ resource "aws_instance" "airflow_scheduler" {
   # brackets to avoid interpretation as a list of lists. If the expression
   # returns a single list item then leave it as-is and remove this TODO comment.
   vpc_security_group_ids = [module.sg_airflow.this_security_group_id]
-  subnet_id              = var.instance_subnet_id
+  subnet_id              = coalesce("${var.instance_subnet_id}", tolist(data.aws_subnet_ids.all.ids)[count.index])
   iam_instance_profile   = module.ami_instance_profile.instance_profile_name
 
   associate_public_ip_address = true
@@ -317,7 +317,7 @@ resource "aws_instance" "airflow_worker" {
   # brackets to avoid interpretation as a list of lists. If the expression
   # returns a single list item then leave it as-is and remove this TODO comment.
   vpc_security_group_ids = [module.sg_airflow.this_security_group_id]
-  subnet_id              = var.instance_subnet_id
+  subnet_id              = coalesce("${var.instance_subnet_id}", tolist(data.aws_subnet_ids.all.ids)[count.index])
   iam_instance_profile   = module.ami_instance_profile.instance_profile_name
 
   associate_public_ip_address = true
