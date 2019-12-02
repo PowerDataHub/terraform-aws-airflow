@@ -138,4 +138,4 @@ cleanup
 END_TIME=$(date +%s)
 ELAPSED=$(($END_TIME - $START_TIME))
 
-echo "Deployment complete. Time elapsed was [$ELAPSED] seconds"
+echo "Deployment complete. Time elapsed: [$ELAPSED] seconds"
