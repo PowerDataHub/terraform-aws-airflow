@@ -55,10 +55,14 @@ function install_python_and_python_packages() {
 		cython \
 		pytz \
 		pyopenssl \
+		pendulum \
+		boto3 \
 		ndg-httpsclient \
 		pyasn1 \
 		psycopg2-binary \
-		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh]==1.10.6 \
+		pydruid \
+		wheel \
+		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh,sentry]==1.10.6 \
 		celery[sqs]==4.3.0 \
 		redis
 
