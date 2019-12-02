@@ -64,9 +64,10 @@ function install_python_and_python_packages() {
 		pyopenssl \
 		pytz \
 		redis \
-		wheel \
+		wheel
 
-		update-alternatives --install /usr/bin/python python /usr/bin/python3 10
+	sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 10
+
 	}
 }
 
