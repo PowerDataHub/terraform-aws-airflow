@@ -101,17 +101,9 @@ module "sg_airflow" {
 resource "aws_instance" "airflow_webserver" {
   count = 1
 
-  instance_type = var.webserver_instance_type
-  ami           = var.ami
-  key_name      = aws_key_pair.auth.id
-  # TF-UPGRADE-TODO: In Terraform v0.10 and earlier, it was sometimes necessary to
-  # force an interpolation expression to be interpreted as a list by wrapping it
-  # in an extra set of list brackets. That form was supported for compatibility in
-  # v0.11, but is no longer supported in Terraform v0.12.
-  #
-  # If the expression in the following list itself returns a list, remove the
-  # brackets to avoid interpretation as a list of lists. If the expression
-  # returns a single list item then leave it as-is and remove this TODO comment.
+  instance_type          = var.webserver_instance_type
+  ami                    = var.ami
+  key_name               = aws_key_pair.auth.id
   vpc_security_group_ids = [module.sg_airflow.this_security_group_id]
   subnet_id              = coalesce("${var.instance_subnet_id}", tolist(data.aws_subnet_ids.all.ids)[0])
   iam_instance_profile   = module.ami_instance_profile.instance_profile_name
@@ -203,17 +195,9 @@ resource "aws_instance" "airflow_webserver" {
 resource "aws_instance" "airflow_scheduler" {
   count = 1
 
-  instance_type = var.scheduler_instance_type
-  ami           = var.ami
-  key_name      = aws_key_pair.auth.id
-  # TF-UPGRADE-TODO: In Terraform v0.10 and earlier, it was sometimes necessary to
-  # force an interpolation expression to be interpreted as a list by wrapping it
-  # in an extra set of list brackets. That form was supported for compatibility in
-  # v0.11, but is no longer supported in Terraform v0.12.
-  #
-  # If the expression in the following list itself returns a list, remove the
-  # brackets to avoid interpretation as a list of lists. If the expression
-  # returns a single list item then leave it as-is and remove this TODO comment.
+  instance_type          = var.scheduler_instance_type
+  ami                    = var.ami
+  key_name               = aws_key_pair.auth.id
   vpc_security_group_ids = [module.sg_airflow.this_security_group_id]
   subnet_id              = coalesce("${var.instance_subnet_id}", tolist(data.aws_subnet_ids.all.ids)[0])
   iam_instance_profile   = module.ami_instance_profile.instance_profile_name
@@ -305,17 +289,9 @@ resource "aws_instance" "airflow_scheduler" {
 resource "aws_instance" "airflow_worker" {
   count = var.worker_instance_count
 
-  instance_type = var.worker_instance_type
-  ami           = var.ami
-  key_name      = aws_key_pair.auth.id
-  # TF-UPGRADE-TODO: In Terraform v0.10 and earlier, it was sometimes necessary to
-  # force an interpolation expression to be interpreted as a list by wrapping it
-  # in an extra set of list brackets. That form was supported for compatibility in
-  # v0.11, but is no longer supported in Terraform v0.12.
-  #
-  # If the expression in the following list itself returns a list, remove the
-  # brackets to avoid interpretation as a list of lists. If the expression
-  # returns a single list item then leave it as-is and remove this TODO comment.
+  instance_type          = var.worker_instance_type
+  ami                    = var.ami
+  key_name               = aws_key_pair.auth.id
   vpc_security_group_ids = [module.sg_airflow.this_security_group_id]
   subnet_id              = coalesce("${var.instance_subnet_id}", tolist(data.aws_subnet_ids.all.ids)[0])
   iam_instance_profile   = module.ami_instance_profile.instance_profile_name
@@ -445,15 +421,7 @@ resource "aws_db_instance" "airflow_database" {
   publicly_accessible     = false
   apply_immediately       = true
   skip_final_snapshot     = true
-  # TF-UPGRADE-TODO: In Terraform v0.10 and earlier, it was sometimes necessary to
-  # force an interpolation expression to be interpreted as a list by wrapping it
-  # in an extra set of list brackets. That form was supported for compatibility in
-  # v0.11, but is no longer supported in Terraform v0.12.
-  #
-  # If the expression in the following list itself returns a list, remove the
-  # brackets to avoid interpretation as a list of lists. If the expression
-  # returns a single list item then leave it as-is and remove this TODO comment.
-  vpc_security_group_ids = [module.sg_database.this_security_group_id]
-  port                   = "5432"
-  db_subnet_group_name   = var.db_subnet_group_name
+  vpc_security_group_ids  = [module.sg_database.this_security_group_id]
+  port                    = "5432"
+  db_subnet_group_name    = var.db_subnet_group_name
 }

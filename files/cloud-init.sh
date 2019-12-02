@@ -66,8 +66,7 @@ function install_python_and_python_packages() {
 		redis \
 		wheel \
 
-		sudo ln -sf /usr/bin/python3 /usr/bin/python
-		sudo ln -sf /usr/bin/pip3 /usr/bin/pip
+		update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 	}
 }
 
@@ -98,9 +97,13 @@ EOL
 	source /etc/environment
 
 	if [ "$AIRFLOW__CORE__LOAD_DEFAULTS" = false ]; then
-		airflow upgradedb
+		if [ "$AIRFLOW_ROLE" == "WEBSERVER" ]
+			airflow upgradedb
+		fi
 	else
-		airflow initdb
+		if [ "$AIRFLOW_ROLE" == "WEBSERVER" ]
+			airflow initdb
+		fi
 	fi
 
 	if [ "$AIRFLOW__WEBSERVER__RBAC" = true ]; then
