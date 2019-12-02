@@ -57,7 +57,6 @@ function install_python_and_python_packages() {
 		celery[sqs]==4.3.0 \
 		cython \
 		ndg-httpsclient \
-		pendulum \
 		psycopg2-binary \
 		pyasn1 \
 		pydruid \
