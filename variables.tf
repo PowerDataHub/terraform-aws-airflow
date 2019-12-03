@@ -225,7 +225,7 @@ variable "root_volume_ebs_optimized" {
 variable "root_volume_type" {
   description = "The type of volume. Must be one of: standard, gp2, or io1."
   type        = string
-  default     = "standard"
+  default     = "gp2"
 }
 
 variable "root_volume_size" {
