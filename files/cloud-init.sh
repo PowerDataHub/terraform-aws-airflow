@@ -76,9 +76,7 @@ function setup_airflow() {
 if [ "\$AIRFLOW_ROLE" == "SCHEDULER" ]
 then exec airflow scheduler -n 10
 elif [ "\$AIRFLOW_ROLE" == "WEBSERVER" ]; then
-	exec airflow webserver -D
-    exec airflow scheduler -D -n 10
-
+	exec airflow webserver
 elif [ "\$AIRFLOW_ROLE" == "WORKER" ]
 then exec airflow worker
 else echo "AIRFLOW_ROLE value unknown" && exit 1
