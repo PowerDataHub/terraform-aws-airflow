@@ -119,13 +119,14 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | key\_name | AWS KeyPair name. | string | n/a | yes |
 | load\_default\_conns | Load the default connections initialized by Airflow. Most consider these unnecessary, which is why the default is to not load them. | string | `"false"` | no |
 | load\_example\_dags | Load the example DAGs distributed with Airflow. Useful if deploying a stack for demonstrating a few topologies, operators and scheduling strategies. | string | `"false"` | no |
+| private\_key | Enter the content of the SSH Private Key to run provisioner. | string | `""` | no |
 | private\_key\_path | Enter the path to the SSH Private Key to run provisioner. | string | `"~/.ssh/id_rsa"` | no |
 | public\_key\_path | Enter the path to the SSH Public Key to add to AWS. | string | `"~/.ssh/id_rsa.pub"` | no |
 | rbac | Enable support for Role-Based Access Control (RBAC). | string | `"false"` | no |
 | root\_volume\_delete\_on\_termination | Whether the volume should be destroyed on instance termination. | string | `"true"` | no |
 | root\_volume\_ebs\_optimized | If true, the launched EC2 instance will be EBS-optimized. | string | `"false"` | no |
 | root\_volume\_size | The size, in GB, of the root EBS volume. | string | `"35"` | no |
-| root\_volume\_type | The type of volume. Must be one of: standard, gp2, or io1. | string | `"standard"` | no |
+| root\_volume\_type | The type of volume. Must be one of: standard, gp2, or io1. | string | `"gp2"` | no |
 | s3\_bucket\_name | S3 Bucket to save airflow logs. | string | `""` | no |
 | scheduler\_instance\_type | Instance type for the Airflow Scheduler. | string | `"t3.micro"` | no |
 | spot\_price | The maximum hourly price to pay for EC2 Spot Instances. | string | `""` | no |
