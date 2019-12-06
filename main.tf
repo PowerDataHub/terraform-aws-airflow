@@ -127,7 +127,7 @@ resource "aws_instance" "airflow_webserver" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = file(var.private_key_path)
+      private_key = coalesce(var.private_key, file(var.private_key_path))
     }
   }
 
@@ -140,7 +140,7 @@ resource "aws_instance" "airflow_webserver" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = file(var.private_key_path)
+      private_key = coalesce(var.private_key, file(var.private_key_path))
     }
   }
 
@@ -153,7 +153,7 @@ resource "aws_instance" "airflow_webserver" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = file(var.private_key_path)
+      private_key = coalesce(var.private_key, file(var.private_key_path))
     }
   }
 
@@ -166,7 +166,7 @@ resource "aws_instance" "airflow_webserver" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = file(var.private_key_path)
+      private_key = coalesce(var.private_key, file(var.private_key_path))
     }
   }
 
@@ -180,7 +180,7 @@ resource "aws_instance" "airflow_webserver" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = file(var.private_key_path)
+      private_key = coalesce(var.private_key, file(var.private_key_path))
     }
   }
 
@@ -234,7 +234,7 @@ resource "aws_instance" "airflow_scheduler" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = file(var.private_key_path)
+      private_key = coalesce(var.private_key, file(var.private_key_path))
     }
   }
 
@@ -247,7 +247,7 @@ resource "aws_instance" "airflow_scheduler" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = file(var.private_key_path)
+      private_key = coalesce(var.private_key, file(var.private_key_path))
     }
   }
 
@@ -260,7 +260,7 @@ resource "aws_instance" "airflow_scheduler" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = file(var.private_key_path)
+      private_key = coalesce(var.private_key, file(var.private_key_path))
     }
   }
 
@@ -274,7 +274,7 @@ resource "aws_instance" "airflow_scheduler" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = file(var.private_key_path)
+      private_key = coalesce(var.private_key, file(var.private_key_path))
     }
   }
 
@@ -315,7 +315,7 @@ resource "aws_instance" "airflow_worker" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = file(var.private_key_path)
+      private_key = coalesce(var.private_key, file(var.private_key_path))
     }
   }
 
@@ -328,7 +328,7 @@ resource "aws_instance" "airflow_worker" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = file(var.private_key_path)
+      private_key = coalesce(var.private_key, file(var.private_key_path))
     }
   }
 
@@ -341,7 +341,7 @@ resource "aws_instance" "airflow_worker" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = file(var.private_key_path)
+      private_key = coalesce(var.private_key, file(var.private_key_path))
     }
   }
 
@@ -354,7 +354,7 @@ resource "aws_instance" "airflow_worker" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = file(var.private_key_path)
+      private_key = coalesce(var.private_key, file(var.private_key_path))
     }
   }
 
@@ -368,7 +368,7 @@ resource "aws_instance" "airflow_worker" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = file(var.private_key_path)
+      private_key = coalesce(var.private_key, file(var.private_key_path))
     }
   }
 
