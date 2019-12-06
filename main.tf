@@ -7,7 +7,7 @@
 # ---------------------------------------
 
 resource "aws_key_pair" "auth" {
-  key_name   = coalesce(var.key_name, module.airflow_labels.id)
+  key_name   = var.key_name
   public_key = coalesce(var.public_key, file(var.public_key_path))
 }
 
@@ -127,7 +127,7 @@ resource "aws_instance" "airflow_webserver" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = coalesce(var.private_key, file(var.private_key_path))
+      private_key = var.private_key
     }
   }
 
@@ -140,7 +140,7 @@ resource "aws_instance" "airflow_webserver" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = coalesce(var.private_key, file(var.private_key_path))
+      private_key = var.private_key
     }
   }
 
@@ -153,7 +153,7 @@ resource "aws_instance" "airflow_webserver" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = coalesce(var.private_key, file(var.private_key_path))
+      private_key = var.private_key
     }
   }
 
@@ -166,7 +166,7 @@ resource "aws_instance" "airflow_webserver" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = coalesce(var.private_key, file(var.private_key_path))
+      private_key = var.private_key
     }
   }
 
@@ -180,7 +180,7 @@ resource "aws_instance" "airflow_webserver" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = coalesce(var.private_key, file(var.private_key_path))
+      private_key = var.private_key
     }
   }
 
@@ -234,7 +234,7 @@ resource "aws_instance" "airflow_scheduler" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = coalesce(var.private_key, file(var.private_key_path))
+      private_key = var.private_key
     }
   }
 
@@ -247,7 +247,7 @@ resource "aws_instance" "airflow_scheduler" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = coalesce(var.private_key, file(var.private_key_path))
+      private_key = var.private_key
     }
   }
 
@@ -260,7 +260,7 @@ resource "aws_instance" "airflow_scheduler" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = coalesce(var.private_key, file(var.private_key_path))
+      private_key = var.private_key
     }
   }
 
@@ -274,7 +274,7 @@ resource "aws_instance" "airflow_scheduler" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = coalesce(var.private_key, file(var.private_key_path))
+      private_key = var.private_key
     }
   }
 
@@ -315,7 +315,7 @@ resource "aws_instance" "airflow_worker" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = coalesce(var.private_key, file(var.private_key_path))
+      private_key = var.private_key
     }
   }
 
@@ -328,7 +328,7 @@ resource "aws_instance" "airflow_worker" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = coalesce(var.private_key, file(var.private_key_path))
+      private_key = var.private_key
     }
   }
 
@@ -341,7 +341,7 @@ resource "aws_instance" "airflow_worker" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = coalesce(var.private_key, file(var.private_key_path))
+      private_key = var.private_key
     }
   }
 
@@ -354,7 +354,7 @@ resource "aws_instance" "airflow_worker" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = coalesce(var.private_key, file(var.private_key_path))
+      private_key = var.private_key
     }
   }
 
@@ -368,7 +368,7 @@ resource "aws_instance" "airflow_worker" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = coalesce(var.private_key, file(var.private_key_path))
+      private_key = var.private_key
     }
   }
 
