@@ -33,21 +33,25 @@ variable "key_name" {
 
 variable "private_key" {
   description = "Enter the content of the SSH Private Key to run provisioner."
+  type        = string
   default     = null
 }
 
 variable "public_key" {
   description = "Enter the content of the SSH Public Key to run provisioner."
+  type        = string
   default     = null
 }
 
 variable "private_key_path" {
   description = "Enter the path to the SSH Private Key to run provisioner."
+  type        = string
   default     = "~/.ssh/id_rsa"
 }
 
 variable "public_key_path" {
   description = "Enter the path to the SSH Public Key to add to AWS."
+  type        = string
   default     = "~/.ssh/id_rsa.pub"
 }
 
@@ -76,13 +80,13 @@ variable "custom_env" {
 
 variable "load_example_dags" {
   description = "Load the example DAGs distributed with Airflow. Useful if deploying a stack for demonstrating a few topologies, operators and scheduling strategies."
-  type        = string
+  type        = bool
   default     = false
 }
 
 variable "load_default_conns" {
   description = "Load the default connections initialized by Airflow. Most consider these unnecessary, which is why the default is to not load them."
-  type        = string
+  type        = bool
   default     = false
 }
 
@@ -127,7 +131,7 @@ variable "tags" {
 
 variable "rbac" {
   description = "Enable support for Role-Based Access Control (RBAC)."
-  type        = string
+  type        = bool
   default     = false
 }
 
@@ -157,7 +161,7 @@ variable "admin_username" {
 
 variable "admin_password" {
   description = "Admin password. Only If RBAC is enabled."
-  type        = string
+  type        = bool
   default     = false
 }
 
@@ -229,7 +233,7 @@ variable "spot_price" {
 
 variable "root_volume_ebs_optimized" {
   description = "If true, the launched EC2 instance will be EBS-optimized."
-  type        = string
+  type        = bool
   default     = false
 }
 

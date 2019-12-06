@@ -97,7 +97,7 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | admin\_email | Admin email. Only If RBAC is enabled, this user will be created in the first run only. | string | `"admin@admin.com"` | no |
 | admin\_lastname | Admin lastname. Only If RBAC is enabled, this user will be created in the first run only. | string | `"Doe"` | no |
 | admin\_name | Admin name. Only If RBAC is enabled, this user will be created in the first run only. | string | `"John"` | no |
-| admin\_password | Admin password. Only If RBAC is enabled. | string | `"false"` | no |
+| admin\_password | Admin password. Only If RBAC is enabled. | bool | `"false"` | no |
 | admin\_username | Admin username used to authenticate. Only If RBAC is enabled, this user will be created in the first run only. | string | `"admin"` | no |
 | ami | Default is `Ubuntu Server 18.04 LTS (HVM), SSD Volume Type.` | string | `"ami-0a313d6098716f372"` | no |
 | aws\_region | AWS Region | string | `"us-east-1"` | no |
@@ -117,15 +117,15 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | ingress\_with\_cidr\_blocks | List of computed ingress rules to create where 'cidr_blocks' is used | object | `[ { "cidr_blocks": "0.0.0.0/0", "description": "Airflow webserver", "from_port": 8080, "protocol": "tcp", "to_port": 8080 }, { "cidr_blocks": "0.0.0.0/0", "description": "Airflow flower", "from_port": 5555, "protocol": "tcp", "to_port": 5555 } ]` | no |
 | instance\_subnet\_id | subnet id used for ec2 instances running airflow, if not defined, vpc's first element in subnetlist will be used | string | `""` | no |
 | key\_name | AWS KeyPair name. | string | `"null"` | no |
-| load\_default\_conns | Load the default connections initialized by Airflow. Most consider these unnecessary, which is why the default is to not load them. | string | `"false"` | no |
-| load\_example\_dags | Load the example DAGs distributed with Airflow. Useful if deploying a stack for demonstrating a few topologies, operators and scheduling strategies. | string | `"false"` | no |
+| load\_default\_conns | Load the default connections initialized by Airflow. Most consider these unnecessary, which is why the default is to not load them. | bool | `"false"` | no |
+| load\_example\_dags | Load the example DAGs distributed with Airflow. Useful if deploying a stack for demonstrating a few topologies, operators and scheduling strategies. | bool | `"false"` | no |
 | private\_key | Enter the content of the SSH Private Key to run provisioner. | string | `"null"` | no |
 | private\_key\_path | Enter the path to the SSH Private Key to run provisioner. | string | `"~/.ssh/id_rsa"` | no |
 | public\_key | Enter the content of the SSH Public Key to run provisioner. | string | `"null"` | no |
 | public\_key\_path | Enter the path to the SSH Public Key to add to AWS. | string | `"~/.ssh/id_rsa.pub"` | no |
-| rbac | Enable support for Role-Based Access Control (RBAC). | string | `"false"` | no |
+| rbac | Enable support for Role-Based Access Control (RBAC). | bool | `"false"` | no |
 | root\_volume\_delete\_on\_termination | Whether the volume should be destroyed on instance termination. | string | `"true"` | no |
-| root\_volume\_ebs\_optimized | If true, the launched EC2 instance will be EBS-optimized. | string | `"false"` | no |
+| root\_volume\_ebs\_optimized | If true, the launched EC2 instance will be EBS-optimized. | bool | `"false"` | no |
 | root\_volume\_size | The size, in GB, of the root EBS volume. | string | `"35"` | no |
 | root\_volume\_type | The type of volume. Must be one of: standard, gp2, or io1. | string | `"gp2"` | no |
 | s3\_bucket\_name | S3 Bucket to save airflow logs. | string | `""` | no |
