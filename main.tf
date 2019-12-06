@@ -221,7 +221,7 @@ resource "aws_instance" "airflow_scheduler" {
       agent       = false
       type        = "ssh"
       user        = "ubuntu"
-      private_key = file(var.private_key_path)
+      private_key = var.private_key_path
     }
   }
 
