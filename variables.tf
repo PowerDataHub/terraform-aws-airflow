@@ -28,6 +28,7 @@ variable "aws_region" {
 variable "key_name" {
   description = "AWS KeyPair name."
   type        = string
+  default     = null
 }
 
 variable "private_key" {

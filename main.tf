@@ -7,7 +7,7 @@
 # ---------------------------------------
 
 resource "aws_key_pair" "auth" {
-  key_name   = var.key_name != "" ? var.key_name : module.airflow_labels.id
+  key_name   = coalesce(var.key_name, module.airflow_labels.id)
   public_key = coalesce(var.public_key, file(var.public_key_path))
 }
 
