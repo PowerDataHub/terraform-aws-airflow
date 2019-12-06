@@ -30,6 +30,11 @@ variable "key_name" {
   type        = string
 }
 
+variable "private_key" {
+  description = "Enter the content of the SSH Private Key to run provisioner."
+  default     = ""
+}
+
 variable "private_key_path" {
   description = "Enter the path to the SSH Private Key to run provisioner."
   default     = "~/.ssh/id_rsa"
