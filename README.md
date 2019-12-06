@@ -7,7 +7,7 @@ Terraform module to deploy an [Apache Airflow](https://airflow.apache.org/) clus
 
 ### Terraform supported versions:
 
-| Terraform version | Tag  | 
+| Terraform version | Tag  |
 |-------------------|------|
 | <= 0.11              | v0.7.x|
 | >= 0.12              | >= v0.8.x|
@@ -25,7 +25,7 @@ module "airflow-cluster" {
   cluster_stage            = "prod" # Default is 'dev'
   db_password              = "your-rds-master-password"
   fernet_key               = "your-fernet-key" # see https://airflow.readthedocs.io/en/stable/howto/secure-connections.html
-  
+
   # OPTIONALS
   vpc_id                   = "some-vpc-id"                     # Use default if not provided  
   custom_requirements      = "path/to/custom/requirements.txt" # See examples/custom_requirements for more details
@@ -76,7 +76,7 @@ The Airflow service runs under systemd, so logs are available through journalctl
 - [x] RBAC
 - [ ] Support for [Google OAUTH ](https://airflow.readthedocs.io/en/latest/security.html#google-authentication)
 - [x] Flower
-- [ ] Secure Flower install 
+- [ ] Secure Flower install
 - [x] Provide a way to inject environment variables into airflow
 - [ ] Split services into multiples files
 - [ ] Auto Scalling for workers
@@ -104,8 +104,8 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | azs | Run the EC2 Instances in these Availability Zones | map(string) | `{ "1": "us-east-1a", "2": "us-east-1b", "3": "us-east-1c", "4": "us-east-1d" }` | no |
 | cluster\_name | The name of the Airflow cluster (e.g. airflow-xyz). This variable is used to namespace all resources created by this module. | string | n/a | yes |
 | cluster\_stage | The stage of the Airflow cluster (e.g. prod). | string | `"dev"` | no |
-| custom\_env | Path to custom airflow environments variables. | string | `""` | no |
-| custom\_requirements | Path to custom requirements.txt. | string | `""` | no |
+| custom\_env | Path to custom airflow environments variables. | string | `"null"` | no |
+| custom\_requirements | Path to custom requirements.txt. | string | `"null"` | no |
 | db\_allocated\_storage | Dabatase disk size. | string | `"20"` | no |
 | db\_dbname | PostgreSQL database name. | string | `"airflow"` | no |
 | db\_instance\_type | Instance type for PostgreSQL database | string | `"db.t2.micro"` | no |
@@ -131,7 +131,7 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | scheduler\_instance\_type | Instance type for the Airflow Scheduler. | string | `"t3.micro"` | no |
 | spot\_price | The maximum hourly price to pay for EC2 Spot Instances. | string | `""` | no |
 | tags | Additional tags used into terraform-terraform-labels module. | map(string) | `{}` | no |
-| vpc\_id | The ID of the VPC in which the nodes will be deployed.  Uses default VPC if not supplied. | string | `""` | no |
+| vpc\_id | The ID of the VPC in which the nodes will be deployed.  Uses default VPC if not supplied. | string | `"null"` | no |
 | webserver\_instance\_type | Instance type for the Airflow Webserver. | string | `"t3.micro"` | no |
 | webserver\_port | The port Airflow webserver will be listening. Ports below 1024 can be opened only with root privileges and the airflow process does not run as such. | string | `"8080"` | no |
 | worker\_instance\_count | Number of worker instances to create. | string | `"1"` | no |

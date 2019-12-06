@@ -32,7 +32,7 @@ variable "key_name" {
 
 variable "private_key" {
   description = "Enter the content of the SSH Private Key to run provisioner."
-  default     = "null"
+  default     = null
 }
 
 variable "private_key_path" {
@@ -48,7 +48,7 @@ variable "public_key_path" {
 variable "vpc_id" {
   description = "The ID of the VPC in which the nodes will be deployed.  Uses default VPC if not supplied."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "fernet_key" {
@@ -59,13 +59,13 @@ variable "fernet_key" {
 variable "custom_requirements" {
   description = "Path to custom requirements.txt."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "custom_env" {
   description = "Path to custom airflow environments variables."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "load_example_dags" {
