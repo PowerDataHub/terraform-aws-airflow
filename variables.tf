@@ -32,7 +32,7 @@ variable "key_name" {
 
 variable "private_key" {
   description = "Enter the content of the SSH Private Key to run provisioner."
-  default     = ""
+  default     = "null"
 }
 
 variable "private_key_path" {
