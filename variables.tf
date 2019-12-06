@@ -35,6 +35,11 @@ variable "private_key" {
   default     = null
 }
 
+variable "public_key" {
+  description = "Enter the content of the SSH Public Key to run provisioner."
+  default     = null
+}
+
 variable "private_key_path" {
   description = "Enter the path to the SSH Private Key to run provisioner."
   default     = "~/.ssh/id_rsa"

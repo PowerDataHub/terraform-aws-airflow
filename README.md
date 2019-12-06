@@ -121,6 +121,7 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | load\_example\_dags | Load the example DAGs distributed with Airflow. Useful if deploying a stack for demonstrating a few topologies, operators and scheduling strategies. | string | `"false"` | no |
 | private\_key | Enter the content of the SSH Private Key to run provisioner. | string | `"null"` | no |
 | private\_key\_path | Enter the path to the SSH Private Key to run provisioner. | string | `"~/.ssh/id_rsa"` | no |
+| public\_key | Enter the content of the SSH Public Key to run provisioner. | string | `"null"` | no |
 | public\_key\_path | Enter the path to the SSH Public Key to add to AWS. | string | `"~/.ssh/id_rsa.pub"` | no |
 | rbac | Enable support for Role-Based Access Control (RBAC). | string | `"false"` | no |
 | root\_volume\_delete\_on\_termination | Whether the volume should be destroyed on instance termination. | string | `"true"` | no |
