@@ -18,6 +18,7 @@ module "airflow_cluster" {
   key_name       = "airflow-example-rbac-key"
   vpc_id         = "${data.aws_vpc.default.id}"
   rbac           = true
+
   admin_name     = "John"              # Only if rbac is true
   admin_lastname = "Doe"               # Only if rbac is true
   admin_email    = "john.doe@acme.org" # Only if rbac is true
