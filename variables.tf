@@ -131,7 +131,7 @@ variable "tags" {
 
 variable "rbac" {
   description = "Enable support for Role-Based Access Control (RBAC)."
-  type        = bool
+  type        = string
   default     = false
 }
 
@@ -161,7 +161,7 @@ variable "admin_username" {
 
 variable "admin_password" {
   description = "Admin password. Only If RBAC is enabled."
-  type        = bool
+  type        = string
   default     = false
 }
 

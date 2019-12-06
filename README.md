@@ -97,7 +97,7 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | admin\_email | Admin email. Only If RBAC is enabled, this user will be created in the first run only. | string | `"admin@admin.com"` | no |
 | admin\_lastname | Admin lastname. Only If RBAC is enabled, this user will be created in the first run only. | string | `"Doe"` | no |
 | admin\_name | Admin name. Only If RBAC is enabled, this user will be created in the first run only. | string | `"John"` | no |
-| admin\_password | Admin password. Only If RBAC is enabled. | bool | `"false"` | no |
+| admin\_password | Admin password. Only If RBAC is enabled. | string | `"false"` | no |
 | admin\_username | Admin username used to authenticate. Only If RBAC is enabled, this user will be created in the first run only. | string | `"admin"` | no |
 | ami | Default is `Ubuntu Server 18.04 LTS (HVM), SSD Volume Type.` | string | `"ami-0a313d6098716f372"` | no |
 | aws\_region | AWS Region | string | `"us-east-1"` | no |
@@ -123,7 +123,7 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | private\_key\_path | Enter the path to the SSH Private Key to run provisioner. | string | `"~/.ssh/id_rsa"` | no |
 | public\_key | Enter the content of the SSH Public Key to run provisioner. | string | `"null"` | no |
 | public\_key\_path | Enter the path to the SSH Public Key to add to AWS. | string | `"~/.ssh/id_rsa.pub"` | no |
-| rbac | Enable support for Role-Based Access Control (RBAC). | bool | `"false"` | no |
+| rbac | Enable support for Role-Based Access Control (RBAC). | string | `"false"` | no |
 | root\_volume\_delete\_on\_termination | Whether the volume should be destroyed on instance termination. | string | `"true"` | no |
 | root\_volume\_ebs\_optimized | If true, the launched EC2 instance will be EBS-optimized. | bool | `"false"` | no |
 | root\_volume\_size | The size, in GB, of the root EBS volume. | string | `"35"` | no |
