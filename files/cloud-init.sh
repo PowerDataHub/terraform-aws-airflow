@@ -97,13 +97,9 @@ EOL
 	source /etc/environment
 
 	if [ "$AIRFLOW__CORE__LOAD_DEFAULTS" = false ]; then
-		if [ "$AIRFLOW_ROLE" == "WEBSERVER" ]; then
 			airflow upgradedb
-		fi
 	else
-		if [ "$AIRFLOW_ROLE" == "WEBSERVER" ]; then
 			airflow initdb
-		fi
 	fi
 
 	if [ "$AIRFLOW__WEBSERVER__RBAC" = true ]; then
