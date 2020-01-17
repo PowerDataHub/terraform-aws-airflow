@@ -52,7 +52,7 @@ function install_python_and_python_packages() {
 	fi
 
     pip3 install -U \
-		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh,sentry]==1.10.6 \
+		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh,sentry]==1.10.7 \
 		boto3 \
 		celery[sqs]==4.3.0 \
 		cython \
