@@ -75,7 +75,7 @@ The Airflow service runs under systemd, so logs are available through journalctl
 - [ ] Provide a way to pass a custom packages.txt files on provision step
 - [x] RBAC
 - [ ] Support for [Google OAUTH ](https://airflow.readthedocs.io/en/latest/security.html#google-authentication)
-- [x] Flower
+- [ ] Flower
 - [ ] Secure Flower install
 - [x] Provide a way to inject environment variables into airflow
 - [ ] Split services into multiples files
