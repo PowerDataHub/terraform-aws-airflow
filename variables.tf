@@ -266,16 +266,19 @@ variable "db_instance_type" {
 
 variable "db_username" {
   description = "PostgreSQL username."
+  type        = string
   default     = "airflow"
 }
 
 variable "db_dbname" {
   description = "PostgreSQL database name."
+  type        = string
   default     = "airflow"
 }
 
 variable "db_password" {
   description = "PostgreSQL password."
+  type        = string
 }
 
 variable "db_allocated_storage" {
