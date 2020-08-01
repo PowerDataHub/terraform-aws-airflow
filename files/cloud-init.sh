@@ -52,7 +52,7 @@ function install_python_and_python_packages() {
 	fi
 
     pip3 install -U \
-		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh,sentry]==1.10.9 \
+		apache-airflow[celery,postgres,s3,crypto,jdbc,google_auth,redis,slack,ssh,sentry]==1.10.11 \
 		boto3 \
 		celery[sqs]==4.3.0 \
 		cython \
@@ -105,7 +105,7 @@ EOL
 	fi
 
 	if [ "$AIRFLOW__WEBSERVER__RBAC" = true ]; then
-		airflow create_user -r Admin -u "${ADMIN_USERNAME}" -f "${ADMIN_NAME}" -l "${ADMIN_LASTNAME}" -e "${ADMIN_EMAIL}" -p "${ADMIN_PASSWORD}"
+		airflow users --create -r Admin -u "${ADMIN_USERNAME}" -f "${ADMIN_NAME}" -l "${ADMIN_LASTNAME}" -e "${ADMIN_EMAIL}" -p "${ADMIN_PASSWORD}"
 	fi
 
 	sudo chown -R ubuntu: /usr/local/airflow
