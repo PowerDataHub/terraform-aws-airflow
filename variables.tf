@@ -5,7 +5,7 @@
 variable "ami" {
   description = "Default is `Ubuntu Server 18.04 LTS (HVM), SSD Volume Type.`"
   type        = string
-  default     = "ami-0a313d6098716f372"
+  default     = "ami-0ac80df6eff0e70b5"
 }
 
 variable "cluster_name" {
