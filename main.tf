@@ -39,7 +39,7 @@ resource "aws_sqs_queue" "airflow_queue" {
 # ---------------------------------------
 
 module "ami_instance_profile" {
-  source         = "git::https://github.com/traveloka/terraform-aws-iam-role//modules/instance?ref=tags/v1.0.2"
+  source         = "git::https://github.com/traveloka/terraform-aws-iam-role//modules/instance?ref=tags/v2.0.2"
   service_name   = module.airflow_labels.namespace
   cluster_role   = module.airflow_labels.stage
   environment    = module.airflow_labels.stage
@@ -409,6 +409,7 @@ module "sg_database" {
 resource "aws_db_instance" "airflow_database" {
   identifier              = "${module.airflow_labels.id}-db"
   allocated_storage       = var.db_allocated_storage
+  max_allocated_storage   = var.db_max_allocated_storage
   engine                  = "postgres"
   engine_version          = "11.5"
   instance_class          = var.db_instance_type
