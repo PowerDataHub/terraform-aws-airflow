@@ -287,6 +287,12 @@ variable "db_allocated_storage" {
   default     = 20
 }
 
+variable "db_max_allocated_storage" {
+  description = "Specifies the value for Storage Autoscaling"
+  type        = number
+  default     = 0
+}
+
 variable "db_subnet_group_name" {
   description = "db subnet group, if assigned, db will create in that subnet, default create in default vpc"
   type        = string

@@ -120,6 +120,7 @@ Special thanks to [villasv/aws-airflow-stack](https://github.com/villasv/aws-air
 | custom\_env | Path to custom airflow environments variables. | `string` | `null` | no |
 | custom\_requirements | Path to custom requirements.txt. | `string` | `null` | no |
 | db\_allocated\_storage | Dabatase disk size. | `string` | `20` | no |
+| db\_max\_allocated\_storage | Specifies the value for Storage Autoscaling | `number` | `0` | no |
 | db\_dbname | PostgreSQL database name. | `string` | `"airflow"` | no |
 | db\_instance\_type | Instance type for PostgreSQL database | `string` | `"db.t2.micro"` | no |
 | db\_password | PostgreSQL password. | `string` | n/a | yes |
