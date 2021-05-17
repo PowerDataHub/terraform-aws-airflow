@@ -39,7 +39,7 @@ resource "aws_sqs_queue" "airflow_queue" {
 # ---------------------------------------
 
 module "ami_instance_profile" {
-  source         = "git::https://github.com/traveloka/terraform-aws-iam-role//modules/instance?ref=tags/v1.0.2"
+  source         = "git::https://github.com/traveloka/terraform-aws-iam-role//modules/instance?ref=tags/v2.0.2"
   service_name   = module.airflow_labels.namespace
   cluster_role   = module.airflow_labels.stage
   environment    = module.airflow_labels.stage
