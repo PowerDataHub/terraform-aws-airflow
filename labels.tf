@@ -18,7 +18,7 @@ module "airflow_labels_scheduler" {
 }
 
 module "airflow_labels_webserver" {
-  source     = "git::https://github.com/cloudposse/terraform-terraform-label.git?ref=tags/0.4.0"
+  source     = "git::https://github.com/cloudposse/terraform-terraform-label.git?ref=tags/0.8.0"
   namespace  = var.cluster_name
   stage      = var.cluster_stage
   name       = "airflow"
