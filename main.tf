@@ -84,7 +84,7 @@ POLICY
 
 module "sg_airflow" {
   source                   = "terraform-aws-modules/security-group/aws"
-  version                  = "3.2.0"
+  version                  = "4.16.1"
   name                     = "${module.airflow_labels.id}-sg"
   description              = "Security group for ${module.airflow_labels.id} machines"
   vpc_id                   = data.aws_vpc.default.id
@@ -390,7 +390,7 @@ resource "aws_instance" "airflow_worker" {
 
 module "sg_database" {
   source                                                   = "terraform-aws-modules/security-group/aws"
-  version                                                  = "3.2.0"
+  version                                                  = "4.16.1"
   name                                                     = "${module.airflow_labels.id}-database-sg"
   description                                              = "Security group for ${module.airflow_labels.id} database"
   vpc_id                                                   = data.aws_vpc.default.id
